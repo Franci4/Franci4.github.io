@@ -1,16 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[12345]]></title>
+    <url>%2Funcategorized%2F12345.html</url>
+    <content type="text"><![CDATA[]]></content>
+  </entry>
+  <entry>
     <title><![CDATA[1234]]></title>
-    <url>%2Funcategorized%2F1234%2F</url>
+    <url>%2Funcategorized%2F1234.html</url>
     <content type="text"><![CDATA[1234]]></content>
   </entry>
   <entry>
     <title><![CDATA[test]]></title>
-    <url>%2FCTF%2Ftest%2F</url>
+    <url>%2Fandroid%2Fresource%2F%E6%95%99%E7%A8%8B%2Ftest.html</url>
     <content type="text"><![CDATA[一级标题级标题 1 2 3]]></content>
       <categories>
-        <category>CTF</category>
+        <category>android</category>
+        <category>resource</category>
+        <category>教程</category>
       </categories>
       <tags>
         <tag>CTF</tag>
@@ -18,7 +25,7 @@
   </entry>
   <entry>
     <title><![CDATA[Welcome to My Blog]]></title>
-    <url>%2Funcategorized%2FWelcome-to-My-Blog%2F</url>
+    <url>%2Funcategorized%2FWelcome-to-My-Blog.html</url>
     <content type="text"><![CDATA[大家好，我是Franci4，一名尚在求学阶段的WEB狗，目前潜心学习渗透测试知识，和队友打打CTF；而这里是我的个人博客，用于记录我学习路上的点点滴滴。 希望我的学习收获能帮助到你~]]></content>
   </entry>
 </search>
