@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="工具,web安全," />
 
 
 
@@ -79,17 +79,18 @@
 
 
 
-<meta name="description" content="沧海桑田一声笑，一人独走这王道">
-<meta property="og:type" content="website">
-<meta property="og:title" content="标签">
-<meta property="og:url" content="http://Franci4.github.io/tags/index.html">
+<meta name="description" content="实验目的1.熟悉sqlmap的基本命令2.使用sqlmap获取目标敏感信息实战 实验原理使用sqlmap获取目标敏感信息实战详解 实验内容使用sqlmap获取目标敏感信息实战详解 实验环境描述靶机系统为windows7 dvwa渗透机系统为kali linux 实验步骤1.首先进入靶机，打开命令提示符，输入命令ipcinfig来查看ip地址。2.进入kali渗透机，打开浏览器访问虚拟机win7的i">
+<meta name="keywords" content="工具,web安全">
+<meta property="og:type" content="article">
+<meta property="og:title" content="1.使用sqlmap获取目标敏感信息实战详解">
+<meta property="og:url" content="http://Franci4.github.io/WEB安全/sqlmap/1-使用sqlmap获取目标敏感信息实战详解.html">
 <meta property="og:site_name" content="Franci4‘Blog">
-<meta property="og:description" content="沧海桑田一声笑，一人独走这王道">
+<meta property="og:description" content="实验目的1.熟悉sqlmap的基本命令2.使用sqlmap获取目标敏感信息实战 实验原理使用sqlmap获取目标敏感信息实战详解 实验内容使用sqlmap获取目标敏感信息实战详解 实验环境描述靶机系统为windows7 dvwa渗透机系统为kali linux 实验步骤1.首先进入靶机，打开命令提示符，输入命令ipcinfig来查看ip地址。2.进入kali渗透机，打开浏览器访问虚拟机win7的i">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-10-24T17:10:55.517Z">
+<meta property="og:updated_time" content="2018-10-27T07:27:20.669Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="标签">
-<meta name="twitter:description" content="沧海桑田一声笑，一人独走这王道">
+<meta name="twitter:title" content="1.使用sqlmap获取目标敏感信息实战详解">
+<meta name="twitter:description" content="实验目的1.熟悉sqlmap的基本命令2.使用sqlmap获取目标敏感信息实战 实验原理使用sqlmap获取目标敏感信息实战详解 实验内容使用sqlmap获取目标敏感信息实战详解 实验环境描述靶机系统为windows7 dvwa渗透机系统为kali linux 实验步骤1.首先进入靶机，打开命令提示符，输入命令ipcinfig来查看ip地址。2.进入kali渗透机，打开浏览器访问虚拟机win7的i">
 
 
 
@@ -119,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://Franci4.github.io/tags/"/>
+  <link rel="canonical" href="http://Franci4.github.io/WEB安全/sqlmap/1-使用sqlmap获取目标敏感信息实战详解.html"/>
 
 
 
 
 
-  <title>标签 | Franci4‘Blog</title>
+  <title>1.使用sqlmap获取目标敏感信息实战详解 | Franci4‘Blog</title>
   
 
 
@@ -294,40 +295,263 @@
 
   <div id="posts" class="posts-expand">
     
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://Franci4.github.io/WEB安全/sqlmap/1-使用sqlmap获取目标敏感信息实战详解.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Franci4">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/touxiang.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Franci4‘Blog">
+    </span>
+
     
-    
-    <div class="post-block page">
       <header class="post-header">
 
-	<h1 class="post-title" itemprop="name headline">标签</h1>
-
-
-
-</header>
-
-      
-      
-      
-      <div class="post-body">
         
         
-          <div class="tag-cloud">
-            <div class="tag-cloud-title">
-                目前共计 3 个标签
+          <h1 class="post-title" itemprop="name headline">1.使用sqlmap获取目标敏感信息实战详解</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-27T14:39:00+08:00">
+                2018-10-27
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2018-10-27T15:27:20+08:00">
+                2018-10-27
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/WEB安全/" itemprop="url" rel="index">
+                    <span itemprop="name">WEB安全</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/WEB安全/sqlmap/" itemprop="url" rel="index">
+                    <span itemprop="name">sqlmap</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/WEB安全/sqlmap/1-使用sqlmap获取目标敏感信息实战详解.html" class="leancloud_visitors" data-flag-title="1.使用sqlmap获取目标敏感信息实战详解">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  984
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  3
+                </span>
+              
             </div>
-            <div class="tag-cloud-tags">
-              <a href="/tags/CTF/" style="font-size: 12px; color: #ccc">CTF</a> <a href="/tags/web安全/" style="font-size: 12px; color: #ccc">web安全</a> <a href="/tags/工具/" style="font-size: 12px; color: #ccc">工具</a>
-            </div>
-          </div>
-        
-      </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
       
       
+
+      
+        <h1 id="实验目的"><a href="#实验目的" class="headerlink" title="实验目的"></a>实验目的</h1><p>1.熟悉sqlmap的基本命令<br>2.使用sqlmap获取目标敏感信息实战</p>
+<h1 id="实验原理"><a href="#实验原理" class="headerlink" title="实验原理"></a>实验原理</h1><p>使用sqlmap获取目标敏感信息实战详解</p>
+<h1 id="实验内容"><a href="#实验内容" class="headerlink" title="实验内容"></a>实验内容</h1><p>使用sqlmap获取目标敏感信息实战详解</p>
+<h1 id="实验环境描述"><a href="#实验环境描述" class="headerlink" title="实验环境描述"></a>实验环境描述</h1><p>靶机系统为windows7 dvwa<br>渗透机系统为kali linux</p>
+<h1 id="实验步骤"><a href="#实验步骤" class="headerlink" title="实验步骤"></a>实验步骤</h1><p>1.首先进入靶机，打开命令提示符，输入命令ipcinfig来查看ip地址。<br>2.进入kali渗透机，打开浏览器访问虚拟机win7的ip地址，浏览正常网页，登录dvwa。<br>3.点击DVWA Security 选择low，点击按钮。<br>4.点击左边的选择框，选择SQL injection。<br>5.点击右上角的设置，open menu-Preferences-Advanced-Network-Settings，选择Manual proxy configuration     HTTP Poxy：127.0.0.1；Port：8080.点击ok设置代理完成。<br>6.在kali打开终端输入：burpsuite。<br>7.在poxy选项卡中的intercept选项卡中，将设置为off，不拦截数据包。<br>8.回到dvwa中，在浏览器窗口的SQLinjection界面中的User ID 中输入：1.2，然后把burpsuite打开。点击按钮<br>9.在burpsuite的poxy中的intercept选项卡中出现了一些信息。然后复制cookie中的内容。<br>10.在终端中打开sqlmap进行测试  输入：sqlmap -u ‘url’ –cookie ‘cookie内容’回车，在后面可以加入参数：-b 获取数据库的标题。<br>11.参数–current-user检索DBMS当前用户 获取数据库当前用户。<br>12.–current-db 检索DBMS当前数据库。 获取当前数据库名称。<br>13.–hostname检索DBMS服务器主机名，获取主机名。<br>14.–is-dba检测DBMS当前用户是不是DBA权限。检测当前用户的权限是不是DBA（最高权限）<br>15.–users枚举DBMS用户。 获取数据库的所有用户。<br>16.–passwords枚举DBMS用户密码hashes值。获取数据库用户的密码的hashes值。首先（1）问你是否进行下一步处理，选Y<br>（2）您想对检测到的密码哈希执行基于字典的攻击吗？（Y/N/Q） 选y<br>（3）最后会给你几种选项，使用默认的字典文件-自定义字典文件-带有字典文件列表的文件。选1即可。<br>（4）您想使用常用的密码后缀吗？（慢）（Y/N）  最后他会开始爆破。<br>得出ATABASE管理系统用户密码散列；密码散列和root<br>17.–privilege枚举BDMS用户权限，可以看到root用户的权限最高，可执行的操作最多<br>18.–roles枚举DBMS用户角色。<br>19.–dbs枚举DBMS数据库。获取当前可用的数据库。<br>20.–tables枚举DBMS数据库表，获取不同数据库下的表。<br>21.–columns枚举DBMS数据库表的列。获取不同数据表下的列。<br>22.–schema枚举数据库模式。<br>23.–count检索表的项数目。<br>24.–dump转出数据库表的映射表项目。就得到了登录名和密码，我们试一下logout在用不同的密码登录，但是如果登录，cookie信息就要重新获取。然后再登录。<br>25.–search搜索用，比如：–serach -D dvwa就可以找到这个数据库。<br>26.–comments检索DBMS注释，说明。获取数据库注释信息。<br>27.-D 指定数据库进行枚举。格式为 -D 制定数据库 –tables。获取制定数据库表信息。<br>28.-T 指定表进行枚举，指定数据库 ，制定表获得列信息。格式：-D 制定数据库 -T 制定表 -column<br>29.-C 制定列获取信息 指定数据库-指定表-指定列名获得数据。格式：-D 指定数据库 -T 指定表 -C 指定列 -dump<br>30.-X 枚举DBMS数据库列的时候排除某个列 格式-D 制定数据库 -T 指定表 -X 排除的列 –dump<br>31.–sql-query=QUERY执行sql语句，格式：–sql-query=“SQL语句”执行一条语句。<br>32.–sql-shell提供一个交互式界面，可能会使界面更加简洁一些。<br>33.最后登录成功。</p>
+
       
     </div>
     
     
     
+
+    
+      <div>
+        <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="/uploads/td.jpg" alt="Franci4 wechat" style="width: 200px; max-width: 100%;"/>
+    <div>订阅我的博客通过扫描我的公众聊天帐户</div>
+</div>
+
+      </div>
+    
+
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    Franci4
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://Franci4.github.io/WEB安全/sqlmap/1-使用sqlmap获取目标敏感信息实战详解.html" title="1.使用sqlmap获取目标敏感信息实战详解">http://Franci4.github.io/WEB安全/sqlmap/1-使用sqlmap获取目标敏感信息实战详解.html</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/工具/" rel="tag"><i class="fa fa-tag"></i> 工具</a>
+          
+            <a href="/tags/web安全/" rel="tag"><i class="fa fa-tag"></i> web安全</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/uncategorized/12345.html" rel="next" title="12345">
+                <i class="fa fa-chevron-left"></i> 12345
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
   </div>
 
 
@@ -360,8 +584,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -453,6 +686,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#实验目的"><span class="nav-number">1.</span> <span class="nav-text">实验目的</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#实验原理"><span class="nav-number">2.</span> <span class="nav-text">实验原理</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#实验内容"><span class="nav-number">3.</span> <span class="nav-text">实验内容</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#实验环境描述"><span class="nav-number">4.</span> <span class="nav-text">实验环境描述</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#实验步骤"><span class="nav-number">5.</span> <span class="nav-text">实验步骤</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
