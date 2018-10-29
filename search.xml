@@ -2,10 +2,10 @@
 <search>
   <entry>
     <title><![CDATA[Nmap之侦测版本和系统]]></title>
-    <url>%2Fweb%E5%AE%89%E5%85%A8%2FNmap%2FNmap%E4%B9%8B%E4%BE%A6%E6%B5%8B%E7%89%88%E6%9C%AC%E5%92%8C%E7%B3%BB%E7%BB%9F.html</url>
+    <url>%2FWEB%E5%AE%89%E5%85%A8%2FNmap%2FNmap%E4%B9%8B%E4%BE%A6%E6%B5%8B%E7%89%88%E6%9C%AC%E5%92%8C%E7%B3%BB%E7%BB%9F.html</url>
     <content type="text"><![CDATA[实验目的1、通过对设备或者防火墙的探测来审计它的安全性。2、探测目标主机所开放的端口。3、网络存储，网络映射，维护和资产管理。4、通过识别新的服务器审计网络的安全性。5、探测网络上的主机。 实验原理nmap使用tcp/ip协议栈指纹来识别不同的操作系统和设备。在RFC规范中，有些地方对TCP/IP的实现并没有强制规定，由于不同的TCP/IP方案中可能都有自己的特定方案。namp主要是根据这些细节上的差异来判断操作系统的类型。 实验内容主机探测：探测网络上的主机，例如列出响应TCP和ICMP请求、icmp请求、开放特别端口的主机。端口扫描：探测目标主机所开放的端口。版本检测：探测目标主机的网络服务，判断其服务名称及版本号。系统检测：探测目标主机的操作系统及网络设备的硬件特性。支持探测脚本的编写：使用Nmap的脚本引擎（NSE）和Lua编程语言。 实验环境描述1、靶机 带有环境 用户名密码为： admin 1234562、攻击机 带有nmap工具 用户名密码为 root toor 实验步骤1、进入win7虚拟机，开启桌面上xampp工具，开启Apache、和MySQL服务，然后输入ipconfig和ifconfig查看靶机和攻击机的ip地址。]]></content>
       <categories>
-        <category>web安全</category>
+        <category>WEB安全</category>
         <category>Nmap</category>
       </categories>
       <tags>
