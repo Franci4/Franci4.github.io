@@ -1,6 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[Nmap之侦测版本和系统]]></title>
+    <url>%2Fweb%E5%AE%89%E5%85%A8%2FNmap%2FNmap%E4%B9%8B%E4%BE%A6%E6%B5%8B%E7%89%88%E6%9C%AC%E5%92%8C%E7%B3%BB%E7%BB%9F.html</url>
+    <content type="text"><![CDATA[实验目的1、通过对设备或者防火墙的探测来审计它的安全性。2、探测目标主机所开放的端口。3、网络存储，网络映射，维护和资产管理。4、通过识别新的服务器审计网络的安全性。5、探测网络上的主机。 实验原理nmap使用tcp/ip协议栈指纹来识别不同的操作系统和设备。在RFC规范中，有些地方对TCP/IP的实现并没有强制规定，由于不同的TCP/IP方案中可能都有自己的特定方案。namp主要是根据这些细节上的差异来判断操作系统的类型。 实验内容主机探测：探测网络上的主机，例如列出响应TCP和ICMP请求、icmp请求、开放特别端口的主机。端口扫描：探测目标主机所开放的端口。版本检测：探测目标主机的网络服务，判断其服务名称及版本号。系统检测：探测目标主机的操作系统及网络设备的硬件特性。支持探测脚本的编写：使用Nmap的脚本引擎（NSE）和Lua编程语言。 实验环境描述1、靶机 带有环境 用户名密码为： admin 1234562、攻击机 带有nmap工具 用户名密码为 root toor 实验步骤1、进入win7虚拟机，开启桌面上xampp工具，开启Apache、和MySQL服务，然后输入ipconfig和ifconfig查看靶机和攻击机的ip地址。]]></content>
+      <categories>
+        <category>web安全</category>
+        <category>Nmap</category>
+      </categories>
+      <tags>
+        <tag>工具</tag>
+        <tag>web安全</tag>
+        <tag>Nmap</tag>
+        <tag>渗透测试</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[1.使用sqlmap获取目标敏感信息实战详解]]></title>
     <url>%2FWEB%E5%AE%89%E5%85%A8%2Fsqlmap%2F1-%E4%BD%BF%E7%94%A8sqlmap%E8%8E%B7%E5%8F%96%E7%9B%AE%E6%A0%87%E6%95%8F%E6%84%9F%E4%BF%A1%E6%81%AF%E5%AE%9E%E6%88%98%E8%AF%A6%E8%A7%A3.html</url>
     <content type="text"><![CDATA[实验目的1.熟悉sqlmap的基本命令2.使用sqlmap获取目标敏感信息实战 实验原理使用sqlmap获取目标敏感信息实战详解 实验内容使用sqlmap获取目标敏感信息实战详解 实验环境描述靶机系统为windows7 dvwa渗透机系统为kali linux 实验步骤1.首先进入靶机，打开命令提示符，输入命令ipcinfig来查看ip地址。2.进入kali渗透机，打开浏览器访问虚拟机win7的ip地址，浏览正常网页，登录dvwa。3.点击DVWA Security 选择low，点击按钮。4.点击左边的选择框，选择SQL injection。5.点击右上角的设置，open menu-Preferences-Advanced-Network-Settings，选择Manual proxy configuration HTTP Poxy：127.0.0.1；Port：8080.点击ok设置代理完成。6.在kali打开终端输入：burpsuite。7.在poxy选项卡中的intercept选项卡中，将设置为off，不拦截数据包。8.回到dvwa中，在浏览器窗口的SQLinjection界面中的User ID 中输入：1.2，然后把burpsuite打开。点击按钮9.在burpsuite的poxy中的intercept选项卡中出现了一些信息。然后复制cookie中的内容。10.在终端中打开sqlmap进行测试 输入：sqlmap -u ‘url’ –cookie ‘cookie内容’回车，在后面可以加入参数：-b 获取数据库的标题。11.参数–current-user检索DBMS当前用户 获取数据库当前用户。12.–current-db 检索DBMS当前数据库。 获取当前数据库名称。13.–hostname检索DBMS服务器主机名，获取主机名。14.–is-dba检测DBMS当前用户是不是DBA权限。检测当前用户的权限是不是DBA（最高权限）15.–users枚举DBMS用户。 获取数据库的所有用户。16.–passwords枚举DBMS用户密码hashes值。获取数据库用户的密码的hashes值。首先（1）问你是否进行下一步处理，选Y（2）您想对检测到的密码哈希执行基于字典的攻击吗？（Y/N/Q） 选y（3）最后会给你几种选项，使用默认的字典文件-自定义字典文件-带有字典文件列表的文件。选1即可。（4）您想使用常用的密码后缀吗？（慢）（Y/N） 最后他会开始爆破。得出ATABASE管理系统用户密码散列；密码散列和root17.–privilege枚举BDMS用户权限，可以看到root用户的权限最高，可执行的操作最多18.–roles枚举DBMS用户角色。19.–dbs枚举DBMS数据库。获取当前可用的数据库。20.–tables枚举DBMS数据库表，获取不同数据库下的表。21.–columns枚举DBMS数据库表的列。获取不同数据表下的列。22.–schema枚举数据库模式。23.–count检索表的项数目。24.–dump转出数据库表的映射表项目。就得到了登录名和密码，我们试一下logout在用不同的密码登录，但是如果登录，cookie信息就要重新获取。然后再登录。25.–search搜索用，比如：–serach -D dvwa就可以找到这个数据库。26.–comments检索DBMS注释，说明。获取数据库注释信息。27.-D 指定数据库进行枚举。格式为 -D 制定数据库 –tables。获取制定数据库表信息。28.-T 指定表进行枚举，指定数据库 ，制定表获得列信息。格式：-D 制定数据库 -T 制定表 -column29.-C 制定列获取信息 指定数据库-指定表-指定列名获得数据。格式：-D 指定数据库 -T 指定表 -C 指定列 -dump30.-X 枚举DBMS数据库列的时候排除某个列 格式-D 制定数据库 -T 指定表 -X 排除的列 –dump31.–sql-query=QUERY执行sql语句，格式：–sql-query=“SQL语句”执行一条语句。32.–sql-shell提供一个交互式界面，可能会使界面更加简洁一些。33.最后登录成功。]]></content>
