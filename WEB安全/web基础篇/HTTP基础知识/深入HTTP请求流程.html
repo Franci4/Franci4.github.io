@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="工具,web安全,Nmap,渗透测试," />
+  <meta name="keywords" content="web安全,HTTP请求," />
 
 
 
@@ -79,20 +79,20 @@
 
 
 
-<meta name="description" content="实验目的1、通过对设备或者防火墙的探测来审计它的安全性。2、探测目标主机所开放的端口。3、网络存储，网络映射，维护和资产管理。4、通过识别新的服务器审计网络的安全性。5、探测网络上的主机。 实验原理nmap使用tcp/ip协议栈指纹来识别不同的操作系统和设备。在RFC规范中，有些地方对TCP/IP的实现并没有强制规定，由于不同的TCP/IP方案中可能都有自己的特定方案。namp主要是根据这些细节上">
-<meta name="keywords" content="工具,web安全,Nmap,渗透测试">
+<meta name="description" content="HTTP介绍  HTTP协议（HyperText Transfer Protocol)，即超文本传输协议，是一种详细规定了浏览器和万维网服务器之间互相通信的规则，他是万维网交换信息的基础，它允许HTML（超文本标记语言）文档从WEB服务器传送到WEB浏览器。是用于从WWW服务器传输超文本到本地浏览器的传送协议。它的发展是万维网协会（World Wide Web Consortium）和Intern">
+<meta name="keywords" content="web安全,HTTP请求">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Nmap之侦测版本和系统">
-<meta property="og:url" content="http://Franci4.github.io/WEB安全/Nmap/Nmap之侦测版本和系统.html">
+<meta property="og:title" content="深入HTTP请求流程">
+<meta property="og:url" content="http://Franci4.github.io/WEB安全/web基础篇/HTTP基础知识/深入HTTP请求流程.html">
 <meta property="og:site_name" content="Franci4‘Blog">
-<meta property="og:description" content="实验目的1、通过对设备或者防火墙的探测来审计它的安全性。2、探测目标主机所开放的端口。3、网络存储，网络映射，维护和资产管理。4、通过识别新的服务器审计网络的安全性。5、探测网络上的主机。 实验原理nmap使用tcp/ip协议栈指纹来识别不同的操作系统和设备。在RFC规范中，有些地方对TCP/IP的实现并没有强制规定，由于不同的TCP/IP方案中可能都有自己的特定方案。namp主要是根据这些细节上">
+<meta property="og:description" content="HTTP介绍  HTTP协议（HyperText Transfer Protocol)，即超文本传输协议，是一种详细规定了浏览器和万维网服务器之间互相通信的规则，他是万维网交换信息的基础，它允许HTML（超文本标记语言）文档从WEB服务器传送到WEB浏览器。是用于从WWW服务器传输超文本到本地浏览器的传送协议。它的发展是万维网协会（World Wide Web Consortium）和Intern">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://franci4.github.io/WEB安全/Nmap/Nmap之侦测版本和系统/1.png">
-<meta property="og:updated_time" content="2018-10-29T14:57:20.109Z">
+<meta property="og:image" content="http://franci4.github.io/WEB安全/web基础篇/HTTP基础知识/深入HTTP请求流程/HTTP请求与响应.png">
+<meta property="og:updated_time" content="2018-11-03T07:32:55.784Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Nmap之侦测版本和系统">
-<meta name="twitter:description" content="实验目的1、通过对设备或者防火墙的探测来审计它的安全性。2、探测目标主机所开放的端口。3、网络存储，网络映射，维护和资产管理。4、通过识别新的服务器审计网络的安全性。5、探测网络上的主机。 实验原理nmap使用tcp/ip协议栈指纹来识别不同的操作系统和设备。在RFC规范中，有些地方对TCP/IP的实现并没有强制规定，由于不同的TCP/IP方案中可能都有自己的特定方案。namp主要是根据这些细节上">
-<meta name="twitter:image" content="http://franci4.github.io/WEB安全/Nmap/Nmap之侦测版本和系统/1.png">
+<meta name="twitter:title" content="深入HTTP请求流程">
+<meta name="twitter:description" content="HTTP介绍  HTTP协议（HyperText Transfer Protocol)，即超文本传输协议，是一种详细规定了浏览器和万维网服务器之间互相通信的规则，他是万维网交换信息的基础，它允许HTML（超文本标记语言）文档从WEB服务器传送到WEB浏览器。是用于从WWW服务器传输超文本到本地浏览器的传送协议。它的发展是万维网协会（World Wide Web Consortium）和Intern">
+<meta name="twitter:image" content="http://franci4.github.io/WEB安全/web基础篇/HTTP基础知识/深入HTTP请求流程/HTTP请求与响应.png">
 
 
 
@@ -122,13 +122,13 @@
 
 
 
-  <link rel="canonical" href="http://Franci4.github.io/WEB安全/Nmap/Nmap之侦测版本和系统.html"/>
+  <link rel="canonical" href="http://Franci4.github.io/WEB安全/web基础篇/HTTP基础知识/深入HTTP请求流程.html"/>
 
 
 
 
 
-  <title>Nmap之侦测版本和系统 | Franci4‘Blog</title>
+  <title>深入HTTP请求流程 | Franci4‘Blog</title>
   
 
 
@@ -309,7 +309,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://Franci4.github.io/WEB安全/Nmap/Nmap之侦测版本和系统.html">
+    <link itemprop="mainEntityOfPage" href="http://Franci4.github.io/WEB安全/web基础篇/HTTP基础知识/深入HTTP请求流程.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Franci4">
@@ -326,7 +326,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Nmap之侦测版本和系统</h1>
+          <h1 class="post-title" itemprop="name headline">深入HTTP请求流程</h1>
         
 
         <div class="post-meta">
@@ -338,8 +338,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-29T22:44:48+08:00">
-                2018-10-29
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-03T14:21:20+08:00">
+                2018-11-03
               </time>
             
 
@@ -354,8 +354,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2018-10-29T22:57:20+08:00">
-                2018-10-29
+              <time title="更新于" itemprop="dateModified" datetime="2018-11-03T15:32:55+08:00">
+                2018-11-03
               </time>
             
           </span>
@@ -384,8 +384,19 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/WEB安全/Nmap/" itemprop="url" rel="index">
-                    <span itemprop="name">Nmap</span>
+                  <a href="/categories/WEB安全/web基础篇/" itemprop="url" rel="index">
+                    <span itemprop="name">web基础篇</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/WEB安全/web基础篇/HTTP基础知识/" itemprop="url" rel="index">
+                    <span itemprop="name">HTTP基础知识</span>
                   </a>
                 </span>
 
@@ -401,7 +412,7 @@
 
           
           
-             <span id="/WEB安全/Nmap/Nmap之侦测版本和系统.html" class="leancloud_visitors" data-flag-title="Nmap之侦测版本和系统">
+             <span id="/WEB安全/web基础篇/HTTP基础知识/深入HTTP请求流程.html" class="leancloud_visitors" data-flag-title="深入HTTP请求流程">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -426,7 +437,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  384
+                  537
                 </span>
               
 
@@ -463,11 +474,12 @@
       
 
       
-        <h1 id="实验目的"><a href="#实验目的" class="headerlink" title="实验目的"></a>实验目的</h1><p>1、通过对设备或者防火墙的探测来审计它的安全性。<br>2、探测目标主机所开放的端口。<br>3、网络存储，网络映射，维护和资产管理。<br>4、通过识别新的服务器审计网络的安全性。<br>5、探测网络上的主机。</p>
-<h1 id="实验原理"><a href="#实验原理" class="headerlink" title="实验原理"></a>实验原理</h1><p>nmap使用tcp/ip协议栈指纹来识别不同的操作系统和设备。在RFC规范中，有些地方对TCP/IP的实现并没有强制规定，由于不同的TCP/IP方案中可能都有自己的特定方案。namp主要是根据这些细节上的差异来判断操作系统的类型。</p>
-<h1 id="实验内容"><a href="#实验内容" class="headerlink" title="实验内容"></a>实验内容</h1><p>主机探测：探测网络上的主机，例如列出响应TCP和ICMP请求、icmp请求、开放特别端口的主机。<br>端口扫描：探测目标主机所开放的端口。<br>版本检测：探测目标主机的网络服务，判断其服务名称及版本号。<br>系统检测：探测目标主机的操作系统及网络设备的硬件特性。<br>支持探测脚本的编写：使用Nmap的脚本引擎（NSE）和Lua编程语言。</p>
-<h1 id="实验环境描述"><a href="#实验环境描述" class="headerlink" title="实验环境描述"></a>实验环境描述</h1><p>1、靶机 带有环境 用户名密码为： admin 123456<br>2、攻击机 带有nmap工具 用户名密码为 root toor</p>
-<h1 id="实验步骤"><a href="#实验步骤" class="headerlink" title="实验步骤"></a>实验步骤</h1><p>1、进入win7虚拟机，开启桌面上xampp工具，开启Apache、和MySQL服务，然后输入ipconfig和ifconfig查看靶机和攻击机的ip地址。<br><img src="/WEB安全/Nmap/Nmap之侦测版本和系统/1.png" alt=""></p>
+        <h1 id="HTTP介绍"><a href="#HTTP介绍" class="headerlink" title="HTTP介绍"></a>HTTP介绍</h1><p>  HTTP协议（HyperText Transfer Protocol)，即超文本传输协议，是一种详细规定了浏览器和万维网服务器之间互相通信的规则，他是万维网交换信息的基础，它允许HTML（超文本标记语言）文档从WEB服务器传送到WEB浏览器。是用于从WWW服务器传输超文本到本地浏览器的传送协议。<br>它的发展是万维网协会（World Wide Web Consortium）和Internet工作小组IETF（Internet Engineering Task Force）合作的结果。<br>它可以使浏览器更加高效，使网络传输减少。它不仅保证计算机正确快速地传输超文本文档，还确定传输文档中的哪一部分，以及哪部分内容首先显示(如文本先于图形)等。</p>
+<p>版本<br>最常用的是HTTP1.0/1.1<br>最新版本是HTTP2.0，与1.0/1.1相比，有了更高的性能、安全性和灵活性<br>以前的版本0.9等</p>
+<h1 id="HTTP协议"><a href="#HTTP协议" class="headerlink" title="HTTP协议"></a>HTTP协议</h1><p>在这里首先介绍一下URL<br>URL(统一资源定位符)也被称为网页地址，是互联网标准的地址。标准格式如下：<br>‘协议://服务器ip [:端口]/路径/[?查询];’<br><a href="https://franci4.github.io/uncategorized/Welcome-to-My-Blog.html">https://franci4.github.io/uncategorized/Welcome-to-My-Blog.html</a> 就是一个标准的URL.</p>
+<p>HTTP协议目前最新的版本是2.0，是一种无状态的协议。无状态是指web浏览器与web服务器之间不需要建议持久的连接，这意味着当一个客户向服务器端发起请求，然后web服务器返回响应（Response），连接就关闭了，在服务端不保留连接的有关信息。也就是说，HTTP请求只能由客户端发起，而服务器不能主动向客户端发送数据。</p>
+<p>HTTP遵循请求（Request）应答（Response）模型，web浏览器向服务器发送请求时，web服务器处理请求并返回适当的应答。<br><img src="/WEB安全/web基础篇/HTTP基础知识/深入HTTP请求流程/HTTP请求与响应.png" alt=""></p>
+<h2 id="HTTP请求与响应"><a href="#HTTP请求与响应" class="headerlink" title="HTTP请求与响应"></a>HTTP请求与响应</h2><p>（1）HTTP请求<br>HTTP请求包括三部分，分别是请求行（请求方法），请求头（消息报头）和请求正文。下面是HTTP请求的一个例子。</p>
 
       
     </div>
@@ -496,7 +508,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="http://Franci4.github.io/WEB安全/Nmap/Nmap之侦测版本和系统.html" title="Nmap之侦测版本和系统">http://Franci4.github.io/WEB安全/Nmap/Nmap之侦测版本和系统.html</a>
+    <a href="http://Franci4.github.io/WEB安全/web基础篇/HTTP基础知识/深入HTTP请求流程.html" title="深入HTTP请求流程">http://Franci4.github.io/WEB安全/web基础篇/HTTP基础知识/深入HTTP请求流程.html</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>
@@ -511,13 +523,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/工具/" rel="tag"><i class="fa fa-tag"></i> 工具</a>
-          
             <a href="/tags/web安全/" rel="tag"><i class="fa fa-tag"></i> web安全</a>
           
-            <a href="/tags/Nmap/" rel="tag"><i class="fa fa-tag"></i> Nmap</a>
-          
-            <a href="/tags/渗透测试/" rel="tag"><i class="fa fa-tag"></i> 渗透测试</a>
+            <a href="/tags/HTTP请求/" rel="tag"><i class="fa fa-tag"></i> HTTP请求</a>
           
         </div>
       
@@ -530,8 +538,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/WEB安全/sqlmap/1-使用sqlmap获取目标敏感信息实战详解.html" rel="next" title="1.使用sqlmap获取目标敏感信息实战详解">
-                <i class="fa fa-chevron-left"></i> 1.使用sqlmap获取目标敏感信息实战详解
+              <a href="/WEB安全/Nmap/Nmap之侦测版本和系统.html" rel="next" title="Nmap之侦测版本和系统">
+                <i class="fa fa-chevron-left"></i> Nmap之侦测版本和系统
               </a>
             
           </div>
@@ -539,10 +547,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/WEB安全/web基础篇/HTTP基础知识/深入HTTP请求流程.html" rel="prev" title="深入HTTP请求流程">
-                深入HTTP请求流程 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -706,7 +710,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#实验目的"><span class="nav-number">1.</span> <span class="nav-text">实验目的</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#实验原理"><span class="nav-number">2.</span> <span class="nav-text">实验原理</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#实验内容"><span class="nav-number">3.</span> <span class="nav-text">实验内容</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#实验环境描述"><span class="nav-number">4.</span> <span class="nav-text">实验环境描述</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#实验步骤"><span class="nav-number">5.</span> <span class="nav-text">实验步骤</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#HTTP介绍"><span class="nav-number">1.</span> <span class="nav-text">HTTP介绍</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#HTTP协议"><span class="nav-number">2.</span> <span class="nav-text">HTTP协议</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#HTTP请求与响应"><span class="nav-number">2.1.</span> <span class="nav-text">HTTP请求与响应</span></a></li></ol></li></ol></div>
             
 
           </div>
