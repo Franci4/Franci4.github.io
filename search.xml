@@ -1,18 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title><![CDATA[深入HTTP请求流程]]></title>
-    <url>%2FWEB%E5%AE%89%E5%85%A8%2Fweb%E5%9F%BA%E7%A1%80%E7%AF%87%2FHTTP%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86%2F%E6%B7%B1%E5%85%A5HTTP%E8%AF%B7%E6%B1%82%E6%B5%81%E7%A8%8B.html</url>
-    <content type="text"><![CDATA[HTTP介绍 HTTP协议（HyperText Transfer Protocol)，即超文本传输协议，是一种详细规定了浏览器和万维网服务器之间互相通信的规则，他是万维网交换信息的基础，它允许HTML（超文本标记语言）文档从WEB服务器传送到WEB浏览器。是用于从WWW服务器传输超文本到本地浏览器的传送协议。它的发展是万维网协会（World Wide Web Consortium）和Internet工作小组IETF（Internet Engineering Task Force）合作的结果。它可以使浏览器更加高效，使网络传输减少。它不仅保证计算机正确快速地传输超文本文档，还确定传输文档中的哪一部分，以及哪部分内容首先显示(如文本先于图形)等。 版本最常用的是HTTP1.0/1.1最新版本是HTTP2.0，与1.0/1.1相比，有了更高的性能、安全性和灵活性以前的版本0.9等 HTTP协议在这里首先介绍一下URLURL(统一资源定位符)也被称为网页地址，是互联网标准的地址。标准格式如下：‘协议://服务器ip [:端口]/路径/[?查询];’https://franci4.github.io/uncategorized/Welcome-to-My-Blog.html 就是一个标准的URL. HTTP协议目前最新的版本是2.0，是一种无状态的协议。无状态是指web浏览器与web服务器之间不需要建议持久的连接，这意味着当一个客户向服务器端发起请求，然后web服务器返回响应（Response），连接就关闭了，在服务端不保留连接的有关信息。也就是说，HTTP请求只能由客户端发起，而服务器不能主动向客户端发送数据。 HTTP遵循请求（Request）应答（Response）模型，web浏览器向服务器发送请求时，web服务器处理请求并返回适当的应答。 HTTP请求与响应（1）HTTP请求HTTP请求包括三部分，分别是请求行（请求方法），请求头（消息报头）和请求正文。下面是HTTP请求的一个例子。]]></content>
+    <title><![CDATA[metasploit基础命令总结]]></title>
+    <url>%2FWEB%E5%AE%89%E5%85%A8%2Fmetasploit%2Fmetasploit%E5%9F%BA%E7%A1%80%E5%91%BD%E4%BB%A4%E6%80%BB%E7%BB%93.html</url>
+    <content type="text"><![CDATA[基础命令介绍msfconsole：启动MSF终端banner ：显示一个非常棒的 bannercd： 改变当前的工作目录color： 切换颜色connect（远程连接）： 与主机通信edit （编辑）： 编辑与$ VISUAL或$ EDITOR当前模块的exit （退出命令行）： 退出控制台get （获取变量）： 获取特定上下文变量的值getg （全局获取变量）： 获取一个全局变量的值go_pro ： 启动Metasploit的网页图形用户界面 grep： grep的另一个命令的输出help（帮助） ： 帮助菜单info（获取模块信息）： 关于一个或多个模块显示信息irb： 进入irb脚本模式jobs：显示和管理职位kill（结束进程）： 结束一个进程load （加载）： 加载一个框架插件loadpath ： 搜索和负载从一个路径模块makerc： 保存自开始进入到一个文件中的命令popm： 弹出最新的模块从堆栈中并使其活跃 previous ： 将以前加载模块作为当前模块pushm ： 推主动或模块列表在模块栈quit （退出控制台）： 退出控制台reload_all Reloads ： 从所有定义的模块路径的所有模块rename_job ： 重命名工作resource ： 运行存储命令在文件route ： 通过会话路由流量save： 将数据存储主动search（搜索exp等模块关键字）： 搜索模块的名称和说明sessions（会话功能）： 转储会话列表和显示有关会话的信息 set （设置参数）： 设置一个特定的上下文变量的值setg（全局设置参数）： 设置一个全局变量的值show （展示参数模块）： 给定类型的显示模块或所有模块sleep ： 什么都不做对的指定秒数spool ： 写控制台输出到一个文件以及屏幕threads ： 查看和操作后台线程unload （卸载某个插件）： 卸载一个框架插件unset （删除某个设置参数）： 取消设置一个或多个特定的上下文变量unsetg （取消全局某个设置参数）： 取消设置一个或多个全局变量的use （使用某个模块）： 选择按名称模块version（查看版本信息）： 显示的框架和控制台库版本号 命令作用详情use：当你已经决定在一个特定的模块使用,使用的命令以选中它。使用的命令改变你的环境到一个特定的模块,将特定类型的命令。back：切换上下模块，返回上一步骤。一旦你已经完成了工作与一个特定的模块,或者如果你无意中选择了错误的模块,你可以“恢复”命令将当前上下文。search：msfconsole包括一个广泛的基于正则表达式的搜索功能。如果你有一个总体的想法你正在寻找你可以通过“搜索”搜索。在下面的输出中,搜索是ms08-067。搜索功能将在模块定位这个字符串名称、描述、参考文献等。]]></content>
       <categories>
         <category>WEB安全</category>
-        <category>web基础篇</category>
-        <category>HTTP基础知识</category>
+        <category>metasploit</category>
       </categories>
       <tags>
         <tag>web安全</tag>
-        <tag>HTTP请求</tag>
+        <tag>工具</tag>
       </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[深入http请求流程]]></title>
+    <url>%2Funcategorized%2F%E6%B7%B1%E5%85%A5HTTP%E8%AF%B7%E6%B1%82%E6%B5%81%E7%A8%8B.html</url>
+    <content type="text"><![CDATA[HTTP介绍 HTTP协议（HyperText Transfer Protocol)，即超文本传输协议，是一种详细规定了浏览器和万维网服务器之间互相通信的规则，他是万维网交换信息的基础，它允许HTML（超文本标记语言）文档从WEB服务器传送到WEB浏览器。是用于从WWW服务器传输超文本到本地浏览器的传送协议。它的发展是万维网协会（World Wide Web Consortium）和Internet工作小组IETF（Internet Engineering Task Force）合作的结果。它可以使浏览器更加高效，使网络传输减少。它不仅保证计算机正确快速地传输超文本文档，还确定传输文档中的哪一部分，以及哪部分内容首先显示(如文本先于图形)等。 版本最常用的是HTTP1.0/1.1最新版本是HTTP2.0，与1.0/1.1相比，有了更高的性能、安全性和灵活性以前的版本0.9等 HTTP协议在这里首先介绍一下URLURL(统一资源定位符)也被称为网页地址，是互联网标准的地址。标准格式如下：协议://服务器ip [:端口]/路径/[?查询];https://franci4.github.io/uncategorized/Welcome-to-My-Blog.html 就是一个标准的URL. HTTP协议目前最新的版本是2.0，是一种无状态的协议。无状态是指web浏览器与web服务器之间不需要建议持久的连接，这意味着当一个客户向服务器端发起请求，然后web服务器返回响应（Response），连接就关闭了，在服务端不保留连接的有关信息。也就是说，HTTP请求只能由客户端发起，而服务器不能主动向客户端发送数据。 HTTP遵循请求（Request）应答（Response）模型，web浏览器向服务器发送请求时，web服务器处理请求并返回适当的应答。 HTTP请求与响应（1）HTTP请求HTTP请求包括三部分，分别是请求行（请求方法），请求头（消息报头）和请求正文。下面是HTTP请求的一个例子。]]></content>
   </entry>
   <entry>
     <title><![CDATA[Nmap之侦测版本和系统]]></title>
@@ -23,9 +27,9 @@
         <category>Nmap</category>
       </categories>
       <tags>
-        <tag>工具</tag>
         <tag>web安全</tag>
         <tag>Nmap</tag>
+        <tag>工具</tag>
         <tag>渗透测试</tag>
       </tags>
   </entry>
@@ -38,8 +42,8 @@
         <category>sqlmap</category>
       </categories>
       <tags>
-        <tag>工具</tag>
         <tag>web安全</tag>
+        <tag>工具</tag>
       </tags>
   </entry>
   <entry>
