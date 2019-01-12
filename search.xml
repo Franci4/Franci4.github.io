@@ -1,6 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[Metasploit's Wmap]]></title>
+    <url>%2FWEB%E5%AE%89%E5%85%A8%2Fmetasploit%2FMetasploit-s-Wmap.html</url>
+    <content type="text"><![CDATA[简介WMAP是一个功能丰富的Web应用程序漏洞扫描程序，最初是从名为SQLMap的工具创建的。该工具与Metasploit集成，允许我们从Metasploit框架内进行Web应用程序扫描。 拥有高效的工作流程是任何工具的重要组成部分，但在探测应用程序的漏洞时尤为重要。虽然Metasploit在开发时被认为是事实上的标准，但它也包含其他活动的模块，例如scanning。例如，WMAP，一种可在Metasploit框架内使用的Web应用程序扫描程序。 Web应用程序扫描程序是用于识别Web应用程序中存在的漏洞的工具。WMAP可以轻松保持流畅的工作流程，因为它可以在Metasploit内部工作时加载和运行 实践操作步骤一在运行 Metasploit 终端前，我们需要先启动用于存储扫描结果的数据库服务：root@kali:~# service postgresql start 步骤二启动命令行终端，运行 Metasploit 控制台：root@kali:~# msfconsole 步骤三加载WMAP使用load wmap命令加载WMAP模块：msf &gt; load wmap从这里，如果我们打字？要显示Metasploit的帮助菜单，我们应该在菜单顶部看到WMAP的命令及其描述。]]></content>
+      <categories>
+        <category>WEB安全</category>
+        <category>metasploit</category>
+      </categories>
+      <tags>
+        <tag>工具</tag>
+        <tag>web安全</tag>
+        <tag>metasploit</tag>
+        <tag>渗透测试</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[metasploit的入门用法]]></title>
     <url>%2FWEB%E5%AE%89%E5%85%A8%2Fmetasploit%2Fmetasploit%E7%9A%84%E5%85%A5%E9%97%A8%E7%94%A8%E6%B3%95.html</url>
     <content type="text"><![CDATA[Metasploit简介Metasploit是一个免费的、可下载的框架，通过它可以很容易地获取、开发并对计算机软件漏洞实施攻击。它本身附带数百个已知软件漏洞的专业级漏洞攻击工具。当H.D. Moore在2003年发布Metasploit时，计算机安全状况也被永久性地改变了。仿佛一夜之间，任何人都可以成为黑客，每个人都可以使用攻击工具来攻击那些未打过补丁或者刚刚打过补丁的漏洞。软件厂商再也不能推迟发布针对已公布漏洞的补丁了，这是因为Metasploit团队一直都在努力开发各种攻击工具，并将它们贡献给所有Metasploit用户。 Metasploit的设计初衷是打造成一个攻击工具开发平台，稍后将讲解如何开发攻击工具。然而在目前情况下，安全专家以及业余安全爱好者更多地将其当作一种点几下鼠标就可以利用其中附带的攻击工具进行成功攻击的环境。 Metasploit的工作方式开源软件Metasploit是H.D. Moore在2003年开发的，它是少数几个可用于执行诸多渗透测试步骤的工具。在发现新漏洞时(这是很常见的)，Metasploit会监控Rapid7，然后Metasploit的200,000多个用户会将漏洞添加到Metasploit的目录上。然后，任何人只要使用Metasploit，就可以用它来测试特定系统的是否有这个漏洞。 Metasploit框架使Metasploit具有良好的可扩展性，它的控制接口负责发现漏洞、攻击漏洞，提交漏洞，然后通过一些接口加入攻击后处理工具和报表工具。Metasploit框架可以从一个漏洞扫描程序导入数据，使用关于有漏洞主机的详细信息来发现可攻击漏洞，然后使用有效载荷对系统发起攻击。所有这些操作都可以通过Metasploit的Web界面进行管理，而它只是其中一种种管理接口，另外还有命令行工具和一些商业工具等等。 攻击者可以将来自漏洞扫描程序的结果导入到Metasploit框架的开源安全工具Armitage中，然后通过Metasploit的模块来确定漏洞。一旦发现了漏洞，攻击者就可以采取一种可行方法攻击系统，通过Shell或启动Metasploit的meterpreter来控制这个系统。 这些有效载荷就是在获得本地系统访问之后执行的一系列命令。这个过程需要参考一些文档并使用一些数据库技术，在发现漏洞之后开发一种可行的攻击方法。其中有效载荷数据库包含用于提取本地系统密码、安装其他软件或控制硬件等的模块，这些功能很像以前BO2K等工具所具备的功能。 特点这种可以扩展的模型将负载控制，编码器，无操作生成器和漏洞整合在一起，使 Metasploit Framework 成为一种研究高危漏洞的途径。它集成了各平台上常见的溢出漏洞和流行的 shellcode ，并且不断更新。最新版本的 MSF 包含了750多种流行的操作系统及应用软件的漏洞，以及224个 shellcode 。作为安全工具，它在安全检测中用着不容忽视的作用，并为漏洞自动化探测和及时检测系统漏洞提供了有力保障。 Metasploit自带上百种漏洞，还可以在online exploit building demo(在线漏洞生成演示)上看到如何生成漏洞。这使自己编写漏洞变得更简单，它势必将提升非法shellcode的水平，并且扩大网络阴暗面。与其相似的专业漏洞工具，如Core Impact和Canvas已经被许多专业领域用户使用。Metasploit降低了使用的门槛，将其推广给大众。 Metasploit的使用在运行 Metasploit 终端前，我们需要先启动MSF默认的数据库用于存储结果的数据库服务Metasploit利用PostgreSQL 数据库系统，在进行渗透测试时跟踪大量信息非常有用。这允许从其他工具导入和导出扫描结果，以及存储已发现的凭据，服务和其他有价值的数据。 root@kali:~# /etc/init.d/postgresql start 如果是第一次使用，我们可以在终端中使用msfdb init命令初始化数据库。这将为Metasploit创建一个默认数据库和用户进行交互。 msfdb init初始化msfdb start开启数据库你可以进入postgresql数据库中新建一个数据库并绑定metasploit 启动命令行终端，运行metaspoit控制台root@kali:~# msfconsole 最后，我们可以使用db_status命令检查数据库是否已加载并正常工作12msf &gt; db_status[*] postgresql connected to msf]]></content>
@@ -11,8 +26,8 @@
       <tags>
         <tag>工具</tag>
         <tag>web安全</tag>
-        <tag>渗透测试</tag>
         <tag>metasploit</tag>
+        <tag>渗透测试</tag>
       </tags>
   </entry>
   <entry>
@@ -26,8 +41,8 @@
       <tags>
         <tag>工具</tag>
         <tag>web安全</tag>
-        <tag>渗透测试</tag>
         <tag>metasploit</tag>
+        <tag>渗透测试</tag>
       </tags>
   </entry>
   <entry>
@@ -46,8 +61,8 @@
       <tags>
         <tag>工具</tag>
         <tag>web安全</tag>
-        <tag>Nmap</tag>
         <tag>渗透测试</tag>
+        <tag>Nmap</tag>
       </tags>
   </entry>
   <entry>
