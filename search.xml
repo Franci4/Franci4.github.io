@@ -1,6 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[主动式信息搜索]]></title>
+    <url>%2Funcategorized%2F%E4%B8%BB%E5%8A%A8%E5%BC%8F%E4%BF%A1%E6%81%AF%E6%90%9C%E7%B4%A2.html</url>
+    <content type="text"></content>
+  </entry>
+  <entry>
+    <title><![CDATA[被动式信息搜集]]></title>
+    <url>%2FWEB%E5%AE%89%E5%85%A8%2F%E4%BF%A1%E6%81%AF%E6%90%9C%E9%9B%86%E7%AF%87%2F%E8%A2%AB%E5%8A%A8%E5%BC%8F%E4%BF%A1%E6%81%AF%E6%90%9C%E9%9B%86.html</url>
+    <content type="text"><![CDATA[被动信息搜集介绍使用被动，间接地信息搜集技巧，你可以再不接触到目标系统的情况下挖掘目标信息。举例来说，你可以使用你这些技巧确定网络边界情况和网络运维人员，甚至了解到目标网络中使用的操作系统和网站服务器软件的类型。在搜集目标资料时应该搜集：服务器的配置信息和网站的信息，其中包括网站注册人，目标网站系统，目标服务器系统，目标网站相关子域名，目标服务器所开放的端口和服务器存放网站等。 域名注册人查询whois查询12345678910111213root@kali:~# whois yuhong.com.cnDomain Name: yuhong.com.cnROID: 20021209s10011s00004332-cnDomain Status: clientTransferProhibitedRegistrant ID: hc451003408-cnRegistrant: 北京东方雨虹防水技术股份有限公司Registrant Contact Email: songht@yuhong.com.cnSponsoring Registrar: 阿里云计算有限公司（万网）Name Server: dns9.hichina.comName Server: dns10.hichina.comRegistration Time: 2001-07-18 00:00:00Expiration Time: 2021-07-18 00:00:00DNSSEC: unsigned DNS枚举firece工具主要对子域名进行扫描和收集信息，可以获取一个目标主机上所有的IP地址和主机信息。root@kali:~# fierce -dns 目标站点执行暴力破解，测试的数量取决于字典中提供的字符串数量，可以使用自带的hosts.txt。也可以自定义字典将一些常用的字段输入进去，root@kali:~# fierce -dns 目标站点 -wordlist /usr/share/fierce/hosts.txt在知道了目标站点IP地址的情况下，可以再次使用whois查询获得一些信息。 aqautone工具介绍：是一套用于对域名进行侦察的工具。它可以通过使用开放源码和更常见的子域名字典暴力法来发现给定域上的子域。在子域发现后，AQUATONE可以扫描主机以查找常见的Web端口，HTTP头，HTML主体和屏幕截图可以收集并整合到一个报告中，以便于对攻击面进行分析。aquatone-discover：使用被动收集或字典爆破方式发现子域名aquatone-scan：完成子域名扫描后，可扫描域名开放端口、HTTP header、HTML body、截图等信息并生成报告aquatone-gather：对扫描结果中的IP进行访问请求和网页截图，搜集信息aquatone-takeover：检测域名是否存在子域名劫持风险工具之间能互相利用其他工具扫描生成的结果开展下一步工作。12345678910root@kali:~# aquatone-discover -d 目标站点 __ ____ _____ ___ ______ _/ /_____ ____ ___ / __ `/ __ `/ / / / __ `/ __/ __ \/ __ \/ _ \/ /_/ / /_/ / /_/ / /_/ / /_/ /_/ / / / / __/\__,_/\__, /\__,_/\__,_/\__/\____/_/ /_/\___/ /_/ discover v0.5.0 - by @michenriksenIdentifying nameservers for yuhong.com.cn... DoneUsing nameservers:]]></content>
+      <categories>
+        <category>WEB安全</category>
+        <category>信息搜集篇</category>
+      </categories>
+      <tags>
+        <tag>工具</tag>
+        <tag>web安全</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[Metasploit's Wmap]]></title>
     <url>%2FWEB%E5%AE%89%E5%85%A8%2Fmetasploit%2FMetasploit-s-Wmap.html</url>
     <content type="text"><![CDATA[简介WMAP是一个功能丰富的Web应用程序漏洞扫描程序，最初是从名为SQLMap的工具创建的。该工具与Metasploit集成，允许我们从Metasploit框架内进行Web应用程序扫描。 拥有高效的工作流程是任何工具的重要组成部分，但在探测应用程序的漏洞时尤为重要。虽然Metasploit在开发时被认为是事实上的标准，但它也包含其他活动的模块，例如scanning。例如，WMAP，一种可在Metasploit框架内使用的Web应用程序扫描程序。 Web应用程序扫描程序是用于识别Web应用程序中存在的漏洞的工具。WMAP可以轻松保持流畅的工作流程，因为它可以在Metasploit内部工作时加载和运行 实践操作步骤一在运行 Metasploit 终端前，我们需要先启动用于存储扫描结果的数据库服务：root@kali:~# service postgresql start 步骤二启动命令行终端，运行 Metasploit 控制台：root@kali:~# msfconsole 步骤三加载WMAP使用load wmap命令加载WMAP模块：msf &gt; load wmap从这里，如果我们打字？要显示Metasploit的帮助菜单，我们应该在菜单顶部看到WMAP的命令及其描述。123456789101112msf &gt; ?wmap Commands============= Command Description ------- ----------- wmap_modules Manage wmap modules 管理wmap模块 wmap_nodes Manage nodes 管理节点 wmap_run Test targets 测试目标 wmap_sites Manage sites 管理网站 wmap_targets Manage targets 管理目标 wmap_vulns Display web vulns 显示网页漏洞 步骤四添加要扫描的站点键入任何命令以显示其可用选项; 让我们从使用wmap_sites管理我们希望扫描的网站开始。1234567msf &gt; wmap_sites [*] Usage: wmap_sites [options] -h Display this help text 显示此帮助文本 -a [url] Add site (vhost,url) 添加站点（vhost,url） -d [ids] Delete sites (separate ids with space) 删除站点（用空格分隔id） -l List all available sites 列出所有可用站点 -s [id] Display site structure (vhost,url|ids) (level) (unicode output true/false) 显示站点结构（vhost,url,ids）（级别）（Unicode输出真/假） 要添加站点，请使用带有-a标志的wmap_sites，后跟站点地址。12msf &gt; wmap_sites -a http://192.168.126.142[*] Site created. 站点创建 现在我们可以使用带有-l标志的wmap_sites列出可用站点1234567msf &gt; wmap_sites -l[*] Available sites=============== Id Host Vhost Port Proto # Pages # Forms -- ---- ----- ---- ----- ------- ------- 0 192.168.126.142 192.168.126.142 80 http 0 0 步骤五指定目标URL接下来，我们需要使用wmap_targets设置我们要扫描的特定目标网址。1234567msf &gt; wmap_targets [*] Usage: wmap_targets [options] -h Display this help text 显示此帮助文本 -t [urls] Define target sites (vhost1,url[space]vhost2,url) 定义目标站点（vhost1,url[space]vhost2,url） -d [ids] Define target sites (id1, id2, id3 ...) 定义目标站点（id1，id2，id3 ......） -c Clean target sites list 清理目标站点列表 -l List all target sites 列出所有目标站点 我们可以使用带有-t标志的wmap_targets定义目标，然后是URL。 msf &gt; wmap_targets -t http://192.168.126.142/index.php 并使用带有-l标志的wmap_targets列出已定义的目标1234567msf &gt; wmap_targets -l[*] Defined targets=============== Id Vhost Host Port SSL Path -- ----- ---- ---- --- ---- 0 192.168.126.142 192.168.126.142 80 false /index.php 我们现在应该很好，所以唯一要做的就是实际运行扫描仪。 步骤六运行扫描仪在提示符下键入wmap_run以查看此命令的选项12345678msf &gt; wmap_run[*] Usage: wmap_run [options] -h Display this help text 显示此帮助文本 -t Show all enabled modules 显示所有已启用的模块 -m [regex] Launch only modules that name match provided regex. 仅启动名称匹配的模块提供正则表达式 -p [regex] Only test path defined by regex. 仅由正则表达式定义的测试路径 -e [/path/to/profile] Launch profile modules against all matched targets. 针对所有匹配的目标启动配置文件模块 (No profile file runs all enabled modules.) 没有配置文件运行所有已启用的模块 在扫描目标之前，我们可以使用带有-t标志的wmap_run列出所有已启用的模块12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364msf &gt; wmap_run -t[*] Testing target: 测试目标[*] Site: 192.168.126.142 (192.168.126.142) 网站[*] Port: 80 SSL: false 端口============================================================[*] Testing started. 2019-01-12 18:34:02 +0800 测试开始[*] Loading wmap modules...[*] 39 wmap enabled modules loaded.[*] =[ SSL testing ]= SSL测试============================================================[*] Target is not SSL. SSL modules disabled. 目标不是SSL。模糊测试已禁用[*] =[ Web Server testing ]= web服务器测试============================================================[*] Module auxiliary/scanner/http/http_version[*] Module auxiliary/scanner/http/open_proxy[*] Module auxiliary/admin/http/tomcat_administration[*] Module auxiliary/admin/http/tomcat_utf8_traversal[*] Module auxiliary/scanner/http/drupal_views_user_enum[*] Module auxiliary/scanner/http/frontpage_login[*] Module auxiliary/scanner/http/host_header_injection[*] Module auxiliary/scanner/http/options[*] Module auxiliary/scanner/http/robots_txt[*] Module auxiliary/scanner/http/scraper[*] Module auxiliary/scanner/http/svn_scanner[*] Module auxiliary/scanner/http/trace[*] Module auxiliary/scanner/http/vhost_scanner[*] Module auxiliary/scanner/http/webdav_internal_ip[*] Module auxiliary/scanner/http/webdav_scanner[*] Module auxiliary/scanner/http/webdav_website_content[*] =[ File/Dir testing ]=============================================================[*] Module auxiliary/scanner/http/backup_file[*] Module auxiliary/scanner/http/brute_dirs[*] Module auxiliary/scanner/http/copy_of_file[*] Module auxiliary/scanner/http/dir_listing[*] Module auxiliary/scanner/http/dir_scanner[*] Module auxiliary/scanner/http/dir_webdav_unicode_bypass[*] Module auxiliary/scanner/http/file_same_name_dir[*] Module auxiliary/scanner/http/files_dir[*] Module auxiliary/scanner/http/http_put[*] Module auxiliary/scanner/http/ms09_020_webdav_unicode_bypass[*] Module auxiliary/scanner/http/prev_dir_same_name_file[*] Module auxiliary/scanner/http/replace_ext[*] Module auxiliary/scanner/http/soap_xml[*] Module auxiliary/scanner/http/trace_axd[*] Module auxiliary/scanner/http/verb_auth_bypass[*] =[ Unique Query testing ]=============================================================[*] Module auxiliary/scanner/http/blind_sql_query[*] Module auxiliary/scanner/http/error_sql_injection[*] Module auxiliary/scanner/http/http_traversal[*] Module auxiliary/scanner/http/rails_mass_assignment[*] Module exploit/multi/http/lcms_php_exec[*] =[ Query testing ]=============================================================[*] =[ General testing ]=============================================================[*] Done. 有一些不同类别的模块，包括用于目录测试，查询测试，Web服务器测试和SSL测试的模块，尽管我们可以看到我们的目标不使用SSL，因此这些模块被禁用。要获得任何给定模块的详细说明，请使用info命令，后跟列出的模块的完整路径。例如12345678910111213141516171819202122232425msf &gt; info auxiliary/scanner/http/http_version Name: HTTP Version Detection Module: auxiliary/scanner/http/http_version License: Metasploit Framework License (BSD) Rank: NormalProvided by: hdm &lt;x@hdm.io&gt;Check supported: YesBasic options: Name Current Setting Required Description ---- --------------- -------- ----------- Proxies no A proxy chain of format type:host:port[,type:host:port][...] RHOSTS yes The target address range or CIDR identifier RPORT 80 yes The target port (TCP) SSL false no Negotiate SSL/TLS for outgoing connections THREADS 1 yes The number of concurrent threads VHOST no HTTP server virtual hostDescription: Display version information about each system. 回到扫描。让我们使用带有-e标志的wmap_run开始扫描，该标志将运行所有模块而不是指定的模块。根据目标站点和已启用模块的数量，扫描可能需要相当长的时间才能完成。完成后，扫描将显示完成所需的时间12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152msf &gt; wmap_run -e[*] Using ALL wmap enabled modules.[-] NO WMAP NODES DEFINED. Executing local modules[*] Testing target:[*] Site: 192.168.126.142 (192.168.126.142)[*] Port: 80 SSL: false============================================================[*] Testing started. 2019-01-12 18:41:14 +0800[*] =[ SSL testing ]=============================================================[*] Target is not SSL. SSL modules disabled.[*] =[ Web Server testing ]=============================================================[*] Module auxiliary/scanner/http/http_version[+] 192.168.126.142:80 Apache/2.4.23 (Win32) OpenSSL/1.0.2j PHP/5.4.45 ( Powered by PHP/5.4.45 )[*] Module auxiliary/scanner/http/open_proxy[*] Module auxiliary/admin/http/tomcat_administration[*] Module auxiliary/admin/http/tomcat_utf8_traversal[*] Attempting to connect to 192.168.126.142:80[+] No File(s) found[*] Module auxiliary/scanner/http/drupal_views_user_enum[-] 192.168.126.142 does not appear to be vulnerable, will not continue[*] Module auxiliary/scanner/http/frontpage_login[*] 192.168.126.142:80 - http://192.168.126.142/ may not support FrontPage Server Extensions[*] Module auxiliary/scanner/http/host_header_injection[*] Module auxiliary/scanner/http/options[*] Module auxiliary/scanner/http/robots_txt[*] Module auxiliary/scanner/http/scraper[+] [192.168.126.142] / [upload-labs][*] Module auxiliary/scanner/http/svn_scanner[*] Using code &apos;404&apos; as not found.[*] Module auxiliary/scanner/http/trace[*] Module auxiliary/scanner/http/vhost_scanner[*] &gt;&gt; Exception during launch from auxiliary/scanner/http/vhost_scanner: The following options failed to validate: DOMAIN.[*] Module auxiliary/scanner/http/webdav_internal_ip[*] Module auxiliary/scanner/http/webdav_scanner[*] 192.168.126.142 (Apache/2.4.23 (Win32) OpenSSL/1.0.2j PHP/5.4.45) WebDAV disabled.[*] Module auxiliary/scanner/http/webdav_website_content[*] =[ File/Dir testing ]=============================================================[*] Module auxiliary/scanner/http/backup_file[*] Module auxiliary/scanner/http/brute_dirs[*] Path: /[*] Using code &apos;404&apos; as not found.[+] Found http://192.168.126.142:80/js/ 403[+] Found http://192.168.126.142:80/aux/ 403[+] Found http://192.168.126.142:80/con/ 403[+] Found http://192.168.126.142:80/css/ 403 步骤七解释结果最后，我们可以输入wmap_vulns -l命令来显示扫描结果。12345678910111213141516171819202122232425262728293031323334msf &gt; wmap_vulns -l[*] + [192.168.126.142] (192.168.126.142): scraper /[*] scraper Scraper[*] GET upload-labs[*] + [192.168.126.142] (192.168.126.142): directory /aux/[*] directory Directory found.[*] GET Res code: 403[*] + [192.168.126.142] (192.168.126.142): directory /con/[*] directory Directory found.[*] GET Res code: 403[*] + [192.168.126.142] (192.168.126.142): directory /nul/[*] directory Directory found.[*] GET Res code: 403[*] + [192.168.126.142] (192.168.126.142): directory /prn/[*] directory Directory found.[*] GET Res code: 403[*] + [192.168.126.142] (192.168.126.142): directory /.../[*] directory Directoy found.[*] GET Res code: 403[*] + [192.168.126.142] (192.168.126.142): directory /css/[*] directory Directoy found.[*] GET Res code: 403[*] + [192.168.126.142] (192.168.126.142): directory /doc/[*] directory Directoy found.[*] GET Res code: 403[*] + [192.168.126.142] (192.168.126.142): directory /img/[*] directory Directoy found.[*] GET Res code: 403[*] + [192.168.126.142] (192.168.126.142): directory /js/[*] directory Directoy found.[*] GET Res code: 403[*] + [192.168.126.142] (192.168.126.142): directory /upload/[*] directory Directoy found.[*] GET Res code: 403 我们可以看到它发现了一些可能值得进一步调查的可能有趣的目录：/ cgi-bin /目录允许执行脚本并直接在服务器上执行类似控制台的功能。/ phpMyAdmin /目录是MySQL数据库系统的开源管理工具。/ dav /目录允许用户远程协作和执行Web创作活动。WMAP可能不会像其他Web应用程序漏洞扫描程序那样返回详细结果，但这些信息可以成为探索不同攻击途径的有用起点。事实上，这个扫描仪可以从Metasploit框架中轻松加载和使用，这使它成为了解如何使用的有用工具。 总结Metasploit是一个功能强大的工具，不仅可以用于开发，还具有大量其他模块，可以直接在框架内加载和运行，使其成为渗透测试和道德黑客攻击的绝对强大。在本教程中，我们学习了如何快速启动和运行Metasploit的数据库系统，以及如何使用WMAP插件扫描Web应用程序中的漏洞。这只是Metasploit框架中许多非常有用的模块之一，每天都有更多的模块可以满足各地白帽的需求。]]></content>
@@ -9,10 +27,10 @@
         <category>metasploit</category>
       </categories>
       <tags>
-        <tag>web安全</tag>
-        <tag>metasploit</tag>
         <tag>工具</tag>
+        <tag>web安全</tag>
         <tag>渗透测试</tag>
+        <tag>metasploit</tag>
       </tags>
   </entry>
   <entry>
@@ -24,10 +42,10 @@
         <category>metasploit</category>
       </categories>
       <tags>
-        <tag>web安全</tag>
-        <tag>metasploit</tag>
         <tag>工具</tag>
+        <tag>web安全</tag>
         <tag>渗透测试</tag>
+        <tag>metasploit</tag>
       </tags>
   </entry>
   <entry>
@@ -39,10 +57,10 @@
         <category>metasploit</category>
       </categories>
       <tags>
-        <tag>web安全</tag>
-        <tag>metasploit</tag>
         <tag>工具</tag>
+        <tag>web安全</tag>
         <tag>渗透测试</tag>
+        <tag>metasploit</tag>
       </tags>
   </entry>
   <entry>
@@ -59,10 +77,10 @@
         <category>Nmap</category>
       </categories>
       <tags>
-        <tag>web安全</tag>
         <tag>工具</tag>
-        <tag>渗透测试</tag>
+        <tag>web安全</tag>
         <tag>Nmap</tag>
+        <tag>渗透测试</tag>
       </tags>
   </entry>
   <entry>
@@ -74,8 +92,8 @@
         <category>sqlmap</category>
       </categories>
       <tags>
-        <tag>web安全</tag>
         <tag>工具</tag>
+        <tag>web安全</tag>
       </tags>
   </entry>
   <entry>
