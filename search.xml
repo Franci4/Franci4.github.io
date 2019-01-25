@@ -2,20 +2,28 @@
 <search>
   <entry>
     <title><![CDATA[主动式信息搜索]]></title>
-    <url>%2Funcategorized%2F%E4%B8%BB%E5%8A%A8%E5%BC%8F%E4%BF%A1%E6%81%AF%E6%90%9C%E7%B4%A2.html</url>
-    <content type="text"></content>
-  </entry>
-  <entry>
-    <title><![CDATA[被动式信息搜集]]></title>
-    <url>%2FWEB%E5%AE%89%E5%85%A8%2F%E4%BF%A1%E6%81%AF%E6%90%9C%E9%9B%86%E7%AF%87%2F%E8%A2%AB%E5%8A%A8%E5%BC%8F%E4%BF%A1%E6%81%AF%E6%90%9C%E9%9B%86.html</url>
-    <content type="text"><![CDATA[被动信息搜集介绍使用被动，间接地信息搜集技巧，你可以再不接触到目标系统的情况下挖掘目标信息。举例来说，你可以使用你这些技巧确定网络边界情况和网络运维人员，甚至了解到目标网络中使用的操作系统和网站服务器软件的类型。在搜集目标资料时应该搜集：服务器的配置信息和网站的信息，其中包括网站注册人，目标网站系统，目标服务器系统，目标网站相关子域名，目标服务器所开放的端口和服务器存放网站等。 域名注册人查询whois查询12345678910111213root@kali:~# whois yuhong.com.cnDomain Name: yuhong.com.cnROID: 20021209s10011s00004332-cnDomain Status: clientTransferProhibitedRegistrant ID: hc451003408-cnRegistrant: 北京东方雨虹防水技术股份有限公司Registrant Contact Email: songht@yuhong.com.cnSponsoring Registrar: 阿里云计算有限公司（万网）Name Server: dns9.hichina.comName Server: dns10.hichina.comRegistration Time: 2001-07-18 00:00:00Expiration Time: 2021-07-18 00:00:00DNSSEC: unsigned DNS枚举firece工具主要对子域名进行扫描和收集信息，可以获取一个目标主机上所有的IP地址和主机信息。root@kali:~# fierce -dns 目标站点执行暴力破解，测试的数量取决于字典中提供的字符串数量，可以使用自带的hosts.txt。也可以自定义字典将一些常用的字段输入进去，root@kali:~# fierce -dns 目标站点 -wordlist /usr/share/fierce/hosts.txt在知道了目标站点IP地址的情况下，可以再次使用whois查询获得一些信息。 aqautone工具介绍：是一套用于对域名进行侦察的工具。它可以通过使用开放源码和更常见的子域名字典暴力法来发现给定域上的子域。在子域发现后，AQUATONE可以扫描主机以查找常见的Web端口，HTTP头，HTML主体和屏幕截图可以收集并整合到一个报告中，以便于对攻击面进行分析。aquatone-discover：使用被动收集或字典爆破方式发现子域名aquatone-scan：完成子域名扫描后，可扫描域名开放端口、HTTP header、HTML body、截图等信息并生成报告aquatone-gather：对扫描结果中的IP进行访问请求和网页截图，搜集信息aquatone-takeover：检测域名是否存在子域名劫持风险工具之间能互相利用其他工具扫描生成的结果开展下一步工作。12345678910root@kali:~# aquatone-discover -d 目标站点 __ ____ _____ ___ ______ _/ /_____ ____ ___ / __ `/ __ `/ / / / __ `/ __/ __ \/ __ \/ _ \/ /_/ / /_/ / /_/ / /_/ / /_/ /_/ / / / / __/\__,_/\__, /\__,_/\__,_/\__/\____/_/ /_/\___/ /_/ discover v0.5.0 - by @michenriksenIdentifying nameservers for yuhong.com.cn... DoneUsing nameservers: nslookup介绍：nslookup命令用于查询DNS的记录，查看域名解析是否正常，在网络故障的时候用来诊断网络问题。指令只是一个检查网络联通情况的命令，虽然在输入的参数是域名的情况下会通过DNS进行查询，但是它只能查询A类型和CNAME类型的记录，而且只会告诉你域名是否存在，其他的信息一概欠奉。所以如果你需要对DNS的故障进行排错就必须熟练另一个更强大的工具nslookup。这个命令可以指定查询的类型，可以查到DNS记录的生存时间还可以指定使用那个DNS服务器进行解释。 指定类型查询set type=mx查询其他类型的域名 如果没有加任何参数，所以默认情况下nslookup查询的是A类型的记录。如果我们配置了其他类型的记录希望看到解释是否正常。这时候ping就无能为力了。比如我们配置了MX记录，但是邮件服务器只能发信不能收信，到底是域名解释问题还是其他的问题Ping命令的检查只能让你误入歧途。nslookup 这时候可以模拟你的其他遇见服务器进行域名解释的情况。我们需要在nslookup上加上适当的参数。指定查询记录类型的指令格式如下： nslookup –qt=类型 目标域名 注意qt必须小写。 类型可以是一下字符，不区分大小写：123456789101112131415161718192021222324252627C:\Users\FRANCI4&gt;nslookup -qt=mx yuhong.com.cn服务器: UnKnownAddress: 192.168.0.1非权威应答:yuhong.com.cn MX preference = 10, mail exchanger = mail.yuhong.com.cnyuhong.com.cn nameserver = dns9.hichina.comyuhong.com.cn nameserver = dns10.hichina.comdns9.hichina.com internet address = 106.11.141.115dns9.hichina.com internet address = 106.11.141.125dns9.hichina.com internet address = 106.11.211.55dns9.hichina.com internet address = 106.11.211.65dns9.hichina.com internet address = 140.205.41.15dns9.hichina.com internet address = 140.205.41.25dns9.hichina.com internet address = 140.205.81.15dns9.hichina.com internet address = 140.205.81.25dns10.hichina.com internet address = 106.11.141.126dns10.hichina.com internet address = 106.11.211.56dns10.hichina.com internet address = 106.11.211.66dns10.hichina.com internet address = 140.205.41.16dns10.hichina.com internet address = 140.205.41.26dns10.hichina.com internet address = 140.205.81.16dns10.hichina.com internet address = 140.205.81.26dns10.hichina.com internet address = 106.11.141.116dns9.hichina.com AAAA IPv6 address = 2400:3200:2000:28::1dns10.hichina.com AAAA IPv6 address = 2400:3200:2000:29::1 其他配置命令 A 地址记录(Ipv4) AAAA 地址记录（Ipv6） AFSDB Andrew文件系统数据库服务器记录（不懂） ATMA ATM地址记录（不是自动提款机） CNAME 别名记录 HINFO 硬件配置记录，包括CPU、操作系统信息 ISDN 域名对应的ISDN号码 MB 存放指定邮箱的服务器 MG 邮件组记录 MINFO 邮件组和邮箱的信息记录 MR 改名的邮箱记录 MX 邮件服务器记录 NS 名字服务器记录 PTR 反向记录（从IP地址解释域名） RP 负责人记录 RT 路由穿透记录（不懂） SRV TCP服务器信息记录（将有大用处） TXT 域名对应的文本信息 X25 域名对应的X.25地址记录 欢迎补充]]></content>
+    <url>%2FWEB%E5%AE%89%E5%85%A8%2F%E4%BF%A1%E6%81%AF%E6%90%9C%E9%9B%86%E7%AF%87%2F%E4%B8%BB%E5%8A%A8%E5%BC%8F%E4%BF%A1%E6%81%AF%E6%90%9C%E7%B4%A2.html</url>
+    <content type="text"><![CDATA[主动信息搜集介绍再主动信息搜索中，我们与目标系统进行交互，从而对其进行更深入的了解。举例来说，我们可以执行端口来确定目标系统开放了哪些端口，运行了那些服务。多发现一个存活的主机或运行中的服务，就多一些渗透成功的机会。需要注意的是，主动的信息收集很可能被IDS和IPS抓住踪迹。 直接与目标系统交互通信 无法避免留下访问的痕迹 使用受控的第三方电脑进行探测： 使用代理或已经被控制的主机 做好被封杀的准备 使用噪声迷惑目标，淹没还真实的探测流量 扫描：发送不同的探测，根据返回结果判断目标状态#]]></content>
       <categories>
         <category>WEB安全</category>
         <category>信息搜集篇</category>
       </categories>
       <tags>
-        <tag>web安全</tag>
         <tag>工具</tag>
+        <tag>web安全</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[被动式信息搜集]]></title>
+    <url>%2FWEB%E5%AE%89%E5%85%A8%2F%E4%BF%A1%E6%81%AF%E6%90%9C%E9%9B%86%E7%AF%87%2F%E8%A2%AB%E5%8A%A8%E5%BC%8F%E4%BF%A1%E6%81%AF%E6%90%9C%E9%9B%86.html</url>
+    <content type="text"><![CDATA[被动信息搜集介绍使用被动，间接地信息搜集技巧，你可以再不接触到目标系统的情况下挖掘目标信息。举例来说，你可以使用你这些技巧确定网络边界情况和网络运维人员，甚至了解到目标网络中使用的操作系统和网站服务器软件的类型。在搜集目标资料时应该搜集：服务器的配置信息和网站的信息，其中包括网站注册人，目标网站系统，目标服务器系统，目标网站相关子域名，目标服务器所开放的端口和服务器存放网站等。 域名注册人查询whois查询12345678910111213root@kali:~# whois yuhong.com.cnDomain Name: yuhong.com.cnROID: 20021209s10011s00004332-cnDomain Status: clientTransferProhibitedRegistrant ID: hc451003408-cnRegistrant: 北京东方雨虹防水技术股份有限公司Registrant Contact Email: songht@yuhong.com.cnSponsoring Registrar: 阿里云计算有限公司（万网）Name Server: dns9.hichina.comName Server: dns10.hichina.comRegistration Time: 2001-07-18 00:00:00Expiration Time: 2021-07-18 00:00:00DNSSEC: unsigned 域名查询工具DMitry介绍： Dmitry：深度信息挖掘工具。Dmitry是一个由C语言编写的UNIX/(GNU)Linux命令行工具，它可用于收集主机相关信息，比如子域名、Email地址、系统运行时间信息。123456789101112用法：dmitry[-winsepfb][-t 0-9][-o%host.txt]主机-o 将输出保存到%host.txt或-o文件指定的文件-i 对主机的IP地址执行whois查找-w 对主机的域名执行whois查找-n 在主机上检索netcraft.com信息-s 搜索可能存在的子域-e 搜索可能的电子邮件地址-p 在主机上执行TCP端口扫描*-f 在显示输出报告筛选端口的主机上执行TCP端口扫描*-b 读取从扫描端口接收的横幅*-t 0-9在扫描TCP端口时以秒为单位设置TTL（默认为2）*要求传递标记为-p的 实例1234567891011root@kali:~# dmitry -iwnse yuhong.com.cnDeepmagic Information Gathering Tool&quot;There be some deep magic going on&quot;HostIP:118.190.27.202HostName:yuhong.com.cnGathered Inet-whois information for 118.190.27.202---------------------------------inetnum: 116.204.0.0 - 125.62.71.255此处省略········· DNS枚举firece工具主要对子域名进行扫描和收集信息，可以获取一个目标主机上所有的IP地址和主机信息。root@kali:~# fierce -dns 目标站点执行暴力破解，测试的数量取决于字典中提供的字符串数量，可以使用自带的hosts.txt。也可以自定义字典将一些常用的字段输入进去，root@kali:~# fierce -dns 目标站点 -wordlist /usr/share/fierce/hosts.txt在知道了目标站点IP地址的情况下，可以再次使用whois查询获得一些信息。 aqautone工具介绍：是一套用于对域名进行侦察的工具。它可以通过使用开放源码和更常见的子域名字典暴力法来发现给定域上的子域。在子域发现后，AQUATONE可以扫描主机以查找常见的Web端口，HTTP头，HTML主体和屏幕截图可以收集并整合到一个报告中，以便于对攻击面进行分析。aquatone-discover：使用被动收集或字典爆破方式发现子域名aquatone-scan：完成子域名扫描后，可扫描域名开放端口、HTTP header、HTML body、截图等信息并生成报告aquatone-gather：对扫描结果中的IP进行访问请求和网页截图，搜集信息aquatone-takeover：检测域名是否存在子域名劫持风险工具之间能互相利用其他工具扫描生成的结果开展下一步工作。12345678910root@kali:~# aquatone-discover -d 目标站点 __ ____ _____ ___ ______ _/ /_____ ____ ___ / __ `/ __ `/ / / / __ `/ __/ __ \/ __ \/ _ \/ /_/ / /_/ / /_/ / /_/ / /_/ /_/ / / / / __/\__,_/\__, /\__,_/\__,_/\__/\____/_/ /_/\___/ /_/ discover v0.5.0 - by @michenriksenIdentifying nameservers for yuhong.com.cn... DoneUsing nameservers: nslookup介绍：nslookup命令用于查询DNS的记录，查看域名解析是否正常，在网络故障的时候用来诊断网络问题。指令只是一个检查网络联通情况的命令，虽然在输入的参数是域名的情况下会通过DNS进行查询，但是它只能查询A类型和CNAME类型的记录，而且只会告诉你域名是否存在，其他的信息一概欠奉。所以如果你需要对DNS的故障进行排错就必须熟练另一个更强大的工具nslookup。这个命令可以指定查询的类型，可以查到DNS记录的生存时间还可以指定使用那个DNS服务器进行解释。 指定类型查询set type=mx查询其他类型的域名 如果没有加任何参数，所以默认情况下nslookup查询的是A类型的记录。如果我们配置了其他类型的记录希望看到解释是否正常。这时候ping就无能为力了。比如我们配置了MX记录，但是邮件服务器只能发信不能收信，到底是域名解释问题还是其他的问题Ping命令的检查只能让你误入歧途。nslookup 这时候可以模拟你的其他遇见服务器进行域名解释的情况。我们需要在nslookup上加上适当的参数。指定查询记录类型的指令格式如下： nslookup –qt=类型 目标域名 注意qt必须小写。 类型可以是一下字符，不区分大小写：123456789101112131415161718192021222324252627C:\Users\FRANCI4&gt;nslookup -qt=mx yuhong.com.cn服务器: UnKnownAddress: 192.168.0.1非权威应答:yuhong.com.cn MX preference = 10, mail exchanger = mail.yuhong.com.cnyuhong.com.cn nameserver = dns9.hichina.comyuhong.com.cn nameserver = dns10.hichina.comdns9.hichina.com internet address = 106.11.141.115dns9.hichina.com internet address = 106.11.141.125dns9.hichina.com internet address = 106.11.211.55dns9.hichina.com internet address = 106.11.211.65dns9.hichina.com internet address = 140.205.41.15dns9.hichina.com internet address = 140.205.41.25dns9.hichina.com internet address = 140.205.81.15dns9.hichina.com internet address = 140.205.81.25dns10.hichina.com internet address = 106.11.141.126dns10.hichina.com internet address = 106.11.211.56dns10.hichina.com internet address = 106.11.211.66dns10.hichina.com internet address = 140.205.41.16dns10.hichina.com internet address = 140.205.41.26dns10.hichina.com internet address = 140.205.81.16dns10.hichina.com internet address = 140.205.81.26dns10.hichina.com internet address = 106.11.141.116dns9.hichina.com AAAA IPv6 address = 2400:3200:2000:28::1dns10.hichina.com AAAA IPv6 address = 2400:3200:2000:29::1 其他配置命令 A 地址记录(Ipv4) AAAA 地址记录（Ipv6） AFSDB Andrew文件系统数据库服务器记录（不懂） ATMA ATM地址记录（不是自动提款机） CNAME 别名记录 HINFO 硬件配置记录，包括CPU、操作系统信息 ISDN 域名对应的ISDN号码 MB 存放指定邮箱的服务器 MG 邮件组记录 MINFO 邮件组和邮箱的信息记录 MR 改名的邮箱记录 MX 邮件服务器记录 NS 名字服务器记录 PTR 反向记录（从IP地址解释域名） RP 负责人记录 RT 路由穿透记录（不懂） SRV TCP服务器信息记录（将有大用处） TXT 域名对应的文本信息 X25 域名对应的X.25地址记录 欢迎补充]]></content>
+      <categories>
+        <category>WEB安全</category>
+        <category>信息搜集篇</category>
+      </categories>
+      <tags>
+        <tag>工具</tag>
+        <tag>web安全</tag>
       </tags>
   </entry>
   <entry>
@@ -27,10 +35,10 @@
         <category>metasploit</category>
       </categories>
       <tags>
-        <tag>web安全</tag>
         <tag>工具</tag>
-        <tag>渗透测试</tag>
+        <tag>web安全</tag>
         <tag>metasploit</tag>
+        <tag>渗透测试</tag>
       </tags>
   </entry>
   <entry>
@@ -42,10 +50,10 @@
         <category>metasploit</category>
       </categories>
       <tags>
-        <tag>web安全</tag>
         <tag>工具</tag>
-        <tag>渗透测试</tag>
+        <tag>web安全</tag>
         <tag>metasploit</tag>
+        <tag>渗透测试</tag>
       </tags>
   </entry>
   <entry>
@@ -57,10 +65,10 @@
         <category>metasploit</category>
       </categories>
       <tags>
-        <tag>web安全</tag>
         <tag>工具</tag>
-        <tag>渗透测试</tag>
+        <tag>web安全</tag>
         <tag>metasploit</tag>
+        <tag>渗透测试</tag>
       </tags>
   </entry>
   <entry>
@@ -77,10 +85,10 @@
         <category>Nmap</category>
       </categories>
       <tags>
-        <tag>web安全</tag>
-        <tag>Nmap</tag>
         <tag>工具</tag>
+        <tag>web安全</tag>
         <tag>渗透测试</tag>
+        <tag>Nmap</tag>
       </tags>
   </entry>
   <entry>
@@ -92,8 +100,8 @@
         <category>sqlmap</category>
       </categories>
       <tags>
-        <tag>web安全</tag>
         <tag>工具</tag>
+        <tag>web安全</tag>
       </tags>
   </entry>
   <entry>
