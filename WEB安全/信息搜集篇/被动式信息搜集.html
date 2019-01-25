@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="工具,web安全," />
+  <meta name="keywords" content="web安全,工具," />
 
 
 
@@ -80,14 +80,14 @@
 
 
 <meta name="description" content="被动信息搜集介绍使用被动，间接地信息搜集技巧，你可以再不接触到目标系统的情况下挖掘目标信息。举例来说，你可以使用你这些技巧确定网络边界情况和网络运维人员，甚至了解到目标网络中使用的操作系统和网站服务器软件的类型。在搜集目标资料时应该搜集：服务器的配置信息和网站的信息，其中包括网站注册人，目标网站系统，目标服务器系统，目标网站相关子域名，目标服务器所开放的端口和服务器存放网站等。 域名注册人查询wh">
-<meta name="keywords" content="工具,web安全">
+<meta name="keywords" content="web安全,工具">
 <meta property="og:type" content="article">
 <meta property="og:title" content="被动式信息搜集">
 <meta property="og:url" content="http://Franci4.github.io/WEB安全/信息搜集篇/被动式信息搜集.html">
 <meta property="og:site_name" content="Franci4‘Blog">
 <meta property="og:description" content="被动信息搜集介绍使用被动，间接地信息搜集技巧，你可以再不接触到目标系统的情况下挖掘目标信息。举例来说，你可以使用你这些技巧确定网络边界情况和网络运维人员，甚至了解到目标网络中使用的操作系统和网站服务器软件的类型。在搜集目标资料时应该搜集：服务器的配置信息和网站的信息，其中包括网站注册人，目标网站系统，目标服务器系统，目标网站相关子域名，目标服务器所开放的端口和服务器存放网站等。 域名注册人查询wh">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-01-25T08:07:45.601Z">
+<meta property="og:updated_time" content="2019-01-25T09:39:57.784Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="被动式信息搜集">
 <meta name="twitter:description" content="被动信息搜集介绍使用被动，间接地信息搜集技巧，你可以再不接触到目标系统的情况下挖掘目标信息。举例来说，你可以使用你这些技巧确定网络边界情况和网络运维人员，甚至了解到目标网络中使用的操作系统和网站服务器软件的类型。在搜集目标资料时应该搜集：服务器的配置信息和网站的信息，其中包括网站注册人，目标网站系统，目标服务器系统，目标网站相关子域名，目标服务器所开放的端口和服务器存放网站等。 域名注册人查询wh">
@@ -352,7 +352,7 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-01-25T16:07:45+08:00">
+              <time title="更新于" itemprop="dateModified" datetime="2019-01-25T17:39:57+08:00">
                 2019-01-25
               </time>
             
@@ -424,7 +424,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  698
+                  1.5k
                 </span>
               
 
@@ -440,7 +440,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  2
+                  6
                 </span>
               
             </div>
@@ -465,7 +465,9 @@
 <h1 id="域名注册人查询"><a href="#域名注册人查询" class="headerlink" title="域名注册人查询"></a>域名注册人查询</h1><p>whois查询<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">root@kali:~# whois yuhong.com.cn</span><br><span class="line">Domain Name: yuhong.com.cn</span><br><span class="line">ROID: 20021209s10011s00004332-cn</span><br><span class="line">Domain Status: clientTransferProhibited</span><br><span class="line">Registrant ID: hc451003408-cn</span><br><span class="line">Registrant: 北京东方雨虹防水技术股份有限公司</span><br><span class="line">Registrant Contact Email: songht@yuhong.com.cn</span><br><span class="line">Sponsoring Registrar: 阿里云计算有限公司（万网）</span><br><span class="line">Name Server: dns9.hichina.com</span><br><span class="line">Name Server: dns10.hichina.com</span><br><span class="line">Registration Time: 2001-07-18 00:00:00</span><br><span class="line">Expiration Time: 2021-07-18 00:00:00</span><br><span class="line">DNSSEC: unsigned</span><br></pre></td></tr></table></figure></p>
 <h1 id="DNS枚举"><a href="#DNS枚举" class="headerlink" title="DNS枚举"></a>DNS枚举</h1><h2 id="firece工具"><a href="#firece工具" class="headerlink" title="firece工具"></a>firece工具</h2><p>主要对子域名进行扫描和收集信息，可以获取一个目标主机上所有的IP地址和主机信息。<br><code>root@kali:~# fierce -dns 目标站点</code><br>执行暴力破解，测试的数量取决于字典中提供的字符串数量，可以使用自带的hosts.txt。也可以自定义字典将一些常用的字段输入进去，<br><code>root@kali:~# fierce -dns 目标站点 -wordlist /usr/share/fierce/hosts.txt</code><br>在知道了目标站点IP地址的情况下，可以再次使用whois查询获得一些信息。</p>
 <h2 id="aqautone工具"><a href="#aqautone工具" class="headerlink" title="aqautone工具"></a>aqautone工具</h2><p>介绍：是一套用于对域名进行侦察的工具。它可以通过使用开放源码和更常见的子域名字典暴力法来发现给定域上的子域。在子域发现后，AQUATONE可以扫描主机以查找常见的Web端口，HTTP头，HTML主体和屏幕截图可以收集并整合到一个报告中，以便于对攻击面进行分析。<br>aquatone-discover：使用被动收集或字典爆破方式发现子域名<br>aquatone-scan：完成子域名扫描后，可扫描域名开放端口、HTTP header、HTML body、截图等信息并生成报告<br>aquatone-gather：对扫描结果中的IP进行访问请求和网页截图，搜集信息<br>aquatone-takeover：检测域名是否存在子域名劫持风险工具之间能互相利用其他工具扫描生成的结果开展下一步工作。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">root@kali:~# aquatone-discover -d 目标站点</span><br><span class="line">                           __</span><br><span class="line">  ____ _____ ___  ______ _/ /_____  ____  ___</span><br><span class="line"> / __ `/ __ `/ / / / __ `/ __/ __ \/ __ \/ _ \</span><br><span class="line">/ /_/ / /_/ / /_/ / /_/ / /_/ /_/ / / / /  __/</span><br><span class="line">\__,_/\__, /\__,_/\__,_/\__/\____/_/ /_/\___/</span><br><span class="line">        /_/  discover v0.5.0 - by @michenriksen</span><br><span class="line"></span><br><span class="line">Identifying nameservers for yuhong.com.cn... Done</span><br><span class="line">Using nameservers:</span><br></pre></td></tr></table></figure></p>
-
+<h2 id="nslookup"><a href="#nslookup" class="headerlink" title="nslookup"></a>nslookup</h2><p>介绍：nslookup命令用于查询DNS的记录，查看域名解析是否正常，在网络故障的时候用来诊断网络问题。<br>指令只是一个检查网络联通情况的命令，虽然在输入的参数是域名的情况下会通过DNS进行查询，但是它只能查询A类型和CNAME类型的记录，而且只会告诉你域名是否存在，其他的信息一概欠奉。所以如果你需要对DNS的故障进行排错就必须熟练另一个更强大的工具nslookup。这个命令可以指定查询的类型，可以查到DNS记录的生存时间还可以指定使用那个DNS服务器进行解释。<br> 指定类型查询set type=mx<br>查询其他类型的域名<br>　　如果没有加任何参数，所以默认情况下nslookup查询的是A类型的记录。如果我们配置了其他类型的记录希望看到解释是否正常。这时候ping就无能为力了。比如我们配置了MX记录，但是邮件服务器只能发信不能收信，到底是域名解释问题还是其他的问题Ping命令的检查只能让你误入歧途。nslookup 这时候可以模拟你的其他遇见服务器进行域名解释的情况。我们需要在nslookup上加上适当的参数。指定查询记录类型的指令格式如下：<br>　　nslookup –qt=类型 目标域名<br>　　注意qt必须小写。<br>　　类型可以是一下字符，不区分大小写：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">C:\Users\FRANCI4&gt;nslookup -qt=mx yuhong.com.cn</span><br><span class="line">服务器:  UnKnown</span><br><span class="line">Address:  192.168.0.1</span><br><span class="line"></span><br><span class="line">非权威应答:</span><br><span class="line">yuhong.com.cn   MX preference = 10, mail exchanger = mail.yuhong.com.cn</span><br><span class="line"></span><br><span class="line">yuhong.com.cn   nameserver = dns9.hichina.com</span><br><span class="line">yuhong.com.cn   nameserver = dns10.hichina.com</span><br><span class="line">dns9.hichina.com        internet address = 106.11.141.115</span><br><span class="line">dns9.hichina.com        internet address = 106.11.141.125</span><br><span class="line">dns9.hichina.com        internet address = 106.11.211.55</span><br><span class="line">dns9.hichina.com        internet address = 106.11.211.65</span><br><span class="line">dns9.hichina.com        internet address = 140.205.41.15</span><br><span class="line">dns9.hichina.com        internet address = 140.205.41.25</span><br><span class="line">dns9.hichina.com        internet address = 140.205.81.15</span><br><span class="line">dns9.hichina.com        internet address = 140.205.81.25</span><br><span class="line">dns10.hichina.com       internet address = 106.11.141.126</span><br><span class="line">dns10.hichina.com       internet address = 106.11.211.56</span><br><span class="line">dns10.hichina.com       internet address = 106.11.211.66</span><br><span class="line">dns10.hichina.com       internet address = 140.205.41.16</span><br><span class="line">dns10.hichina.com       internet address = 140.205.41.26</span><br><span class="line">dns10.hichina.com       internet address = 140.205.81.16</span><br><span class="line">dns10.hichina.com       internet address = 140.205.81.26</span><br><span class="line">dns10.hichina.com       internet address = 106.11.141.116</span><br><span class="line">dns9.hichina.com        AAAA IPv6 address = 2400:3200:2000:28::1</span><br><span class="line">dns10.hichina.com       AAAA IPv6 address = 2400:3200:2000:29::1</span><br></pre></td></tr></table></figure></p>
+<p>其他配置命令　<br>　A 地址记录(Ipv4)<br>　　AAAA 地址记录（Ipv6）<br>　　AFSDB Andrew文件系统数据库服务器记录（不懂）<br>　　ATMA ATM地址记录（不是自动提款机）<br>　　CNAME 别名记录<br>　　HINFO 硬件配置记录，包括CPU、操作系统信息<br>　　ISDN 域名对应的ISDN号码<br>　　MB 存放指定邮箱的服务器<br>　　MG 邮件组记录<br>　　MINFO 邮件组和邮箱的信息记录<br>　　MR 改名的邮箱记录<br>　　MX 邮件服务器记录<br>　　NS 名字服务器记录<br>　　PTR 反向记录（从IP地址解释域名）<br>　　RP 负责人记录<br>　　RT 路由穿透记录（不懂）<br>　　SRV TCP服务器信息记录（将有大用处）<br>　　TXT 域名对应的文本信息<br>　　X25 域名对应的X.25地址记录</p>
+<h1 id="欢迎补充"><a href="#欢迎补充" class="headerlink" title="欢迎补充"></a>欢迎补充</h1>
       
     </div>
     
@@ -490,9 +492,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/工具/" rel="tag"><i class="fa fa-tag"></i> 工具</a>
-          
             <a href="/tags/web安全/" rel="tag"><i class="fa fa-tag"></i> web安全</a>
+          
+            <a href="/tags/工具/" rel="tag"><i class="fa fa-tag"></i> 工具</a>
           
         </div>
       
@@ -681,7 +683,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#被动信息搜集介绍"><span class="nav-number">1.</span> <span class="nav-text">被动信息搜集介绍</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#域名注册人查询"><span class="nav-number">2.</span> <span class="nav-text">域名注册人查询</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#DNS枚举"><span class="nav-number">3.</span> <span class="nav-text">DNS枚举</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#firece工具"><span class="nav-number">3.1.</span> <span class="nav-text">firece工具</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#aqautone工具"><span class="nav-number">3.2.</span> <span class="nav-text">aqautone工具</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#被动信息搜集介绍"><span class="nav-number">1.</span> <span class="nav-text">被动信息搜集介绍</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#域名注册人查询"><span class="nav-number">2.</span> <span class="nav-text">域名注册人查询</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#DNS枚举"><span class="nav-number">3.</span> <span class="nav-text">DNS枚举</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#firece工具"><span class="nav-number">3.1.</span> <span class="nav-text">firece工具</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#aqautone工具"><span class="nav-number">3.2.</span> <span class="nav-text">aqautone工具</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#nslookup"><span class="nav-number">3.3.</span> <span class="nav-text">nslookup</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#欢迎补充"><span class="nav-number">4.</span> <span class="nav-text">欢迎补充</span></a></li></ol></div>
             
 
           </div>
@@ -716,7 +718,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">7.1k</span>
+    <span title="Site words total count">7.9k</span>
   
 </div>
 
