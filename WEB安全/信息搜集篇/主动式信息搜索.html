@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Franci4‘Blog">
 <meta property="og:description" content="主动信息搜集介绍再主动信息搜索中，我们与目标系统进行交互，从而对其进行更深入的了解。举例来说，我们可以执行端口来确定目标系统开放了哪些端口，运行了那些服务。多发现一个存活的主机或运行中的服务，就多一些渗透成功的机会。需要注意的是，主动的信息收集很可能被IDS和IPS抓住踪迹。  直接与目标系统交互通信 无法避免留下访问的痕迹 使用受控的第三方电脑进行探测： 使用代理或已经被控制的主机 做好被封杀的">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-01-25T12:04:13.649Z">
+<meta property="og:updated_time" content="2019-01-25T13:36:52.842Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="主动式信息搜索">
 <meta name="twitter:description" content="主动信息搜集介绍再主动信息搜索中，我们与目标系统进行交互，从而对其进行更深入的了解。举例来说，我们可以执行端口来确定目标系统开放了哪些端口，运行了那些服务。多发现一个存活的主机或运行中的服务，就多一些渗透成功的机会。需要注意的是，主动的信息收集很可能被IDS和IPS抓住踪迹。  直接与目标系统交互通信 无法避免留下访问的痕迹 使用受控的第三方电脑进行探测： 使用代理或已经被控制的主机 做好被封杀的">
@@ -352,7 +352,7 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2019-01-25T20:04:13+08:00">
+              <time title="更新于" itemprop="dateModified" datetime="2019-01-25T21:36:52+08:00">
                 2019-01-25
               </time>
             
@@ -424,7 +424,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  219
+                  395
                 </span>
               
 
@@ -469,9 +469,12 @@
 <li>使用代理或已经被控制的主机</li>
 <li>做好被封杀的准备</li>
 <li>使用噪声迷惑目标，淹没还真实的探测流量</li>
-<li>扫描：发送不同的探测，根据返回结果判断目标状态<h1 id=""><a href="#" class="headerlink" title="#"></a>#</h1></li>
+<li>扫描：发送不同的探测，根据返回结果判断目标状态</li>
 </ul>
-
+<h1 id="端口扫描"><a href="#端口扫描" class="headerlink" title="端口扫描"></a>端口扫描</h1><h2 id="nmap"><a href="#nmap" class="headerlink" title="nmap"></a>nmap</h2><p>介绍：nmap是一个网络连接端扫描软件，用来扫描网上电脑开放的网络连接端。确定哪些服务运行在哪些连接端，并且推断计算机运行哪个操作系统（这是亦称 fingerprinting）。它是网络管理员必用的软件之一，以及用以评估网络系统安全。<br>基本功能有三个：一是探测一组主机是否在线：其次是扫描主机端口，嗅探所提供的网络服务：三是可以推断主机所用的操作系统。</p>
+<h2 id="识别活跃主机"><a href="#识别活跃主机" class="headerlink" title="识别活跃主机"></a>识别活跃主机</h2><p>查看一个主机是否在线</p>
+<pre><code>root@kali:~# nmap -sP 目标IP
+</code></pre><h2 id="端口扫描-1"><a href="#端口扫描-1" class="headerlink" title="端口扫描"></a>端口扫描</h2>
       
     </div>
     
@@ -520,6 +523,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/Vulnhub靶场演练/Raven-1.html" rel="prev" title="Raven 1">
+                Raven 1 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -600,7 +607,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-count">10</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -611,7 +618,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -622,7 +629,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-count">8</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -683,7 +690,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#主动信息搜集介绍"><span class="nav-number">1.</span> <span class="nav-text">主动信息搜集介绍</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#"><span class="nav-number">2.</span> <span class="nav-text">#</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#主动信息搜集介绍"><span class="nav-number">1.</span> <span class="nav-text">主动信息搜集介绍</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#端口扫描"><span class="nav-number">2.</span> <span class="nav-text">端口扫描</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#nmap"><span class="nav-number">2.1.</span> <span class="nav-text">nmap</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#识别活跃主机"><span class="nav-number">2.2.</span> <span class="nav-text">识别活跃主机</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#端口扫描-1"><span class="nav-number">2.3.</span> <span class="nav-text">端口扫描</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -718,7 +725,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">8.4k</span>
+    <span title="Site words total count">9.8k</span>
   
 </div>
 
