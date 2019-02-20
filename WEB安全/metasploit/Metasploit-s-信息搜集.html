@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="工具,web安全," />
+  <meta name="keywords" content="工具,web安全,metasploit,渗透测试,信息搜集," />
 
 
 
@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="实验目的1.熟悉sqlmap的基本命令2.使用sqlmap获取目标敏感信息实战 实验原理使用sqlmap获取目标敏感信息实战详解 实验内容使用sqlmap获取目标敏感信息实战详解 实验环境描述靶机系统为windows7 dvwa渗透机系统为kali linux 实验步骤1.首先进入靶机，打开命令提示符，输入命令ipcinfig来查看ip地址。2.进入kali渗透机，打开浏览器访问虚拟机win7的i">
-<meta name="keywords" content="工具,web安全">
+<meta name="description" content="使用Nmap进行端口扫描在被动信息搜集确定了目标的IP范围之后，我们可以开始使用端口扫描获取目标开放的端口，端口的扫描过程实际上是逐个对远程主机的端口发起连接，从而确定那些端口是开放的过程。 Nmap是最流行的端口扫描工具，它与Metasploit的集成可谓是珠联璧合，在Metasoloit中，Nmap的输出结果可以保存在后端数据库中以备后续使用。Nmap能够让你一次性扫描大量主机并确定每台主机上">
+<meta name="keywords" content="工具,web安全,metasploit,渗透测试,信息搜集">
 <meta property="og:type" content="article">
-<meta property="og:title" content="1.使用sqlmap获取目标敏感信息实战详解">
-<meta property="og:url" content="http://Franci4.github.io/WEB安全/sqlmap/1-使用sqlmap获取目标敏感信息实战详解.html">
+<meta property="og:title" content="Metasploit&#39;s 信息搜集">
+<meta property="og:url" content="http://Franci4.github.io/WEB安全/metasploit/Metasploit-s-信息搜集.html">
 <meta property="og:site_name" content="Franci4‘Blog">
-<meta property="og:description" content="实验目的1.熟悉sqlmap的基本命令2.使用sqlmap获取目标敏感信息实战 实验原理使用sqlmap获取目标敏感信息实战详解 实验内容使用sqlmap获取目标敏感信息实战详解 实验环境描述靶机系统为windows7 dvwa渗透机系统为kali linux 实验步骤1.首先进入靶机，打开命令提示符，输入命令ipcinfig来查看ip地址。2.进入kali渗透机，打开浏览器访问虚拟机win7的i">
+<meta property="og:description" content="使用Nmap进行端口扫描在被动信息搜集确定了目标的IP范围之后，我们可以开始使用端口扫描获取目标开放的端口，端口的扫描过程实际上是逐个对远程主机的端口发起连接，从而确定那些端口是开放的过程。 Nmap是最流行的端口扫描工具，它与Metasploit的集成可谓是珠联璧合，在Metasoloit中，Nmap的输出结果可以保存在后端数据库中以备后续使用。Nmap能够让你一次性扫描大量主机并确定每台主机上">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-12-25T12:33:05.045Z">
+<meta property="og:updated_time" content="2019-02-19T02:08:30.281Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="1.使用sqlmap获取目标敏感信息实战详解">
-<meta name="twitter:description" content="实验目的1.熟悉sqlmap的基本命令2.使用sqlmap获取目标敏感信息实战 实验原理使用sqlmap获取目标敏感信息实战详解 实验内容使用sqlmap获取目标敏感信息实战详解 实验环境描述靶机系统为windows7 dvwa渗透机系统为kali linux 实验步骤1.首先进入靶机，打开命令提示符，输入命令ipcinfig来查看ip地址。2.进入kali渗透机，打开浏览器访问虚拟机win7的i">
+<meta name="twitter:title" content="Metasploit&#39;s 信息搜集">
+<meta name="twitter:description" content="使用Nmap进行端口扫描在被动信息搜集确定了目标的IP范围之后，我们可以开始使用端口扫描获取目标开放的端口，端口的扫描过程实际上是逐个对远程主机的端口发起连接，从而确定那些端口是开放的过程。 Nmap是最流行的端口扫描工具，它与Metasploit的集成可谓是珠联璧合，在Metasoloit中，Nmap的输出结果可以保存在后端数据库中以备后续使用。Nmap能够让你一次性扫描大量主机并确定每台主机上">
 
 
 
@@ -120,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://Franci4.github.io/WEB安全/sqlmap/1-使用sqlmap获取目标敏感信息实战详解.html"/>
+  <link rel="canonical" href="http://Franci4.github.io/WEB安全/metasploit/Metasploit-s-信息搜集.html"/>
 
 
 
 
 
-  <title>1.使用sqlmap获取目标敏感信息实战详解 | Franci4‘Blog</title>
+  <title>Metasploit's 信息搜集 | Franci4‘Blog</title>
   
 
 
@@ -307,7 +307,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://Franci4.github.io/WEB安全/sqlmap/1-使用sqlmap获取目标敏感信息实战详解.html">
+    <link itemprop="mainEntityOfPage" href="http://Franci4.github.io/WEB安全/metasploit/Metasploit-s-信息搜集.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Franci4">
@@ -324,7 +324,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">1.使用sqlmap获取目标敏感信息实战详解</h1>
+          <h1 class="post-title" itemprop="name headline">Metasploit's 信息搜集</h1>
         
 
         <div class="post-meta">
@@ -336,8 +336,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-27T14:39:00+08:00">
-                2018-10-27
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-18T21:02:24+08:00">
+                2019-02-18
               </time>
             
 
@@ -352,8 +352,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2018-12-25T20:33:05+08:00">
-                2018-12-25
+              <time title="更新于" itemprop="dateModified" datetime="2019-02-19T10:08:30+08:00">
+                2019-02-19
               </time>
             
           </span>
@@ -382,8 +382,8 @@
                 
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/WEB安全/sqlmap/" itemprop="url" rel="index">
-                    <span itemprop="name">sqlmap</span>
+                  <a href="/categories/WEB安全/metasploit/" itemprop="url" rel="index">
+                    <span itemprop="name">metasploit</span>
                   </a>
                 </span>
 
@@ -399,7 +399,7 @@
 
           
           
-             <span id="/WEB安全/sqlmap/1-使用sqlmap获取目标敏感信息实战详解.html" class="leancloud_visitors" data-flag-title="1.使用sqlmap获取目标敏感信息实战详解">
+             <span id="/WEB安全/metasploit/Metasploit-s-信息搜集.html" class="leancloud_visitors" data-flag-title="Metasploit's 信息搜集">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -424,7 +424,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  984
+                  2.1k
                 </span>
               
 
@@ -440,7 +440,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  3
+                  11
                 </span>
               
             </div>
@@ -461,12 +461,14 @@
       
 
       
-        <h1 id="实验目的"><a href="#实验目的" class="headerlink" title="实验目的"></a>实验目的</h1><p>1.熟悉sqlmap的基本命令<br>2.使用sqlmap获取目标敏感信息实战</p>
-<h1 id="实验原理"><a href="#实验原理" class="headerlink" title="实验原理"></a>实验原理</h1><p>使用sqlmap获取目标敏感信息实战详解</p>
-<h1 id="实验内容"><a href="#实验内容" class="headerlink" title="实验内容"></a>实验内容</h1><p>使用sqlmap获取目标敏感信息实战详解</p>
-<h1 id="实验环境描述"><a href="#实验环境描述" class="headerlink" title="实验环境描述"></a>实验环境描述</h1><p>靶机系统为windows7 dvwa<br>渗透机系统为kali linux</p>
-<h1 id="实验步骤"><a href="#实验步骤" class="headerlink" title="实验步骤"></a>实验步骤</h1><p>1.首先进入靶机，打开命令提示符，输入命令ipcinfig来查看ip地址。<br>2.进入kali渗透机，打开浏览器访问虚拟机win7的ip地址，浏览正常网页，登录dvwa。<br>3.点击DVWA Security 选择low，点击按钮。<br>4.点击左边的选择框，选择SQL injection。<br>5.点击右上角的设置，open menu-Preferences-Advanced-Network-Settings，选择Manual proxy configuration     HTTP Poxy：127.0.0.1；Port：8080.点击ok设置代理完成。<br>6.在kali打开终端输入：burpsuite。<br>7.在poxy选项卡中的intercept选项卡中，将设置为off，不拦截数据包。<br>8.回到dvwa中，在浏览器窗口的SQLinjection界面中的User ID 中输入：1.2，然后把burpsuite打开。点击按钮<br>9.在burpsuite的poxy中的intercept选项卡中出现了一些信息。然后复制cookie中的内容。<br>10.在终端中打开sqlmap进行测试  输入：sqlmap -u ‘url’ –cookie ‘cookie内容’回车，在后面可以加入参数：-b 获取数据库的标题。<br>11.参数–current-user检索DBMS当前用户 获取数据库当前用户。<br>12.–current-db 检索DBMS当前数据库。 获取当前数据库名称。<br>13.–hostname检索DBMS服务器主机名，获取主机名。<br>14.–is-dba检测DBMS当前用户是不是DBA权限。检测当前用户的权限是不是DBA（最高权限）<br>15.–users枚举DBMS用户。 获取数据库的所有用户。<br>16.–passwords枚举DBMS用户密码hashes值。获取数据库用户的密码的hashes值。首先（1）问你是否进行下一步处理，选Y<br>（2）您想对检测到的密码哈希执行基于字典的攻击吗？（Y/N/Q） 选y<br>（3）最后会给你几种选项，使用默认的字典文件-自定义字典文件-带有字典文件列表的文件。选1即可。<br>（4）您想使用常用的密码后缀吗？（慢）（Y/N）  最后他会开始爆破。<br>得出ATABASE管理系统用户密码散列；密码散列和root<br>17.–privilege枚举BDMS用户权限，可以看到root用户的权限最高，可执行的操作最多<br>18.–roles枚举DBMS用户角色。<br>19.–dbs枚举DBMS数据库。获取当前可用的数据库。<br>20.–tables枚举DBMS数据库表，获取不同数据库下的表。<br>21.–columns枚举DBMS数据库表的列。获取不同数据表下的列。<br>22.–schema枚举数据库模式。<br>23.–count检索表的项数目。<br>24.–dump转出数据库表的映射表项目。就得到了登录名和密码，我们试一下logout在用不同的密码登录，但是如果登录，cookie信息就要重新获取。然后再登录。<br>25.–search搜索用，比如：–serach -D dvwa就可以找到这个数据库。<br>26.–comments检索DBMS注释，说明。获取数据库注释信息。<br>27.-D 指定数据库进行枚举。格式为 -D 制定数据库 –tables。获取制定数据库表信息。<br>28.-T 指定表进行枚举，指定数据库 ，制定表获得列信息。格式：-D 制定数据库 -T 制定表 -column<br>29.-C 制定列获取信息 指定数据库-指定表-指定列名获得数据。格式：-D 指定数据库 -T 指定表 -C 指定列 -dump<br>30.-X 枚举DBMS数据库列的时候排除某个列 格式-D 制定数据库 -T 指定表 -X 排除的列 –dump<br>31.–sql-query=QUERY执行sql语句，格式：–sql-query=“SQL语句”执行一条语句。<br>32.–sql-shell提供一个交互式界面，可能会使界面更加简洁一些。<br>33.最后登录成功。</p>
-
+        <h1 id="使用Nmap进行端口扫描"><a href="#使用Nmap进行端口扫描" class="headerlink" title="使用Nmap进行端口扫描"></a>使用Nmap进行端口扫描</h1><p>在被动信息搜集确定了目标的IP范围之后，我们可以开始使用端口扫描获取目标开放的端口，端口的扫描过程实际上是逐个对远程主机的端口发起连接，从而确定那些端口是开放的过程。</p>
+<p>Nmap是最流行的端口扫描工具，它与Metasploit的集成可谓是珠联璧合，在Metasoloit中，Nmap的输出结果可以保存在后端数据库中以备后续使用。Nmap能够让你一次性扫描大量主机并确定每台主机上运行的服务，其中每哥服务都可能是一个进入系统的入口。</p>
+<p>使用之前我们就可以看看nmap的基本语法，有很多的参数和选项。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br></pre></td><td class="code"><pre><span class="line">root@kali:~# nmap -h</span><br><span class="line">Nmap 7.70 ( https://nmap.org )</span><br><span class="line">Usage: nmap [Scan Type(s)] [Options] &#123;target specification&#125;</span><br><span class="line">TARGET SPECIFICATION:</span><br><span class="line">  Can pass hostnames, IP addresses, networks, etc.</span><br><span class="line">  Ex: scanme.nmap.org, microsoft.com/24, 192.168.0.1; 10.0.0-255.1-254</span><br><span class="line">  -iL &lt;inputfilename&gt;: Input from list of hosts/networks</span><br><span class="line">  -iR &lt;num hosts&gt;: Choose random targets</span><br><span class="line">  --exclude &lt;host1[,host2][,host3],...&gt;: Exclude hosts/networks</span><br><span class="line">  --excludefile &lt;exclude_file&gt;: Exclude list from file</span><br><span class="line">HOST DISCOVERY:</span><br><span class="line">  -sL: List Scan - simply list targets to scan</span><br><span class="line">  -sn: Ping Scan - disable port scan</span><br><span class="line">  -Pn: Treat all hosts as online -- skip host discovery</span><br><span class="line">  -PS/PA/PU/PY[portlist]: TCP SYN/ACK, UDP or SCTP discovery to given ports</span><br><span class="line">  -PE/PP/PM: ICMP echo, timestamp, and netmask request discovery probes</span><br><span class="line">  -PO[protocol list]: IP Protocol Ping</span><br><span class="line">  -n/-R: Never do DNS resolution/Always resolve [default: sometimes]</span><br><span class="line">  --dns-servers &lt;serv1[,serv2],...&gt;: Specify custom DNS servers</span><br><span class="line">  --system-dns: Use OS&apos;s DNS resolver</span><br><span class="line">  --traceroute: Trace hop path to each host</span><br><span class="line">SCAN TECHNIQUES:</span><br><span class="line">  -sS/sT/sA/sW/sM: TCP SYN/Connect()/ACK/Window/Maimon scans</span><br><span class="line">  -sU: UDP Scan</span><br><span class="line">  -sN/sF/sX: TCP Null, FIN, and Xmas scans</span><br><span class="line">  --scanflags &lt;flags&gt;: Customize TCP scan flags</span><br><span class="line">  -sI &lt;zombie host[:probeport]&gt;: Idle scan</span><br><span class="line">  -sY/sZ: SCTP INIT/COOKIE-ECHO scans</span><br><span class="line">  -sO: IP protocol scan</span><br><span class="line">  -b &lt;FTP relay host&gt;: FTP bounce scan</span><br><span class="line">PORT SPECIFICATION AND SCAN ORDER:</span><br><span class="line">  -p &lt;port ranges&gt;: Only scan specified ports</span><br><span class="line">    Ex: -p22; -p1-65535; -p U:53,111,137,T:21-25,80,139,8080,S:9</span><br><span class="line">  --exclude-ports &lt;port ranges&gt;: Exclude the specified ports from scanning</span><br><span class="line">  -F: Fast mode - Scan fewer ports than the default scan</span><br><span class="line">  -r: Scan ports consecutively - don&apos;t randomize</span><br><span class="line">  --top-ports &lt;number&gt;: Scan &lt;number&gt; most common ports</span><br><span class="line">  --port-ratio &lt;ratio&gt;: Scan ports more common than &lt;ratio&gt;</span><br><span class="line">SERVICE/VERSION DETECTION:</span><br><span class="line">  -sV: Probe open ports to determine service/version info</span><br><span class="line">  --version-intensity &lt;level&gt;: Set from 0 (light) to 9 (try all probes)</span><br><span class="line">  --version-light: Limit to most likely probes (intensity 2)</span><br><span class="line">  --version-all: Try every single probe (intensity 9)</span><br><span class="line">  --version-trace: Show detailed version scan activity (for debugging)</span><br><span class="line">SCRIPT SCAN:</span><br><span class="line">  -sC: equivalent to --script=default</span><br><span class="line">  --script=&lt;Lua scripts&gt;: &lt;Lua scripts&gt; is a comma separated list of</span><br><span class="line">           directories, script-files or script-categories</span><br><span class="line">  --script-args=&lt;n1=v1,[n2=v2,...]&gt;: provide arguments to scripts</span><br><span class="line">  --script-args-file=filename: provide NSE script args in a file</span><br><span class="line">  --script-trace: Show all data sent and received</span><br><span class="line">  --script-updatedb: Update the script database.</span><br><span class="line">  --script-help=&lt;Lua scripts&gt;: Show help about scripts.</span><br><span class="line">           &lt;Lua scripts&gt; is a comma-separated list of script-files or</span><br><span class="line">           script-categories.</span><br><span class="line">OS DETECTION:</span><br><span class="line">  -O: Enable OS detection</span><br><span class="line">  --osscan-limit: Limit OS detection to promising targets</span><br><span class="line">  --osscan-guess: Guess OS more aggressively</span><br><span class="line">TIMING AND PERFORMANCE:</span><br><span class="line">  Options which take &lt;time&gt; are in seconds, or append &apos;ms&apos; (milliseconds),</span><br><span class="line">  &apos;s&apos; (seconds), &apos;m&apos; (minutes), or &apos;h&apos; (hours) to the value (e.g. 30m).</span><br><span class="line">  -T&lt;0-5&gt;: Set timing template (higher is faster)</span><br><span class="line">  --min-hostgroup/max-hostgroup &lt;size&gt;: Parallel host scan group sizes</span><br><span class="line">  --min-parallelism/max-parallelism &lt;numprobes&gt;: Probe parallelization</span><br><span class="line">  --min-rtt-timeout/max-rtt-timeout/initial-rtt-timeout &lt;time&gt;: Specifies</span><br><span class="line">      probe round trip time.</span><br><span class="line">  --max-retries &lt;tries&gt;: Caps number of port scan probe retransmissions.</span><br><span class="line">  --host-timeout &lt;time&gt;: Give up on target after this long</span><br><span class="line">  --scan-delay/--max-scan-delay &lt;time&gt;: Adjust delay between probes</span><br><span class="line">  --min-rate &lt;number&gt;: Send packets no slower than &lt;number&gt; per second</span><br><span class="line">  --max-rate &lt;number&gt;: Send packets no faster than &lt;number&gt; per second</span><br><span class="line">FIREWALL/IDS EVASION AND SPOOFING:</span><br><span class="line">  -f; --mtu &lt;val&gt;: fragment packets (optionally w/given MTU)</span><br><span class="line">  -D &lt;decoy1,decoy2[,ME],...&gt;: Cloak a scan with decoys</span><br><span class="line">  -S &lt;IP_Address&gt;: Spoof source address</span><br><span class="line">  -e &lt;iface&gt;: Use specified interface</span><br><span class="line">  -g/--source-port &lt;portnum&gt;: Use given port number</span><br><span class="line">  --proxies &lt;url1,[url2],...&gt;: Relay connections through HTTP/SOCKS4 proxies</span><br><span class="line">  --data &lt;hex string&gt;: Append a custom payload to sent packets</span><br><span class="line">  --data-string &lt;string&gt;: Append a custom ASCII string to sent packets</span><br><span class="line">  --data-length &lt;num&gt;: Append random data to sent packets</span><br><span class="line">  --ip-options &lt;options&gt;: Send packets with specified ip options</span><br><span class="line">  --ttl &lt;val&gt;: Set IP time-to-live field</span><br><span class="line">  --spoof-mac &lt;mac address/prefix/vendor name&gt;: Spoof your MAC address</span><br><span class="line">  --badsum: Send packets with a bogus TCP/UDP/SCTP checksum</span><br><span class="line">OUTPUT:</span><br><span class="line">  -oN/-oX/-oS/-oG &lt;file&gt;: Output scan in normal, XML, s|&lt;rIpt kIddi3,</span><br><span class="line">     and Grepable format, respectively, to the given filename.</span><br><span class="line">  -oA &lt;basename&gt;: Output in the three major formats at once</span><br><span class="line">  -v: Increase verbosity level (use -vv or more for greater effect)</span><br><span class="line">  -d: Increase debugging level (use -dd or more for greater effect)</span><br><span class="line">  --reason: Display the reason a port is in a particular state</span><br><span class="line">  --open: Only show open (or possibly open) ports</span><br><span class="line">  --packet-trace: Show all packets sent and received</span><br><span class="line">  --iflist: Print host interfaces and routes (for debugging)</span><br><span class="line">  --append-output: Append to rather than clobber specified output files</span><br><span class="line">  --resume &lt;filename&gt;: Resume an aborted scan</span><br><span class="line">  --stylesheet &lt;path/URL&gt;: XSL stylesheet to transform XML output to HTML</span><br><span class="line">  --webxml: Reference stylesheet from Nmap.Org for more portable XML</span><br><span class="line">  --no-stylesheet: Prevent associating of XSL stylesheet w/XML output</span><br><span class="line">MISC:</span><br><span class="line">  -6: Enable IPv6 scanning</span><br><span class="line">  -A: Enable OS detection, version detection, script scanning, and traceroute</span><br><span class="line">  --datadir &lt;dirname&gt;: Specify custom Nmap data file location</span><br><span class="line">  --send-eth/--send-ip: Send using raw ethernet frames or IP packets</span><br><span class="line">  --privileged: Assume that the user is fully privileged</span><br><span class="line">  --unprivileged: Assume the user lacks raw socket privileges</span><br><span class="line">  -V: Print version number</span><br><span class="line">  -h: Print this help summary page.</span><br><span class="line">EXAMPLES:</span><br><span class="line">  nmap -v -A scanme.nmap.org</span><br><span class="line">  nmap -v -sn 192.168.0.0/16 10.0.0.0/8</span><br><span class="line">  nmap -v -iR 10000 -Pn -p 80</span><br><span class="line">SEE THE MAN PAGE (https://nmap.org/book/man.html) FOR MORE OPTIONS AND EXAMPLES</span><br></pre></td></tr></table></figure></p>
+<p>NMap选项之一<br>-sS:-表示使用TCP SYN方式扫描TCP端口,执行一次隐秘的TCP扫描，已确定某个特定的TCP端口是否开放。<br>-Pn：将所有主机视为在线——跳过主机发现。他告诉Nmap不要使用ping命令预先判断主机是否存活，而是默认所有主机都是存活状态。这个选项适用于Internet上的渗透测试，因为在lnternet上大多数网络均不允许ping命令所使用的“lnternet控制报文协议（ICMP）”通行，如果预先使用ping进行判断，那么你可能会漏掉许多实际存活的主机。如果在内网的环境中，可以省略这个选项。</p>
+<p>使用-sS和-Pn选项对我们的靶机进行一次简单的nmap扫描</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">root@kali:~# nmap -sS -Pn 192.168.126.142</span><br><span class="line">Starting Nmap 7.70 ( https://nmap.org ) at 2019-02-19 10:04 CST</span><br><span class="line">Nmap scan report for 192.168.126.142</span><br><span class="line">Host is up (0.00064s latency).</span><br><span class="line">Not shown: 993 filtered ports</span><br><span class="line">PORT      STATE SERVICE</span><br><span class="line">135/tcp   open  msrpc</span><br><span class="line">139/tcp   open  netbios-ssn</span><br><span class="line">445/tcp   open  microsoft-ds</span><br><span class="line">554/tcp   open  rtsp</span><br><span class="line">2869/tcp  open  icslap</span><br><span class="line">5357/tcp  open  wsdapi</span><br><span class="line">10243/tcp open  unknown</span><br><span class="line">MAC Address: 00:0C:29:62:C2:25 (VMware)</span><br><span class="line"></span><br><span class="line">Nmap done: 1 IP address (1 host up) scanned in 5.50 seconds</span><br></pre></td></tr></table></figure>
+<p>可以看到nmap报告一个开放端口的列表。并且在每个端口后面附上其绑定服务的描述。<br>为了获取更多的信息，我们可以尝试使用-A选项：启用脚本版本的检测，检测，扫描和方法，它将尝试进行深入的服务枚举和旗标获取，可以为我们提供目系统更多的细节。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line">root@kali:~# nmap -sS -Pn -A 192.168.126.142</span><br><span class="line">Starting Nmap 7.70 ( https://nmap.org ) at 2019-02-19 10:04 CST</span><br><span class="line">Nmap scan report for 192.168.126.142</span><br><span class="line">Host is up (0.0013s latency).</span><br><span class="line">Not shown: 993 filtered ports</span><br><span class="line">PORT      STATE SERVICE      VERSION</span><br><span class="line">135/tcp   open  msrpc        Microsoft Windows RPC</span><br><span class="line">139/tcp   open  netbios-ssn  Microsoft Windows netbios-ssn</span><br><span class="line">445/tcp   open  microsoft-ds Windows 7 Ultimate 7601 Service Pack 1 microsoft-ds (workgroup: WORKGROUP)</span><br><span class="line">554/tcp   open  rtsp?</span><br><span class="line">2869/tcp  open  http         Microsoft HTTPAPI httpd 2.0 (SSDP/UPnP)</span><br><span class="line">5357/tcp  open  http         Microsoft HTTPAPI httpd 2.0 (SSDP/UPnP)</span><br><span class="line">|_http-server-header: Microsoft-HTTPAPI/2.0</span><br><span class="line">|_http-title: Service Unavailable</span><br><span class="line">10243/tcp open  http         Microsoft HTTPAPI httpd 2.0 (SSDP/UPnP)</span><br><span class="line">|_http-server-header: Microsoft-HTTPAPI/2.0</span><br><span class="line">|_http-title: Not Found</span><br><span class="line">MAC Address: 00:0C:29:62:C2:25 (VMware)</span><br><span class="line">Warning: OSScan results may be unreliable because we could not find at least 1 open and 1 closed port</span><br><span class="line">Device type: general purpose|specialized|phone</span><br><span class="line">Running: Microsoft Windows 2008|8.1|7|Phone|Vista</span><br><span class="line">OS CPE: cpe:/o:microsoft:windows_server_2008:r2 cpe:/o:microsoft:windows_8.1 cpe:/o:microsoft:windows_7::-:professional cpe:/o:microsoft:windows_8 cpe:/o:microsoft:windows_7 cpe:/o:microsoft:windows cpe:/o:microsoft:windows_vista::- cpe:/o:microsoft:windows_vista::sp1</span><br><span class="line">OS details: Microsoft Windows Server 2008 R2 or Windows 8.1, Microsoft Windows 7 Professional or Windows 8, Microsoft Windows Embedded Standard 7, Microsoft Windows Phone 7.5 or 8.0, Microsoft Windows Vista SP0 or SP1, Windows Server 2008 SP1, or Windows 7, Microsoft Windows Vista SP2, Windows 7 SP1, or Windows Server 2008</span><br><span class="line">Network Distance: 1 hop</span><br><span class="line">Service Info: Host: WIN7-PC; OS: Windows; CPE: cpe:/o:microsoft:windows</span><br><span class="line"></span><br><span class="line">Host script results:</span><br><span class="line">|_clock-skew: mean: -2h40m00s, deviation: 4h37m07s, median: 0s</span><br><span class="line">|_nbstat: NetBIOS name: WIN7-PC, NetBIOS user: &lt;unknown&gt;, NetBIOS MAC: 00:0c:29:62:c2:25 (VMware)</span><br><span class="line">| smb-os-discovery:</span><br><span class="line">|   OS: Windows 7 Ultimate 7601 Service Pack 1 (Windows 7 Ultimate 6.1)</span><br><span class="line">|   OS CPE: cpe:/o:microsoft:windows_7::sp1</span><br><span class="line">|   Computer name: win7-PC</span><br><span class="line">|   NetBIOS computer name: WIN7-PC\x00</span><br><span class="line">|   Workgroup: WORKGROUP\x00</span><br><span class="line">|_  System time: 2019-02-19T10:06:53+08:00</span><br><span class="line">| smb-security-mode:</span><br><span class="line">|   account_used: guest</span><br><span class="line">|   authentication_level: user</span><br><span class="line">|   challenge_response: supported</span><br><span class="line">|_  message_signing: disabled (dangerous, but default)</span><br><span class="line">| smb2-security-mode:</span><br><span class="line">|   2.02:</span><br><span class="line">|_    Message signing enabled but not required</span><br><span class="line">| smb2-time:</span><br><span class="line">|   date: 2019-02-19 10:06:53</span><br><span class="line">|_  start_date: 2019-02-19 10:03:01</span><br><span class="line"></span><br><span class="line">TRACEROUTE</span><br><span class="line">HOP RTT     ADDRESS</span><br><span class="line">1   1.32 ms 192.168.126.142</span><br><span class="line"></span><br><span class="line">OS and Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .</span><br><span class="line">Nmap done: 1 IP address (1 host up) scanned in 198.59 seconds</span><br></pre></td></tr></table></figure>
       
     </div>
     
@@ -495,6 +497,12 @@
           
             <a href="/tags/web安全/" rel="tag"><i class="fa fa-tag"></i> web安全</a>
           
+            <a href="/tags/metasploit/" rel="tag"><i class="fa fa-tag"></i> metasploit</a>
+          
+            <a href="/tags/渗透测试/" rel="tag"><i class="fa fa-tag"></i> 渗透测试</a>
+          
+            <a href="/tags/信息搜集/" rel="tag"><i class="fa fa-tag"></i> 信息搜集</a>
+          
         </div>
       
 
@@ -506,8 +514,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/uncategorized/Welcome-to-My-Blog.html" rel="next" title="Welcome to My Blog">
-                <i class="fa fa-chevron-left"></i> Welcome to My Blog
+              <a href="/Vulnhub靶场演练/Raven-1.html" rel="next" title="Raven 1">
+                <i class="fa fa-chevron-left"></i> Raven 1
               </a>
             
           </div>
@@ -515,10 +523,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/WEB安全/Nmap/Nmap之侦测版本和系统.html" rel="prev" title="Nmap之侦测版本和系统">
-                Nmap之侦测版本和系统 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -682,7 +686,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#实验目的"><span class="nav-number">1.</span> <span class="nav-text">实验目的</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#实验原理"><span class="nav-number">2.</span> <span class="nav-text">实验原理</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#实验内容"><span class="nav-number">3.</span> <span class="nav-text">实验内容</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#实验环境描述"><span class="nav-number">4.</span> <span class="nav-text">实验环境描述</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#实验步骤"><span class="nav-number">5.</span> <span class="nav-text">实验步骤</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#使用Nmap进行端口扫描"><span class="nav-number">1.</span> <span class="nav-text">使用Nmap进行端口扫描</span></a></li></ol></div>
             
 
           </div>
