@@ -1,6 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[DIRB]]></title>
+    <url>%2FTOOLS%2FWEB%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%2FDIRB.html</url>
+    <content type="text"><![CDATA[简介DIRB是一个Web内容扫描程序。它查找现有（和/或隐藏）Web对象。它基本上是通过对Web服务器启动基于字典的攻击并分析响应来实现的。 DIRB附带了一组预先配置的攻击单词列表，方便使用，但您可以使用自定义单词列表。DIRB有时也可以用作经典的CGI扫描仪，但记住的是内容扫描程序而不是漏洞扫描程序。 DIRB的主要目的是帮助进行专业的Web应用程序审计。特别是在安全相关的测试中。它涵盖了经典Web漏洞扫描程序未涵盖的一些漏洞。DIRB查找其他通用CGI扫描仪无法查找的特定Web对象。它不会搜索漏洞，也不会查找可能存在漏洞的Web内容。 参数12345678910111213141516171819202122232425262728293031323334353637383940414243444546root@kali:~# dirb-----------------DIRB v2.22By The Dark Raver-----------------dirb &lt;url_base&gt; [&lt;wordlist_file(s)&gt;] [options]========================= NOTES ========================= &lt;url_base&gt; : Base URL to scan. (Use -resume for session resuming) &lt;wordlist_file(s)&gt; : List of wordfiles. (wordfile1,wordfile2,wordfile3...)======================== HOTKEYS ======================== &apos;n&apos; -&gt; Go to next directory. &apos;q&apos; -&gt; Stop scan. (Saving state for resume) &apos;r&apos; -&gt; Remaining scan stats.======================== OPTIONS ======================== -a &lt;agent_string&gt; : Specify your custom USER_AGENT. -b : Use path as is. -c &lt;cookie_string&gt; : Set a cookie for the HTTP request. -E &lt;certificate&gt; : path to the client certificate. -f : Fine tunning of NOT_FOUND (404) detection. -H &lt;header_string&gt; : Add a custom header to the HTTP request. -i : Use case-insensitive search. -l : Print &quot;Location&quot; header when found. -N &lt;nf_code&gt;: Ignore responses with this HTTP code. -o &lt;output_file&gt; : Save output to disk. -p &lt;proxy[:port]&gt; : Use this proxy. (Default port is 1080) -P &lt;proxy_username:proxy_password&gt; : Proxy Authentication. -r : Don&apos;t search recursively. -R : Interactive recursion. (Asks for each directory) -S : Silent Mode. Don&apos;t show tested words. (For dumb terminals) -t : Don&apos;t force an ending &apos;/&apos; on URLs. -u &lt;username:password&gt; : HTTP Authentication. -v : Show also NOT_FOUND pages. -w : Don&apos;t stop on WARNING messages. -X &lt;extensions&gt; / -x &lt;exts_file&gt; : Append each word with this extensions. -z &lt;millisecs&gt; : Add a milliseconds delay to not cause excessive Flood.======================== EXAMPLES ======================= dirb http://url/directory/ (Simple Test) dirb http://url/ -X .html (Test files with &apos;.html&apos; extension) dirb http://url/ /usr/share/dirb/wordlists/vulns/apache.txt (Test with apache.txt wordlist) dirb https://secure_url/ (Simple Test with SSL) dirb用法示例攻击中，common.txt被设置为目录遍历的默认单词列表使用字典文件（/usr/share/wordlists/dirb/common.txt）扫描Web服务器（http://192.168.126.130/）以获取目录：dirb 目标 字典路径1234567891011121314root@kali:/# dirb http://192.168.126.130 /usr/share/wordlists/dirb/common.txt-----------------DIRB v2.22By The Dark Raver-----------------START_TIME: Fri Feb 22 16:33:46 2019URL_BASE: http://192.168.126.130/WORDLIST_FILES: /usr/share/wordlists/dirb/common.txt-----------------GENERATED WORDS: 4612 枚举具有特定扩展名列表的目录在很多情况下我们需要在目标服务器上提取特定扩展的目录，然后我们可以使用dirb扫描的-X参数。此参数接受文件扩展名，然后在目标服务器或计算机上搜索给定的扩展文件。dirb 目标 -X .php上面的命令将提取与php扩展相关的所有目录路径，如下图所示123456789101112131415161718192021root@kali:/# dirb http://192.168.126.130 -X .php-----------------DIRB v2.22By The Dark Raver-----------------START_TIME: Fri Feb 22 17:12:16 2019URL_BASE: http://192.168.126.130/WORDLIST_FILES: /usr/share/dirb/wordlists/common.txtEXTENSIONS_LIST: (.php) | (.php) [NUM = 1]-----------------GENERATED WORDS: 4612---- Scanning URL: http://192.168.126.130/ ---------------------END_TIME: Fri Feb 22 17:12:24 2019DOWNLOADED: 4612 - FOUND: 0 将输出保存到磁盘出于记录维护，更好的可读性和未来参考的目的，我们将dirb扫描的输出保存到文件中。为此，我们将使用dirb扫描的参数-o，我们可以在文本文件中保存dirb扫描的输出。dirb 目标 -o /位置/自定义名称.txt上面的命令将在枚举目录的桌面上生成.txt文件。123456789101112131415root@kali:/# dirb http://192.168.126.130 -o /root/123.txt-----------------DIRB v2.22By The Dark Raver-----------------OUTPUT_FILE: /root/123.txtSTART_TIME: Fri Feb 22 17:15:22 2019URL_BASE: http://192.168.126.130/WORDLIST_FILES: /usr/share/dirb/wordlists/common.txt-----------------GENERATED WORDS: 4612 root@kali:~# cat /root/123.txt现在我们已经成功执行了命令，现在让我们遍历该位置以确保输出是否已保存在文件上。在这种情况下，我们的输出位置是/root/123.txt。 忽略不必要的状态代码Status-Code元素是一个3位整数，其中Status-Code的第一个数字定义了响应类，后两个数字没有任何分类角色。在这次攻击中，我们在代码302上使用-N参数，如下所示。dirb 目标 -N 302您可以从给定的屏幕截图中了解到dirb扫描忽略的是NOT FOUND代码，即302。123456root@kali:~# dirb http://192.168.126.130 -N 302-----------------DIRB v2.22By The Dark Raver----------------- 默认工作与警告消息不间断工作正常dirb扫描期间，一些页面会生成警告; dirb扫描会跳过遇到任何警告的目录。在进行非常深入和冗长的扫描时，我们希望dirb扫描不要避免这些警告并进行深入扫描，因此我们使用dirb扫描的-w参数。dirb 目标 -w您可以观察到突出显示的目录/ dev / shell即使在默认扫描中缺少警告消息之后也会被枚举123456root@kali:~# dirb http://192.168.126.130 -w-----------------DIRB v2.22By The Dark Raver----------------- 速度延迟在不同场景下工作时，我们遇到的某些环境无法处理由dirb扫描创建的洪水，因此在这些环境中，我们将扫描延迟一段时间非常重要。使用dirb扫描的-z参数可以轻松完成此操作。在此参数中，时间以毫秒为单位提供。就像我们给出的例子中所示，我们给dirb延迟了100秒。dirb 目标 -z 1001234567891011root@kali:~# dirb http://192.168.126.130 -z 100-----------------DIRB v2.22By The Dark Raver-----------------START_TIME: Fri Feb 22 18:11:47 2019URL_BASE: http://192.168.126.130/WORDLIST_FILES: /usr/share/dirb/wordlists/common.txtSPEED_DELAY: 100 milliseconds 不递归（-r）默认情况下，dirb扫描以递归方式扫描目录。这意味着它扫描目录，然后遍历该目录以扫描更多子目录。但在某些情况下，如果时间不够，我们会将dirb设置为不递归扫描。这可以使用-r参数来实现。1234567891011root@kali:~# dirb http://192.168.126.130 -r-----------------DIRB v2.22By The Dark Raver-----------------START_TIME: Fri Feb 22 18:13:13 2019URL_BASE: http://192.168.126.130/WORDLIST_FILES: /usr/share/dirb/wordlists/common.txtOPTION: Not Recursive 显示不存在页面404错误是HTTP状态代码，表示您尝试在网站上访问的页面无法在其服务器上找到。404 Not Found错误消息经常由各个网站自定义。在某些情况下，我们也需要找到404页面，默认情况下dirb会跳过。要查找这些页面，我们将使用-v参数。dirb 目标 -v从下面中你可以观察到它还提取了所有那些与404错误相关的目录。1234567891011root@kali:~# dirb http://192.168.126.130 -v-----------------DIRB v2.22By The Dark Raver-----------------START_TIME: Fri Feb 22 18:14:17 2019URL_BASE: http://192.168.126.130/WORDLIST_FILES: /usr/share/dirb/wordlists/common.txtOPTION: Show Not Existent Pages 扩展名列表（-X参数）与扩展名标头（-H参数）通过将-X参数与具有特定扩展名的目标URL（例如.php）一起使用，它枚举所有扩展名为.php的文件或目录，但使用带有特定扩展名的-H参数，例如.php以及目标URL它将枚举用php命名的所有文件或目录，如下面给出的图像所示。dirb 目标 -H .PHP1234567891011121314root@kali:~# dirb http://192.168.126.130 -H .php-----------------DIRB v2.22By The Dark Raver-----------------START_TIME: Fri Feb 22 18:16:36 2019URL_BASE: http://192.168.126.130/WORDLIST_FILES: /usr/share/dirb/wordlists/common.txtADDED_HEADERS:--.php-- HTTP AUTHORIZATION（-u用户名：密码）HTTP身份验证/身份验证机制都基于使用401状态代码和WWW- Authenticate 响应头。最广泛使用的 HTTP身份验证 机制是 Basic。客户端将用户名和密码作为未加密的base64编码文本发送。 因此，为了在dirb的帮助下绕过这种身份验证，我们使用了以下命令：dirb 目标 -u test:test结果，它显示了测试的状态码200：目标URL上的测试和授权凭证。1234567891011root@kali:~# dirb http://192.168.126.130/admin/admin.asp -u test:test-----------------DIRB v2.22By The Dark Raver-----------------START_TIME: Fri Feb 22 18:22:47 2019URL_BASE: http://192.168.126.130/admin/WORDLIST_FILES: /usr/share/dirb/wordlists/common.txtAUTHORIZATION: test:test 代理URL使用-p选项可以将代理URL用于所有请求，默认情况下它适用于端口1080.正如您所看到的，在Web浏览器中探索目标网络IP时，它会显示“访问禁止错误”，这意味着此网页是在一些代理后面运行。 测试特殊弱势列表我们可以使用DIRB来测试特定类型的Web技术中的特定易受攻击对象。每种Web技术都有不同的漏洞。他们并非都是一样的。DIRB可以帮助我们查找特定技术特定的特定易受攻击对象。 在Kali，DIRB有特定的单词列表来搜索这些易受攻击的经常隐藏的对象。您可以在以下位置找到它们12345678root@kali:/# cd /usr/share/dirb/wordlists/vulns/root@kali:/usr/share/dirb/wordlists/vulns# lsapache.txt fatwire.txt jboss.txt sap.txt weblogic.txtaxis.txt frontpage.txt jersey.txt sharepoint.txt websphere.txtcgis.txt hpsmh.txt jrun.txt sunas.txtcoldfusion.txt hyperion.txt netware.txt tests.txtdomino.txt iis.txt oracle.txt tomcat.txtfatwire_pagenames.txt iplanet.txt ror.txt vignette.txt 正如您在上面所看到的，每个要测试的特定漏洞都有许多文件列表。如果您的Web服务器是Apache，并且您想测试它，请使用apache.txt 现在，DIRB将使用该Apache列表来查找已知的易受攻击对象。如果它找到任何，那么您可以采取下一步并寻找漏洞，以利用它在Exploit-DB，Metasploit，SecurityFocus或Web上的任何其他许多漏洞利用源。当然，您必须使用与网站中使用的技术相适应的词汇表。例如，如果它是Windows IIS服务器，则应使用iis.txt wordlist。]]></content>
+      <categories>
+        <category>TOOLS</category>
+        <category>WEB应用程序</category>
+      </categories>
+      <tags>
+        <tag>web安全</tag>
+        <tag>TOOLS</tag>
+        <tag>工具</tag>
+        <tag>渗透测试</tag>
+        <tag>目录扫描</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[Metasploit's 信息搜集]]></title>
     <url>%2FWEB%E5%AE%89%E5%85%A8%2Fmetasploit%2FMetasploit-s-%E4%BF%A1%E6%81%AF%E6%90%9C%E9%9B%86.html</url>
     <content type="text"><![CDATA[使用Nmap进行端口扫描在被动信息搜集确定了目标的IP范围之后，我们可以开始使用端口扫描获取目标开放的端口，端口的扫描过程实际上是逐个对远程主机的端口发起连接，从而确定那些端口是开放的过程。 Nmap是最流行的端口扫描工具，它与Metasploit的集成可谓是珠联璧合，在Metasoloit中，Nmap的输出结果可以保存在后端数据库中以备后续使用。Nmap能够让你一次性扫描大量主机并确定每台主机上运行的服务，其中每哥服务都可能是一个进入系统的入口。 使用之前我们就可以看看nmap的基本语法，有很多的参数和选项。123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899100101102103104105106107108109110111112113114115root@kali:~# nmap -hNmap 7.70 ( https://nmap.org )Usage: nmap [Scan Type(s)] [Options] &#123;target specification&#125;TARGET SPECIFICATION: Can pass hostnames, IP addresses, networks, etc. Ex: scanme.nmap.org, microsoft.com/24, 192.168.0.1; 10.0.0-255.1-254 -iL &lt;inputfilename&gt;: Input from list of hosts/networks -iR &lt;num hosts&gt;: Choose random targets --exclude &lt;host1[,host2][,host3],...&gt;: Exclude hosts/networks --excludefile &lt;exclude_file&gt;: Exclude list from fileHOST DISCOVERY: -sL: List Scan - simply list targets to scan -sn: Ping Scan - disable port scan -Pn: Treat all hosts as online -- skip host discovery -PS/PA/PU/PY[portlist]: TCP SYN/ACK, UDP or SCTP discovery to given ports -PE/PP/PM: ICMP echo, timestamp, and netmask request discovery probes -PO[protocol list]: IP Protocol Ping -n/-R: Never do DNS resolution/Always resolve [default: sometimes] --dns-servers &lt;serv1[,serv2],...&gt;: Specify custom DNS servers --system-dns: Use OS&apos;s DNS resolver --traceroute: Trace hop path to each hostSCAN TECHNIQUES: -sS/sT/sA/sW/sM: TCP SYN/Connect()/ACK/Window/Maimon scans -sU: UDP Scan -sN/sF/sX: TCP Null, FIN, and Xmas scans --scanflags &lt;flags&gt;: Customize TCP scan flags -sI &lt;zombie host[:probeport]&gt;: Idle scan -sY/sZ: SCTP INIT/COOKIE-ECHO scans -sO: IP protocol scan -b &lt;FTP relay host&gt;: FTP bounce scanPORT SPECIFICATION AND SCAN ORDER: -p &lt;port ranges&gt;: Only scan specified ports Ex: -p22; -p1-65535; -p U:53,111,137,T:21-25,80,139,8080,S:9 --exclude-ports &lt;port ranges&gt;: Exclude the specified ports from scanning -F: Fast mode - Scan fewer ports than the default scan -r: Scan ports consecutively - don&apos;t randomize --top-ports &lt;number&gt;: Scan &lt;number&gt; most common ports --port-ratio &lt;ratio&gt;: Scan ports more common than &lt;ratio&gt;SERVICE/VERSION DETECTION: -sV: Probe open ports to determine service/version info --version-intensity &lt;level&gt;: Set from 0 (light) to 9 (try all probes) --version-light: Limit to most likely probes (intensity 2) --version-all: Try every single probe (intensity 9) --version-trace: Show detailed version scan activity (for debugging)SCRIPT SCAN: -sC: equivalent to --script=default --script=&lt;Lua scripts&gt;: &lt;Lua scripts&gt; is a comma separated list of directories, script-files or script-categories --script-args=&lt;n1=v1,[n2=v2,...]&gt;: provide arguments to scripts --script-args-file=filename: provide NSE script args in a file --script-trace: Show all data sent and received --script-updatedb: Update the script database. --script-help=&lt;Lua scripts&gt;: Show help about scripts. &lt;Lua scripts&gt; is a comma-separated list of script-files or script-categories.OS DETECTION: -O: Enable OS detection --osscan-limit: Limit OS detection to promising targets --osscan-guess: Guess OS more aggressivelyTIMING AND PERFORMANCE: Options which take &lt;time&gt; are in seconds, or append &apos;ms&apos; (milliseconds), &apos;s&apos; (seconds), &apos;m&apos; (minutes), or &apos;h&apos; (hours) to the value (e.g. 30m). -T&lt;0-5&gt;: Set timing template (higher is faster) --min-hostgroup/max-hostgroup &lt;size&gt;: Parallel host scan group sizes --min-parallelism/max-parallelism &lt;numprobes&gt;: Probe parallelization --min-rtt-timeout/max-rtt-timeout/initial-rtt-timeout &lt;time&gt;: Specifies probe round trip time. --max-retries &lt;tries&gt;: Caps number of port scan probe retransmissions. --host-timeout &lt;time&gt;: Give up on target after this long --scan-delay/--max-scan-delay &lt;time&gt;: Adjust delay between probes --min-rate &lt;number&gt;: Send packets no slower than &lt;number&gt; per second --max-rate &lt;number&gt;: Send packets no faster than &lt;number&gt; per secondFIREWALL/IDS EVASION AND SPOOFING: -f; --mtu &lt;val&gt;: fragment packets (optionally w/given MTU) -D &lt;decoy1,decoy2[,ME],...&gt;: Cloak a scan with decoys -S &lt;IP_Address&gt;: Spoof source address -e &lt;iface&gt;: Use specified interface -g/--source-port &lt;portnum&gt;: Use given port number --proxies &lt;url1,[url2],...&gt;: Relay connections through HTTP/SOCKS4 proxies --data &lt;hex string&gt;: Append a custom payload to sent packets --data-string &lt;string&gt;: Append a custom ASCII string to sent packets --data-length &lt;num&gt;: Append random data to sent packets --ip-options &lt;options&gt;: Send packets with specified ip options --ttl &lt;val&gt;: Set IP time-to-live field --spoof-mac &lt;mac address/prefix/vendor name&gt;: Spoof your MAC address --badsum: Send packets with a bogus TCP/UDP/SCTP checksumOUTPUT: -oN/-oX/-oS/-oG &lt;file&gt;: Output scan in normal, XML, s|&lt;rIpt kIddi3, and Grepable format, respectively, to the given filename. -oA &lt;basename&gt;: Output in the three major formats at once -v: Increase verbosity level (use -vv or more for greater effect) -d: Increase debugging level (use -dd or more for greater effect) --reason: Display the reason a port is in a particular state --open: Only show open (or possibly open) ports --packet-trace: Show all packets sent and received --iflist: Print host interfaces and routes (for debugging) --append-output: Append to rather than clobber specified output files --resume &lt;filename&gt;: Resume an aborted scan --stylesheet &lt;path/URL&gt;: XSL stylesheet to transform XML output to HTML --webxml: Reference stylesheet from Nmap.Org for more portable XML --no-stylesheet: Prevent associating of XSL stylesheet w/XML outputMISC: -6: Enable IPv6 scanning -A: Enable OS detection, version detection, script scanning, and traceroute --datadir &lt;dirname&gt;: Specify custom Nmap data file location --send-eth/--send-ip: Send using raw ethernet frames or IP packets --privileged: Assume that the user is fully privileged --unprivileged: Assume the user lacks raw socket privileges -V: Print version number -h: Print this help summary page.EXAMPLES: nmap -v -A scanme.nmap.org nmap -v -sn 192.168.0.0/16 10.0.0.0/8 nmap -v -iR 10000 -Pn -p 80SEE THE MAN PAGE (https://nmap.org/book/man.html) FOR MORE OPTIONS AND EXAMPLES NMap选项之一-sS:-表示使用TCP SYN方式扫描TCP端口,执行一次隐秘的TCP扫描，已确定某个特定的TCP端口是否开放。-Pn：将所有主机视为在线——跳过主机发现。他告诉Nmap不要使用ping命令预先判断主机是否存活，而是默认所有主机都是存活状态。这个选项适用于Internet上的渗透测试，因为在lnternet上大多数网络均不允许ping命令所使用的“lnternet控制报文协议（ICMP）”通行，如果预先使用ping进行判断，那么你可能会漏掉许多实际存活的主机。如果在内网的环境中，可以省略这个选项。 使用-sS和-Pn选项对我们的靶机进行一次简单的nmap扫描 12345678910111213141516root@kali:~# nmap -sS -Pn 192.168.126.142Starting Nmap 7.70 ( https://nmap.org ) at 2019-02-19 10:04 CSTNmap scan report for 192.168.126.142Host is up (0.00064s latency).Not shown: 993 filtered portsPORT STATE SERVICE135/tcp open msrpc139/tcp open netbios-ssn445/tcp open microsoft-ds554/tcp open rtsp2869/tcp open icslap5357/tcp open wsdapi10243/tcp open unknownMAC Address: 00:0C:29:62:C2:25 (VMware)Nmap done: 1 IP address (1 host up) scanned in 5.50 seconds 可以看到nmap报告一个开放端口的列表。并且在每个端口后面附上其绑定服务的描述。为了获取更多的信息，我们可以尝试使用-A选项：启用脚本版本的检测，检测，扫描和方法，它将尝试进行深入的服务枚举和旗标获取，可以为我们提供目系统更多的细节。 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354root@kali:~# nmap -sS -Pn -A 192.168.126.142Starting Nmap 7.70 ( https://nmap.org ) at 2019-02-19 10:04 CSTNmap scan report for 192.168.126.142Host is up (0.0013s latency).Not shown: 993 filtered portsPORT STATE SERVICE VERSION135/tcp open msrpc Microsoft Windows RPC139/tcp open netbios-ssn Microsoft Windows netbios-ssn445/tcp open microsoft-ds Windows 7 Ultimate 7601 Service Pack 1 microsoft-ds (workgroup: WORKGROUP)554/tcp open rtsp?2869/tcp open http Microsoft HTTPAPI httpd 2.0 (SSDP/UPnP)5357/tcp open http Microsoft HTTPAPI httpd 2.0 (SSDP/UPnP)|_http-server-header: Microsoft-HTTPAPI/2.0|_http-title: Service Unavailable10243/tcp open http Microsoft HTTPAPI httpd 2.0 (SSDP/UPnP)|_http-server-header: Microsoft-HTTPAPI/2.0|_http-title: Not FoundMAC Address: 00:0C:29:62:C2:25 (VMware)Warning: OSScan results may be unreliable because we could not find at least 1 open and 1 closed portDevice type: general purpose|specialized|phoneRunning: Microsoft Windows 2008|8.1|7|Phone|VistaOS CPE: cpe:/o:microsoft:windows_server_2008:r2 cpe:/o:microsoft:windows_8.1 cpe:/o:microsoft:windows_7::-:professional cpe:/o:microsoft:windows_8 cpe:/o:microsoft:windows_7 cpe:/o:microsoft:windows cpe:/o:microsoft:windows_vista::- cpe:/o:microsoft:windows_vista::sp1OS details: Microsoft Windows Server 2008 R2 or Windows 8.1, Microsoft Windows 7 Professional or Windows 8, Microsoft Windows Embedded Standard 7, Microsoft Windows Phone 7.5 or 8.0, Microsoft Windows Vista SP0 or SP1, Windows Server 2008 SP1, or Windows 7, Microsoft Windows Vista SP2, Windows 7 SP1, or Windows Server 2008Network Distance: 1 hopService Info: Host: WIN7-PC; OS: Windows; CPE: cpe:/o:microsoft:windowsHost script results:|_clock-skew: mean: -2h40m00s, deviation: 4h37m07s, median: 0s|_nbstat: NetBIOS name: WIN7-PC, NetBIOS user: &lt;unknown&gt;, NetBIOS MAC: 00:0c:29:62:c2:25 (VMware)| smb-os-discovery:| OS: Windows 7 Ultimate 7601 Service Pack 1 (Windows 7 Ultimate 6.1)| OS CPE: cpe:/o:microsoft:windows_7::sp1| Computer name: win7-PC| NetBIOS computer name: WIN7-PC\x00| Workgroup: WORKGROUP\x00|_ System time: 2019-02-19T10:06:53+08:00| smb-security-mode:| account_used: guest| authentication_level: user| challenge_response: supported|_ message_signing: disabled (dangerous, but default)| smb2-security-mode:| 2.02:|_ Message signing enabled but not required| smb2-time:| date: 2019-02-19 10:06:53|_ start_date: 2019-02-19 10:03:01TRACEROUTEHOP RTT ADDRESS1 1.32 ms 192.168.126.142OS and Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .Nmap done: 1 IP address (1 host up) scanned in 198.59 seconds]]></content>
@@ -9,10 +25,10 @@
         <category>metasploit</category>
       </categories>
       <tags>
-        <tag>工具</tag>
         <tag>web安全</tag>
-        <tag>metasploit</tag>
+        <tag>工具</tag>
         <tag>渗透测试</tag>
+        <tag>metasploit</tag>
         <tag>信息搜集</tag>
       </tags>
   </entry>
@@ -38,8 +54,8 @@
         <category>信息搜集篇</category>
       </categories>
       <tags>
-        <tag>工具</tag>
         <tag>web安全</tag>
+        <tag>工具</tag>
       </tags>
   </entry>
   <entry>
@@ -51,8 +67,8 @@
         <category>信息搜集篇</category>
       </categories>
       <tags>
-        <tag>工具</tag>
         <tag>web安全</tag>
+        <tag>工具</tag>
       </tags>
   </entry>
   <entry>
@@ -64,10 +80,10 @@
         <category>metasploit</category>
       </categories>
       <tags>
-        <tag>工具</tag>
         <tag>web安全</tag>
-        <tag>metasploit</tag>
+        <tag>工具</tag>
         <tag>渗透测试</tag>
+        <tag>metasploit</tag>
       </tags>
   </entry>
   <entry>
@@ -79,10 +95,10 @@
         <category>metasploit</category>
       </categories>
       <tags>
-        <tag>工具</tag>
         <tag>web安全</tag>
-        <tag>metasploit</tag>
+        <tag>工具</tag>
         <tag>渗透测试</tag>
+        <tag>metasploit</tag>
       </tags>
   </entry>
   <entry>
@@ -94,10 +110,10 @@
         <category>metasploit</category>
       </categories>
       <tags>
-        <tag>工具</tag>
         <tag>web安全</tag>
-        <tag>metasploit</tag>
+        <tag>工具</tag>
         <tag>渗透测试</tag>
+        <tag>metasploit</tag>
       </tags>
   </entry>
   <entry>
@@ -114,8 +130,8 @@
         <category>Nmap</category>
       </categories>
       <tags>
-        <tag>工具</tag>
         <tag>web安全</tag>
+        <tag>工具</tag>
         <tag>渗透测试</tag>
         <tag>Nmap</tag>
       </tags>
@@ -129,8 +145,8 @@
         <category>sqlmap</category>
       </categories>
       <tags>
-        <tag>工具</tag>
         <tag>web安全</tag>
+        <tag>工具</tag>
       </tags>
   </entry>
   <entry>
